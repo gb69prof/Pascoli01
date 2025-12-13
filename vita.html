@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pascoli — Vita</title>
+  <meta name="description" content="Vita di Giovanni Pascoli con timeline interattiva e blocco appunti esportabile in TXT." />
 
   <style>
     :root{
@@ -27,14 +28,17 @@
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
       color:var(--ink);
       background:
         radial-gradient(1200px 600px at 10% 10%, var(--bg2), transparent 60%),
         radial-gradient(900px 500px at 90% 20%, #ffe8f1, transparent 55%),
+        radial-gradient(900px 500px at 70% 95%, #eafff2, transparent 55%),
         linear-gradient(135deg, var(--bg1), #ffffff 35%, #f7fbff);
+      overflow-x:hidden;
     }
 
     .wrap{
@@ -51,211 +55,702 @@
       gap:16px;
       margin-bottom:18px;
     }
-
     .header-left h1{
       margin:0;
-      font-size:clamp(1.6rem, 3vw, 2.2rem);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      line-height:1.06;
       letter-spacing:-.4px;
     }
-
     .subtitle{
-      margin-top:10px;
+      margin:10px 0 0;
       color:var(--muted);
-      max-width:80ch;
+      max-width:78ch;
       line-height:1.45;
+      font-size:1rem;
     }
-
     .home-link{
       text-decoration:none;
-      font-weight:800;
+      font-weight:900;
+      letter-spacing:.2px;
       padding:10px 14px;
       border-radius:14px;
       border:1px solid var(--stroke);
       background:linear-gradient(135deg, #ffffff, #ffffffcc);
       color:var(--ink);
       box-shadow:0 10px 22px rgba(16,42,67,.10);
-      transition:.15s;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
       white-space:nowrap;
     }
     .home-link:hover{
-      border-color:var(--accent3);
+      border-color:rgba(99,102,241,.55);
+      box-shadow:0 14px 28px rgba(16,42,67,.12);
+      transform: translateY(-1px);
     }
+    .home-link:active{ transform: translateY(0); }
 
     /* GRID */
     .grid{
       display:grid;
       grid-template-columns: 1.2fr .9fr;
       gap:18px;
+      align-items:start;
     }
 
     .panel{
       background:var(--card);
       border:1px solid var(--stroke);
       border-radius:var(--radius2);
-      box-shadow:var(--shadow);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
       overflow:hidden;
     }
 
-    .head{
+    .panel .head{
       padding:16px 18px;
       border-bottom:1px solid var(--stroke);
-      background:linear-gradient(135deg, #ffffffcc, #ffffff88);
       display:flex;
+      align-items:center;
       justify-content:space-between;
+      gap:10px;
+      background:linear-gradient(135deg, #ffffffcc, #ffffff88);
+    }
+    .panel .head h2{
+      margin:0;
+      font-size:1.05rem;
+      letter-spacing:-.2px;
+      font-weight:900;
+    }
+    .panel .head small{
+      color:var(--muted);
+      font-size:.85rem;
     }
 
+    /* BIO */
     .bio{
-      padding:18px;
+      padding:16px 18px 18px;
       line-height:1.7;
+      font-size:1rem;
     }
-
-    .quote{
+    .bio p{margin:0 0 12px}
+    .bio p:last-child{margin-bottom:0}
+    .bio .quote{
       margin-top:14px;
       padding:12px 14px;
       border-left:4px solid var(--accent2);
-      background:#eafff7;
+      background:linear-gradient(135deg, #eafff7, #ffffff);
       border-radius:14px;
+      color:#123;
+      box-shadow:0 12px 26px rgba(16,42,67,.08);
     }
+    .bio .quote strong{color:#0f766e}
 
     /* TIMELINE */
     .timeline{
       position:relative;
-      padding:18px;
+      padding:18px 18px 10px;
     }
-
     .timeline::before{
       content:"";
       position:absolute;
-      top:18px;
-      bottom:18px;
+      top:18px; bottom:18px;
       left:28px;
       width:6px;
-      background:linear-gradient(180deg,var(--accent2),var(--accent3),var(--accent4));
       border-radius:999px;
+      background:linear-gradient(180deg, var(--accent2), var(--accent3), var(--accent4), var(--accent));
+      box-shadow:0 0 0 6px rgba(99,102,241,.10);
     }
 
     .step{
+      position:relative;
       display:grid;
-      grid-template-columns:56px 1fr;
+      grid-template-columns: 56px 1fr;
       gap:12px;
-      margin-bottom:14px;
+      padding:10px 0 12px;
     }
 
     .marker{
+      position:relative;
       display:flex;
+      align-items:flex-start;
       justify-content:flex-end;
       padding-right:8px;
     }
-
     .pin{
-      width:22px;
-      height:22px;
+      width:26px; height:26px;
       border-radius:50%;
-      background:white;
-      border:2px solid rgba(16,42,67,.25);
-      margin-top:6px;
+      background:linear-gradient(135deg, #ffffff, #ffffffcc);
+      border:2px solid rgba(16,42,67,.18);
+      display:grid;
+      place-items:center;
+      box-shadow:0 14px 28px rgba(16,42,67,.16);
+      margin-top:4px;
+    }
+    .pin::after{
+      content:"";
+      width:12px; height:12px; border-radius:50%;
+      background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3), var(--accent4), var(--accent));
+      box-shadow:0 0 0 4px rgba(255,122,24,.12);
     }
 
     .card{
       border:1px solid var(--stroke);
       border-radius:var(--radius);
-      padding:12px;
-      background:white;
+      background:linear-gradient(135deg, #ffffff, #ffffffb8);
+      padding:12px 12px;
+      box-shadow:0 12px 26px rgba(16,42,67,.10);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       cursor:pointer;
-      transition:.15s;
+      user-select:none;
     }
-
     .card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 28px rgba(16,42,67,.18);
+      transform: translateY(-2px);
+      box-shadow:0 18px 40px rgba(16,42,67,.14);
+      border-color:rgba(45,212,191,.55);
     }
+    .card:active{ transform: translateY(0); }
 
     .cardTop{
       display:flex;
+      align-items:baseline;
       justify-content:space-between;
       gap:10px;
       margin-bottom:6px;
     }
-
     .year{
-      font-weight:800;
-      font-size:.85rem;
-      padding:4px 10px;
+      font-weight:900;
+      letter-spacing:.3px;
+      font-size:.92rem;
+      padding:6px 10px;
       border-radius:999px;
       border:1px solid var(--stroke);
-      background:#fff;
+      background:#ffffffcc;
+      color:#0f172a;
+      white-space:nowrap;
     }
-
-    .hint{
-      color:var(--muted);
+    .card h3{
+      margin:0;
+      font-size:1rem;
+      letter-spacing:-.2px;
+      line-height:1.25;
+      font-weight:900;
+    }
+    .card .hint{
       font-size:.9rem;
+      color:var(--muted);
       line-height:1.45;
+      margin:0;
     }
 
     /* NOTEPAD */
-    .notepad{margin-top:18px}
-
+    .notepad{ margin-top:18px; }
+    .notepad .content{ padding:16px 18px 18px; }
     textarea{
       width:100%;
-      min-height:160px;
-      padding:12px;
+      min-height:170px;
+      resize:vertical;
       border-radius:16px;
       border:1px solid var(--stroke);
+      background:linear-gradient(135deg, #ffffff, #fbfdff);
+      padding:12px 12px;
       font-size:1rem;
+      line-height:1.55;
+      outline:none;
+      box-shadow: inset 0 2px 0 rgba(16,42,67,.04);
     }
-
+    textarea:focus{
+      border-color:rgba(99,102,241,.55);
+      box-shadow:0 0 0 4px rgba(99,102,241,.16), inset 0 2px 0 rgba(16,42,67,.04);
+    }
     .actions{
-      margin-top:10px;
       display:flex;
-      justify-content:space-between;
-      align-items:center;
+      flex-wrap:wrap;
       gap:10px;
+      margin-top:10px;
+      align-items:center;
+      justify-content:space-between;
     }
-
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap}
     button{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:.2px;
       padding:10px 14px;
       border-radius:14px;
-      border:none;
-      font-weight:800;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    button:active{transform: translateY(1px)}
+    .btn{
+      background:linear-gradient(135deg, var(--accent3), var(--accent2));
+      color:white;
+      box-shadow:0 16px 28px rgba(45,212,191,.20);
+    }
+    .btn:hover{filter:saturate(1.05)}
+    .btn2{
+      background:linear-gradient(135deg, #ffffff, #ffffffcc);
+      border:1px solid var(--stroke);
+      color:var(--ink);
+      box-shadow:0 10px 22px rgba(16,42,67,.10);
+    }
+    .btn2:hover{border-color:rgba(255,122,24,.45)}
+    .meta{ color:var(--muted); font-size:.9rem; }
+
+    /* MODAL */
+    .modalBackdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(8, 18, 35, .58);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:50;
+      backdrop-filter: blur(6px);
+    }
+    .modalBackdrop.open{display:flex}
+    .modal{
+      width:min(680px, 100%);
+      border-radius:22px;
+      background:linear-gradient(135deg, #ffffff, #ffffffcc);
+      border:1px solid rgba(214,226,240,.9);
+      box-shadow:0 28px 70px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .modalHeader{
+      padding:16px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom:1px solid var(--stroke);
+      background:linear-gradient(135deg, #fff, #ffffffaa);
+    }
+    .modalHeader h3{
+      margin:0;
+      font-size:1.1rem;
+      letter-spacing:-.25px;
+      font-weight:900;
+    }
+    .modalHeader p{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.45;
+    }
+    .close{
+      border:1px solid var(--stroke);
+      background:#ffffffcc;
+      border-radius:14px;
+      padding:10px 12px;
+      font-weight:900;
+      box-shadow:0 10px 22px rgba(16,42,67,.10);
       cursor:pointer;
     }
-
-    .btn{
-      background:linear-gradient(135deg,var(--accent3),var(--accent2));
-      color:white;
+    .modalBody{
+      padding:16px 16px 18px;
+      display:grid;
+      gap:12px;
     }
-
-    .btn2{
-      background:white;
+    .linkCard{
       border:1px solid var(--stroke);
+      border-radius:18px;
+      padding:14px 14px;
+      background:linear-gradient(135deg, #fbfdff, #ffffff);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      box-shadow:0 12px 26px rgba(16,42,67,.08);
+    }
+    .linkCard strong{display:block; font-weight:900}
+    .linkCard small{color:var(--muted)}
+    .go{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:900;
+      background:linear-gradient(135deg, var(--accent), var(--accent4));
+      color:white;
+      box-shadow:0 16px 28px rgba(244,63,94,.18);
+      white-space:nowrap;
     }
 
-    @media(max-width:980px){
+    footer{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:.85rem;
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
       .grid{grid-template-columns:1fr}
+      .timeline::before{left:24px}
+      .step{grid-template-columns: 56px 1fr}
     }
   </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-<header>
-  <div class="header-left">
-    <h1>Giovanni Pascoli: vita e snodi</h1>
-    <p class="subtitle">
-      A sinistra la biografia essenziale; a destra le tappe principali.
-      Ogni tappa apre un collegamento interpretativo.
-    </p>
+    <header>
+      <div class="header-left">
+        <h1>Giovanni Pascoli: vita e snodi</h1>
+        <p class="subtitle">
+          A sinistra la biografia essenziale; a destra le tappe principali. Ogni tappa apre una finestra con due porte:
+          <strong>come cambia la sua immagine del mondo</strong> e <strong>testi collegati</strong>.
+        </p>
+      </div>
+      <a class="home-link" href="index.html">Home</a>
+    </header>
+
+    <section class="grid">
+      <!-- BIO -->
+      <article class="panel">
+        <div class="head">
+          <h2>Biografia</h2>
+          <small>testo base</small>
+        </div>
+        <div class="bio" id="bio">
+          <p>
+            Giovanni Pascoli (1855-1912) nacque a San Mauro di Romagna il 31 dicembre 1855, quarto di dieci figli,
+            in una famiglia di modesto benessere rurale. La sua infanzia fu segnata da tragici lutti: il padre Ruggero
+            – amministratore di una tenuta dei principi Torlonia – venne assassinato in un agguato il 10 agosto 1867
+            sulla via del ritorno a casa. Questo omicidio, rimasto impunito, lasciò un “trauma indelebile” nel giovane
+            Pascoli e diede avvio a una catena di sciagure familiari: nel giro di pochi anni morirono anche la madre
+            Caterina, la sorella maggiore Margherita e i fratelli Luigi e Giacomo.
+          </p>
+          <p>
+            Questi eventi luttuosi spezzarono il “guscio protettivo” del nucleo familiare, che Pascoli ricercò poi per
+            tutta la vita nella sua poesia sotto forma di nido (il rifugio dell’infanzia perduta). Trasferitosi a Urbino
+            per gli studi collegiali presso i padri Scolopi, Pascoli ricevette una solida formazione classica in latino e greco.
+            Proseguì gli studi universitari a Bologna dal 1873, allievo del poeta Giosuè Carducci.
+          </p>
+          <p>
+            Furono anni inquieti: aderì ai circoli socialisti e radicali, stringendo amicizia con Andrea Costa e partecipando
+            a proteste studentesche. Nel 1876 perse la borsa di studio per aver contestato pubblicamente il ministro Bonghi,
+            e nel 1879 fu incarcerato alcuni mesi con l’accusa di attività sovversiva. Dopo la scarcerazione, riprese gli studi
+            e si laureò nel 1882 con una tesi sul poeta greco Alceo.
+          </p>
+          <p>
+            Iniziò quindi la carriera di docente: insegnò lettere classiche nei licei di Matera (1882), Massa (1884) – dove poté
+            riunire presso di sé le amatissime sorelle minori Ida e Maria – e Livorno (1887-1895). Nel 1895 ottenne un incarico
+            universitario a Bologna (grammatica greca e latina) e, dal 1897, la cattedra di Letteratura Latina all’Università di Messina.
+            Il 1895 segnò anche un momento delicato nella sua vita privata: la sorella Ida si sposò, evento vissuto da Giovanni come un
+            abbandono doloroso. Da allora egli visse sostanzialmente con l’altra sorella Maria (la “Mariù” dei suoi versi), ricostruendo con lei
+            una sorta di famiglia sostitutiva su cui fondare il proprio equilibrio affettivo.
+          </p>
+          <p>
+            Nel 1903 Pascoli fu chiamato a succedere al suo maestro Carducci sulla cattedra di Letteratura Italiana a Bologna – una nomina prestigiosa,
+            vista anche come un tardivo risarcimento dopo i contrasti giovanili – e vi insegnò fino alla morte.
+          </p>
+          <p>
+            Nonostante il prestigio accademico, Pascoli trovava gravoso l’insegnamento universitario e preferiva ritirarsi nella quiete della campagna
+            toscana. Dal 1895 aveva infatti eletto a dimora prediletta una casa colonica a Castelvecchio di Barga (Lucca), circondata dalla natura,
+            dove trascorreva ogni momento libero in compagnia di Maria. Castelvecchio divenne il suo rifugio poetico: qui compose molte opere e qui sarà sepolto
+            (nonostante sia morto a Bologna). La devota Maria custodì gelosamente fino al 1953 l’archivio e le memorie del fratello.
+          </p>
+          <p>
+            Pascoli morì prematuramente il 6 aprile 1912 a Bologna, a 56 anni. La sua vicenda personale di orfano traumatizzato, intellettuale solitario e fratello
+            affettuoso resta indissolubilmente legata alla sua produzione poetica: tutte le scelte di vita successive – dall’ideale del “nido” familiare ricostruito con Maria,
+            fino al rifugio nella poesia – possono leggersi come tentativi di compensare quell’angoscia originaria mai davvero sanata.
+          </p>
+
+          <div class="quote">
+            <strong>Idea-guida:</strong> “nido” e “trauma” non sono temi: sono una struttura interiore che diventa poetica.
+          </div>
+        </div>
+      </article>
+
+      <!-- TIMELINE -->
+      <aside class="panel">
+        <div class="head">
+          <h2>Tappe principali</h2>
+          <small>clicca una tappa</small>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </aside>
+    </section>
+
+    <!-- NOTEPAD -->
+    <section class="panel notepad">
+      <div class="head">
+        <h2>Appunti rapidi</h2>
+        <small>incolla → salva .txt</small>
+      </div>
+      <div class="content">
+        <textarea id="pad" placeholder="Incolla qui il testo che selezioni e copi (citazioni, appunti, pezzi di spiegazione)…"></textarea>
+        <div class="actions">
+          <div class="btnrow">
+            <button class="btn" id="saveTxt">Salva come TXT</button>
+            <button class="btn2" id="clearPad" title="Pulisci il riquadro">Svuota</button>
+          </div>
+          <div class="meta" id="padMeta">0 caratteri</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Nel JS puoi cambiare i link delle due porte per puntare alle tue pagine reali (immagine del mondo / testi).
+    </footer>
+
   </div>
-  <a href="index.html" class="home-link">Home</a>
-</header>
 
-<!-- (IL RESTO DEL FILE RESTA IDENTICO ALLA VERSIONE PRECEDENTE:
-     BIOGRAFIA, TIMELINE, MODAL, APPUNTI, JS)
-     Non l’ho accorciato qui per non confonderti:
-     puoi incollare questo header sopra il corpo che già hai,
-     oppure usare direttamente questo file completo come base. -->
+  <!-- MODAL -->
+  <div class="modalBackdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <div class="modalHeader">
+        <div>
+          <h3 id="mTitle">Titolo tappa</h3>
+          <p id="mDesc">Descrizione…</p>
+        </div>
+        <button class="close" id="closeModal" aria-label="Chiudi">Chiudi</button>
+      </div>
+      <div class="modalBody">
+        <div class="linkCard">
+          <div>
+            <strong>Come ha influenzato l’immagine del mondo</strong>
+            <small>lettura interpretativa dello snodo</small>
+          </div>
+          <a class="go" id="linkWorld" href="#" target="_self" rel="noopener">Apri</a>
+        </div>
+        <div class="linkCard">
+          <div>
+            <strong>Testi collegati</strong>
+            <small>poesie / saggi / raccolte da agganciare</small>
+          </div>
+          <a class="go" id="linkTexts" href="#" target="_self" rel="noopener">Apri</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <script>
+    // Cambia qui i link quando hai i file reali
+    const TAPPE = [
+      {
+        year: "1855",
+        title: "Nascita a San Mauro di Romagna",
+        desc: "Origini rurali: un’infanzia dentro un mondo domestico e naturale.",
+        worldUrl: "immagine-del-mondo.html#origini",
+        textsUrl: "testi.html#prime"
+      },
+      {
+        year: "1867",
+        title: "Uccisione del padre (10 agosto)",
+        desc: "Trauma fondativo: frattura del nucleo familiare e ricerca del nido perduto.",
+        worldUrl: "immagine-del-mondo.html#trauma-nido",
+        textsUrl: "x-agosto.html"
+      },
+      {
+        year: "1873",
+        title: "Università a Bologna (Carducci)",
+        desc: "Formazione classica e tensione fra disciplina e inquietudine moderna.",
+        worldUrl: "immagine-del-mondo.html#formazione",
+        textsUrl: "poetica.html#fanciullino"
+      },
+      {
+        year: "1876",
+        title: "Perde la borsa di studio",
+        desc: "Scontro con l’autorità: politicizzazione e disillusione.",
+        worldUrl: "immagine-del-mondo.html#politica",
+        textsUrl: "testi.html#civili"
+      },
+      {
+        year: "1879",
+        title: "Carcere per attività sovversiva",
+        desc: "Dopo la durezza del reale cresce il bisogno di riparo e interiorità.",
+        worldUrl: "immagine-del-mondo.html#riparo",
+        textsUrl: "testi.html#rifugio"
+      },
+      {
+        year: "1882",
+        title: "Laurea e inizio insegnamento (Matera)",
+        desc: "Stabilità esterna, fragilità interna: comincia la vita docente.",
+        worldUrl: "immagine-del-mondo.html#stabilita",
+        textsUrl: "myricae.html"
+      },
+      {
+        year: "1884",
+        title: "Massa: riunisce Ida e Maria",
+        desc: "Ricostruzione del nido: gli affetti come architettura di sopravvivenza.",
+        worldUrl: "immagine-del-mondo.html#nido-ricostruito",
+        textsUrl: "testi.html#maria"
+      },
+      {
+        year: "1887–1895",
+        title: "Livorno: maturazione poetica",
+        desc: "Le “cose piccole” diventano universo: suono, immagine, simbolo.",
+        worldUrl: "immagine-del-mondo.html#cose",
+        textsUrl: "canti-di-castelvecchio.html"
+      },
+      {
+        year: "1895",
+        title: "Matrimonio di Ida",
+        desc: "Vissuto come abbandono: la ferita affettiva spinge verso il nido chiuso con Maria.",
+        worldUrl: "immagine-del-mondo.html#ida",
+        textsUrl: "testi.html#ida"
+      },
+      {
+        year: "1895",
+        title: "Bologna e scelta di Castelvecchio",
+        desc: "Prestigio e fuga: università da un lato, campagna come rifugio dall’altro.",
+        worldUrl: "immagine-del-mondo.html#castelvecchio",
+        textsUrl: "poemetti.html"
+      },
+      {
+        year: "1897",
+        title: "Cattedra a Messina (Letteratura Latina)",
+        desc: "La lingua antica come laboratorio: classicismo e modernità insieme.",
+        worldUrl: "immagine-del-mondo.html#latino",
+        textsUrl: "testi.html#latini"
+      },
+      {
+        year: "1903",
+        title: "Succede a Carducci a Bologna",
+        desc: "Nomina prestigiosa e risarcimento simbolico, ma l’inquietudine resta.",
+        worldUrl: "immagine-del-mondo.html#carducci",
+        textsUrl: "testi.html#discorsi"
+      },
+      {
+        year: "1912",
+        title: "Morte a Bologna (6 aprile)",
+        desc: "La vita finisce, l’opera resta: biografia e poesia rimangono cucite insieme.",
+        worldUrl: "immagine-del-mondo.html#eredita",
+        textsUrl: "testi.html#eredita"
+      }
+    ];
+
+    const timeline = document.getElementById("timeline");
+    const backdrop = document.getElementById("backdrop");
+    const closeModalBtn = document.getElementById("closeModal");
+    const mTitle = document.getElementById("mTitle");
+    const mDesc = document.getElementById("mDesc");
+    const linkWorld = document.getElementById("linkWorld");
+    const linkTexts = document.getElementById("linkTexts");
+
+    function openModal(t){
+      mTitle.textContent = `${t.year} — ${t.title}`;
+      mDesc.textContent = t.desc;
+      linkWorld.href = t.worldUrl || "#";
+      linkTexts.href = t.textsUrl || "#";
+      backdrop.classList.add("open");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal(){
+      backdrop.classList.remove("open");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // build timeline
+    TAPPE.forEach((t) => {
+      const step = document.createElement("div");
+      step.className = "step";
+
+      const marker = document.createElement("div");
+      marker.className = "marker";
+
+      const pin = document.createElement("div");
+      pin.className = "pin";
+      marker.appendChild(pin);
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `Apri dettagli tappa ${t.year}: ${t.title}`);
+
+      const top = document.createElement("div");
+      top.className = "cardTop";
+
+      const h = document.createElement("h3");
+      h.textContent = t.title;
+
+      const y = document.createElement("div");
+      y.className = "year";
+      y.textContent = t.year;
+
+      top.appendChild(h);
+      top.appendChild(y);
+
+      const hint = document.createElement("p");
+      hint.className = "hint";
+      hint.textContent = t.desc;
+
+      card.appendChild(top);
+      card.appendChild(hint);
+
+      step.appendChild(marker);
+      step.appendChild(card);
+
+      card.addEventListener("click", () => openModal(t));
+      card.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          openModal(t);
+        }
+      });
+
+      timeline.appendChild(step);
+    });
+
+    // modal interactions
+    closeModalBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", (e) => {
+      if(e.target === backdrop) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && backdrop.classList.contains("open")) closeModal();
+    });
+
+    // notepad: save txt
+    const pad = document.getElementById("pad");
+    const padMeta = document.getElementById("padMeta");
+    const saveTxt = document.getElementById("saveTxt");
+    const clearPad = document.getElementById("clearPad");
+
+    function updateMeta(){
+      padMeta.textContent = `${pad.value.length} caratteri`;
+    }
+    pad.addEventListener("input", updateMeta);
+    updateMeta();
+
+    clearPad.addEventListener("click", () => {
+      pad.value = "";
+      updateMeta();
+      pad.focus();
+    });
+
+    saveTxt.addEventListener("click", () => {
+      const text = pad.value.trim();
+      if(!text){
+        alert("Non c’è nulla da salvare: incolla prima un testo.");
+        pad.focus();
+        return;
+      }
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth()+1).padStart(2,"0");
+      const dd = String(now.getDate()).padStart(2,"0");
+      const hh = String(now.getHours()).padStart(2,"0");
+      const mi = String(now.getMinutes()).padStart(2,"0");
+
+      const filename = `pascoli-appunti_${yyyy}-${mm}-${dd}_${hh}-${mi}.txt`;
+      const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
 </body>
 </html>
