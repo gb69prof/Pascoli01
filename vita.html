@@ -11,16 +11,10 @@
       --bg1:#fbf7ef;
       --bg2:#e9f6ff;
       --ink:#1f2a33;
-      --muted:rgba(31,42,51,0.72);
       --quiet:rgba(31,42,51,0.56);
-      --line:rgba(31,42,51,0.14);
       --card:rgba(255,255,255,0.72);
-      --card2:rgba(255,255,255,0.90);
-      --accent:#ffb703;
-      --accent2:#219ebc;
       --shadow:0 18px 60px rgba(0,0,0,0.14);
       --r-xl:22px;
-      --r-lg:16px;
       --max:1120px;
 
       --hl: rgba(255, 183, 3, 0.38);
@@ -44,37 +38,25 @@
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px 18px 28px; }
 
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap:wrap;
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px; margin-bottom: 12px; flex-wrap:wrap;
     }
-
     .crumbs{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 900;
-      letter-spacing:.3px;
-      flex-wrap:wrap;
+      display:flex; align-items:center; gap:10px;
+      font-weight: 900; letter-spacing:.3px; flex-wrap:wrap;
     }
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 10px 12px;
-      border-radius: 999px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px; border-radius: 999px;
       border: 1px solid rgba(31,42,51,0.14);
       background: rgba(255,255,255,0.88);
-      font-size: 12px;
-      font-weight: 950;
+      font-size: 12px; font-weight: 950;
       user-select:none;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
       cursor:pointer;
+      touch-action: manipulation;
     }
     .pill:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.96); }
     .pill[aria-pressed="true"]{
@@ -85,13 +67,9 @@
     }
 
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 950;
-      padding: 6px 8px;
-      border-radius: 999px;
+      display:inline-flex; align-items:center; gap: 6px;
+      font-size: 11px; font-weight: 950;
+      padding: 6px 8px; border-radius: 999px;
       border: 1px solid rgba(31,42,51,0.14);
       background: rgba(255,255,255,0.75);
       color: rgba(31,42,51,0.78);
@@ -118,8 +96,7 @@
     }
     .heroInner{ position:relative; }
     .kicker{
-      font-size: 12px;
-      text-transform: uppercase;
+      font-size: 12px; text-transform: uppercase;
       letter-spacing: 1px;
       color: rgba(31,42,51,0.72);
       font-weight: 900;
@@ -196,6 +173,7 @@
       font-size: 13px; line-height:1.55; color: rgba(31,42,51,0.84);
     }
 
+    /* TOOLBAR lavoro */
     .workTools{ display:none; gap: 8px; flex-wrap:wrap; align-items:center; }
     .workOn .workTools{ display:flex; }
 
@@ -207,13 +185,25 @@
       border-radius: 999px;
       padding: 8px 10px;
       cursor:pointer;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease, outline .14s ease;
       user-select:none;
       font-size: 12px;
       touch-action: manipulation;
     }
     .toolBtn:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,1); }
     .toolBtn:disabled{ opacity: .55; cursor:not-allowed; transform:none; }
+    .toolBtn.active{
+      border-color: rgba(33,158,188,0.55);
+      outline: 2px solid rgba(33,158,188,0.22);
+      outline-offset: 2px;
+      background: rgba(233,246,255,0.85);
+    }
+    .toolBtn.ok{
+      border-color: rgba(255,183,3,0.55);
+      outline: 2px solid rgba(255,183,3,0.18);
+      outline-offset: 2px;
+      background: rgba(255,255,255,0.98);
+    }
 
     .tip{
       font-size:12px;
@@ -225,6 +215,7 @@
       user-select:none;
     }
 
+    /* SEGNI */
     .mark{
       border-radius: 6px;
       padding: 0 .08em;
@@ -233,13 +224,14 @@
     }
     .mark.hl{ background: var(--hl); }
     .mark.ul{
-      background: rgba(255,255,255,0.0);
+      background: transparent;
       text-decoration: underline;
       text-decoration-thickness: 3px;
       text-decoration-color: var(--ul);
       text-underline-offset: 3px;
     }
 
+    /* QUADERNO */
     .notebook{
       margin-top: 14px;
       border: 1px solid rgba(31,42,51,0.12);
@@ -274,6 +266,7 @@
       display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
     }
 
+    /* TIMELINE */
     .timeline{ display:flex; flex-direction:column; gap: 10px; }
     .tItem{
       width:100%;
@@ -300,6 +293,7 @@
 
     footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
 
+    /* MODAL */
     dialog{
       border: none;
       padding: 0;
@@ -391,6 +385,63 @@
       background: rgba(255,255,255,0.96);
     }
 
+    /* ===== Overlay Selezione attiva ===== */
+    .selBar{
+      position: fixed;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      width: min(820px, calc(100vw - 18px));
+      z-index: 9999;
+      border-radius: 18px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background:
+        radial-gradient(520px 240px at 20% 30%, rgba(255,183,3,0.16), transparent 60%),
+        radial-gradient(520px 240px at 80% 30%, rgba(33,158,188,0.16), transparent 60%),
+        rgba(255,255,255,0.95);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.22);
+      padding: 10px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .selLeft{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .selBadge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-weight: 950;
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.85);
+      white-space:nowrap;
+    }
+    .selText{
+      font-size: 12px;
+      color: rgba(31,42,51,0.72);
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 54ch;
+    }
+    .selActions{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
     @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
   </style>
 </head>
@@ -408,7 +459,7 @@
       </div>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <button class="pill" id="toggleWork" type="button" aria-pressed="false" title="Attiva/Disattiva strumenti di lavoro">
+        <button class="pill" id="toggleWork" type="button" aria-pressed="false">
           🟡 Modalità lavoro: OFF
         </button>
         <a class="pill" href="index.html" aria-label="Torna alla home">↩︎ Home</a>
@@ -434,15 +485,19 @@
           <strong>Sintesi (chiara, non cupa)</strong>
 
           <div class="workTools" aria-label="Strumenti di lavoro">
-            <button class="toolBtn" id="btnUnderline" type="button" disabled>✏️ Sottolinea</button>
-            <button class="toolBtn" id="btnHighlight" type="button" disabled>🖍️ Evidenzia</button>
-            <button class="toolBtn" id="btnUndo" type="button" disabled>↩︎ Annulla</button>
+            <button class="toolBtn" id="btnToolUl" type="button">✏️ Sottolinea</button>
+            <button class="toolBtn" id="btnToolHl" type="button">🖍️ Evidenzia</button>
+            <button class="toolBtn ok" id="btnOk" type="button" disabled>✅ OK</button>
+            <button class="toolBtn" id="btnCancelSel" type="button" disabled>✕ Annulla selezione</button>
+
+            <span class="tip" id="workTip">1) Scegli uno strumento. 2) Seleziona testo. 3) Premi OK.</span>
+
+            <button class="toolBtn" id="btnUndo" type="button" disabled>↩︎ Undo</button>
             <button class="toolBtn" id="btnClearMarks" type="button" disabled>🧼 Pulisci segni</button>
-            <span class="tip" id="workTip">Seleziona una frase e premi un pulsante.</span>
           </div>
         </div>
 
-        <div class="bd prose" id="workArea">
+        <div class="bd prose">
           <div id="workText">
             <p>
               Giovanni Pascoli nasce a San Mauro di Romagna nel 1855. L’infanzia viene spezzata dall’assassinio del padre Ruggero (10 agosto 1867) e,
@@ -513,6 +568,18 @@
     <footer>© <span id="year"></span> — Pascoli / Libro.0 — a cura di gbprof</footer>
   </div>
 
+  <!-- Overlay: Selezione attiva -->
+  <div class="selBar" id="selBar" hidden>
+    <div class="selLeft">
+      <span class="selBadge" id="selBadge">✅ Selezione pronta</span>
+      <span class="selText" id="selText">—</span>
+    </div>
+    <div class="selActions">
+      <button class="toolBtn ok" id="btnOk2" type="button">✅ OK</button>
+      <button class="toolBtn" id="btnCancelSel2" type="button">✕ Annulla</button>
+    </div>
+  </div>
+
   <!-- MODAL -->
   <dialog id="modal">
     <div class="modalHd">
@@ -544,7 +611,7 @@
     $('#year').textContent = new Date().getFullYear();
 
     // =========
-    //  TIMELINE DATA
+    //  TIMELINE (minimal)
     // =========
     const EVENTS = [
       { date:"1855", title:"Nasce a San Mauro di Romagna", mini:"Origine rurale, “cose” e natura come alfabeti.",
@@ -556,16 +623,6 @@
         sub:"10 agosto 1867: Ruggero Pascoli ucciso in un agguato; omicidio impunito.",
         world:`<p>La realtà può essere ingiusta senza spiegazione: esperienza, non teoria.</p>`,
         poems:[{label:"X agosto", href:"testi/x-agosto.html", note:"Nodo sorgivo."}]
-      },
-      { date:"1868–1871", title:"Catena di lutti familiari", mini:"Il guscio si rompe: nasce il bisogno del nido.",
-        sub:"Negli anni successivi muoiono madre, sorella e fratelli.",
-        world:`<p>Il nido è difesa, ricostruzione, rito.</p>`,
-        poems:[{label:"Tema: il nido (pagina futura)", href:"#", note:"Crea pagina-tema."}]
-      },
-      { date:"1873–1882", title:"Bologna: Carducci, politica, inquietudine", mini:"Protesta, perdita borsa, carcere.",
-        sub:"1876 perdita borsa; 1879 carcere; 1882 laurea.",
-        world:`<p>Conflitto e storia: energia che diventa tensione interna.</p>`,
-        poems:[{label:"Poemi conviviali (se li accenni)", href:"#", note:"Ponte classico/moderno."}]
       },
       { date:"1895", title:"Ida si sposa: ferita affettiva", mini:"Vissuto come abbandono.",
         sub:"Evento privato ma strutturante.",
@@ -579,7 +636,6 @@
       }
     ];
 
-    // Render timeline
     const tl = $('#timeline');
     EVENTS.forEach((ev) => {
       const btn = document.createElement('button');
@@ -601,9 +657,7 @@
       tl.appendChild(btn);
     });
 
-    // =========
-    //  MODAL
-    // =========
+    // Modal
     const modal = $('#modal');
     const mTitle = $('#mTitle');
     const mSub = $('#mSub');
@@ -665,49 +719,59 @@
     }
 
     // =========
-    //  LAVORO (FIX robusto)
+    //  LAVORO: tool -> selezione -> OK + overlay
     // =========
     const toggleWork = $('#toggleWork');
     const badgeWork = $('#badgeWork');
-    const btnUnderline = $('#btnUnderline');
-    const btnHighlight = $('#btnHighlight');
+
+    const btnToolUl = $('#btnToolUl');
+    const btnToolHl = $('#btnToolHl');
+    const btnOk = $('#btnOk');
+    const btnCancelSel = $('#btnCancelSel');
+
     const btnUndo = $('#btnUndo');
     const btnClearMarks = $('#btnClearMarks');
+
     const btnExtract = $('#btnExtract');
     const btnCopy = $('#btnCopy');
     const btnSaveTxt = $('#btnSaveTxt');
     const btnClearNotebook = $('#btnClearNotebook');
-    const workTip = $('#workTip');
 
+    const workTip = $('#workTip');
     const workText = $('#workText');
+
     const notebookText = $('#notebookText');
     const nbCount = $('#nbCount');
     const saveState = $('#saveState');
 
+    // overlay
+    const selBar = $('#selBar');
+    const selBadge = $('#selBadge');
+    const selText = $('#selText');
+    const btnOk2 = $('#btnOk2');
+    const btnCancelSel2 = $('#btnCancelSel2');
+
     let workEnabled = false;
 
-    // Range cache: salva l’ultima selezione valida (fondamentale su iPad)
+    // tool scelto: 'ul' | 'hl' | null
+    let currentTool = null;
+
+    // selezione cache (iPad)
     let cachedRange = null;
 
-    // Undo stack (snapshot HTML)
+    // undo HTML
     const undoStack = [];
     const UNDO_MAX = 25;
 
-    // Notebook lines
+    // notebook
     let notebookLines = [];
 
-    // Storage (IndexedDB + fallback)
+    // storage
     const DB_NAME = "Libro01_Pascoli";
     const DB_STORE = "pages";
     const PAGE_KEY = "vita";
-
+    function lsKey(){ return "Libro01_Pascoli_vita_v4"; }
     function setSaveState(msg){ saveState.textContent = "autosave: " + msg; }
-
-    function pushUndo(){
-      undoStack.push(workText.innerHTML);
-      if(undoStack.length > UNDO_MAX) undoStack.shift();
-      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-    }
 
     function enableWorkUI(on){
       workEnabled = on;
@@ -716,29 +780,37 @@
       toggleWork.setAttribute('aria-pressed', on ? "true" : "false");
       toggleWork.textContent = on ? "🟡 Modalità lavoro: ON" : "🟡 Modalità lavoro: OFF";
 
-      const dis = !on;
-      btnUnderline.disabled = dis;
-      btnHighlight.disabled = dis;
-      btnClearMarks.disabled = dis;
-      btnExtract.disabled = dis;
-      btnUndo.disabled = !(on && undoStack.length > 0);
+      if(!on){
+        currentTool = null;
+        cachedRange = null;
+        setToolUI();
+        setSelectionUI();
+      }
 
-      updateNotebookUI();
+      btnUndo.disabled = !(on && undoStack.length > 0);
+      btnClearMarks.disabled = !on;
+      btnExtract.disabled = !on;
 
       workTip.textContent = on
-        ? "Seleziona una frase e poi premi Sottolinea/Evidenzia."
+        ? "1) Scegli uno strumento. 2) Seleziona testo. 3) Premi OK."
         : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
+
+      updateNotebookUI();
     }
 
     toggleWork.addEventListener('click', () => enableWorkUI(!workEnabled));
 
-    // IMPORTANTISSIMO: su iPad il click sul bottone “uccide” la selezione.
-    // Quindi blocchiamo il focus sul bottone e usiamo la selezione cache.
-    [btnUnderline, btnHighlight, btnUndo, btnClearMarks, btnExtract, btnCopy, btnSaveTxt, btnClearNotebook].forEach(b=>{
+    // Evita perdita selezione quando tocchi OK/Annulla (toolbar + overlay)
+    [btnOk, btnCancelSel, btnOk2, btnCancelSel2].forEach(b=>{
       b.addEventListener('pointerdown', (e)=>{ if(workEnabled) e.preventDefault(); }, {passive:false});
-      b.addEventListener('mousedown', (e)=>{ if(workEnabled) e.preventDefault(); });
       b.addEventListener('touchstart', (e)=>{ if(workEnabled) e.preventDefault(); }, {passive:false});
+      b.addEventListener('mousedown', (e)=>{ if(workEnabled) e.preventDefault(); });
     });
+
+    function setToolUI(){
+      btnToolUl.classList.toggle('active', currentTool === 'ul');
+      btnToolHl.classList.toggle('active', currentTool === 'hl');
+    }
 
     function isRangeInside(range, container){
       if(!range) return false;
@@ -747,28 +819,114 @@
       return container.contains(node);
     }
 
-    function captureSelection(){
+    function previewSelectionText(range){
+      try{
+        const t = (range && !range.collapsed) ? range.toString().replace(/\s+/g," ").trim() : "";
+        if(!t) return "—";
+        return t.length > 90 ? (t.slice(0, 90) + "…") : t;
+      }catch(e){
+        return "—";
+      }
+    }
+
+    function setSelectionUI(){
+      const hasSel = !!cachedRange && !cachedRange.collapsed && isRangeInside(cachedRange, workText);
+      const hasTool = !!currentTool;
+      const ok = workEnabled && hasTool && hasSel;
+
+      btnOk.disabled = !ok;
+      btnCancelSel.disabled = !(workEnabled && hasSel);
+
+      // overlay on/off
+      selBar.hidden = !ok;
+
+      if(ok){
+        selBadge.textContent = currentTool === "ul" ? "✏️ Sottolinea pronta" : "🖍️ Evidenzia pronta";
+        selText.textContent = previewSelectionText(cachedRange);
+      }
+
       if(!workEnabled) return;
+
+      if(!currentTool){
+        workTip.textContent = "1) Scegli uno strumento. 2) Seleziona testo. 3) Premi OK.";
+      }else if(!hasSel){
+        workTip.textContent = "Strumento scelto → adesso seleziona una frase nel testo.";
+      }else{
+        workTip.textContent = "Selezione pronta → premi OK (anche dalla barra in basso).";
+      }
+    }
+
+    function chooseTool(tool){
+      if(!workEnabled) return;
+      currentTool = tool;
+      setToolUI();
+      setSelectionUI();
+    }
+
+    btnToolUl.addEventListener('click', ()=> chooseTool('ul'));
+    btnToolHl.addEventListener('click', ()=> chooseTool('hl'));
+
+    function cancelSelection(){
+      cachedRange = null;
+      const sel = window.getSelection();
+      if(sel) sel.removeAllRanges();
+      setSelectionUI();
+      flashTip("Selezione annullata.");
+    }
+    btnCancelSel.addEventListener('click', cancelSelection);
+    btnCancelSel2.addEventListener('click', cancelSelection);
+
+    // Cattura selezione SOLO dopo scelta tool
+    document.addEventListener('selectionchange', ()=>{
+      if(!workEnabled) return;
+      if(!currentTool) return;
+
       const sel = window.getSelection();
       if(!sel || sel.rangeCount === 0) return;
+
       const r = sel.getRangeAt(0);
       if(r.collapsed) return;
       if(!isRangeInside(r, workText)) return;
 
-      // clona e salva
       cachedRange = r.cloneRange();
-      workTip.textContent = "Selezione pronta → scegli Sottolinea o Evidenzia.";
+      setSelectionUI();
+    });
+
+    // Undo
+    function pushUndo(){
+      undoStack.push(workText.innerHTML);
+      if(undoStack.length > UNDO_MAX) undoStack.shift();
+      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
     }
+    btnUndo.addEventListener('click', ()=>{
+      if(!workEnabled || undoStack.length === 0) return;
+      workText.innerHTML = undoStack.pop();
+      autosaveNow();
+      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
+      flashTip("Undo fatto.");
+    });
 
-    document.addEventListener('selectionchange', captureSelection);
+    // Clear marks
+    btnClearMarks.addEventListener('click', ()=>{
+      if(!workEnabled) return;
+      pushUndo();
+      const marks = workText.querySelectorAll('.mark');
+      marks.forEach(m=>{
+        const parent = m.parentNode;
+        while(m.firstChild) parent.insertBefore(m.firstChild, m);
+        parent.removeChild(m);
+        parent.normalize();
+      });
+      autosaveNow();
+      flashTip("Segni rimossi (testo intatto).");
+    });
 
-    // Helper per TreeWalker text nodes nel range
+    // ===== applicazione robusta (text nodes nel range)
     function getTextNodesInRange(range, container){
       const nodes = [];
       const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
         acceptNode(node){
           if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-          // Interseca range?
           const nodeRange = document.createRange();
           nodeRange.selectNodeContents(node);
           const intersects =
@@ -782,9 +940,7 @@
       return nodes;
     }
 
-    function normText(t){ return t.replace(/\s+/g, " ").trim(); }
-
-    function wrapTextPortion(textNode, start, end, className){
+    function wrapTextPortion(textNode, start, end, kind){
       const text = textNode.nodeValue;
       const before = text.slice(0, start);
       const mid = text.slice(start, end);
@@ -794,115 +950,75 @@
       if(before) frag.appendChild(document.createTextNode(before));
 
       const span = document.createElement('span');
-      span.className = "mark " + className;
-      span.setAttribute('data-mark', className === "ul" ? "ul" : "hl");
+      span.className = "mark " + kind;
+      span.setAttribute('data-mark', kind);
       span.setAttribute('data-ts', String(Date.now()));
       span.textContent = mid;
       frag.appendChild(span);
 
       if(after) frag.appendChild(document.createTextNode(after));
-
       textNode.parentNode.replaceChild(frag, textNode);
     }
 
-    function applyMarkRobust(kind){
+    function applyCachedSelection(){
       if(!workEnabled) return;
 
-      // usa cachedRange se disponibile, altrimenti prova a leggere selezione live
-      let range = cachedRange && isRangeInside(cachedRange, workText) ? cachedRange.cloneRange() : null;
-
-      if(!range){
-        const sel = window.getSelection();
-        if(sel && sel.rangeCount){
-          const r2 = sel.getRangeAt(0);
-          if(!r2.collapsed && isRangeInside(r2, workText)) range = r2.cloneRange();
-        }
-      }
-
-      if(!range || range.collapsed){
-        flashTip("Seleziona prima una frase nel testo (colonna sinistra).");
+      const hasSel = !!cachedRange && !cachedRange.collapsed && isRangeInside(cachedRange, workText);
+      if(!currentTool){
+        flashTip("Prima scegli Sottolinea o Evidenzia.");
         return;
       }
-
-      // evita di marcare già dentro un mark: se la selezione è tutta dentro mark, non fare casino
-      const sc = range.startContainer.nodeType === 1 ? range.startContainer : range.startContainer.parentNode;
-      const ec = range.endContainer.nodeType === 1 ? range.endContainer : range.endContainer.parentNode;
-      if(sc && sc.closest && sc.closest('.mark') && ec && ec.closest && ec.closest('.mark')){
-        flashTip("Sei già dentro un segno. Seleziona un po’ più fuori.");
+      if(!hasSel){
+        flashTip("Selezione non valida. Seleziona una frase nel testo.");
         return;
       }
 
       pushUndo();
 
       try{
+        const range = cachedRange.cloneRange();
         const nodes = getTextNodesInRange(range, workText);
         if(nodes.length === 0){
-          flashTip("Selezione non valida. Prova a selezionare solo testo (non spazi).");
+          flashTip("Seleziona testo vero (non solo spazi).");
           return;
         }
 
-        // Processa dal fondo verso l’alto per non rompere gli offset dei nodi successivi
         for(let i = nodes.length - 1; i >= 0; i--){
           const node = nodes[i];
-          const nodeRange = document.createRange();
-          nodeRange.selectNodeContents(node);
-
           const start = (node === range.startContainer) ? range.startOffset : 0;
           const end = (node === range.endContainer) ? range.endOffset : node.nodeValue.length;
 
-          // clamp
           const s = Math.max(0, Math.min(start, node.nodeValue.length));
           const e = Math.max(0, Math.min(end, node.nodeValue.length));
           if(e <= s) continue;
 
-          wrapTextPortion(node, s, e, kind);
+          wrapTextPortion(node, s, e, currentTool);
         }
 
-        // pulisci selezione cache (evita riapplicazioni strane)
         cachedRange = null;
         const sel = window.getSelection();
         if(sel) sel.removeAllRanges();
 
         autosaveNow();
-        btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-        flashTip(kind === "ul" ? "Sottolineatura fatta." : "Evidenziazione fatta.");
+        setSelectionUI();
+        flashTip(currentTool === 'ul' ? "Sottolineatura applicata." : "Evidenziazione applicata.");
       }catch(err){
-        // rollback
         if(undoStack.length){
           workText.innerHTML = undoStack.pop();
         }
-        btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-        flashTip("Safari ha fatto resistenza. Seleziona una frase più corta e riprova.");
+        autosaveNow();
+        setSelectionUI();
+        flashTip("Intoppo Safari: prova con una selezione più corta (una frase).");
       }
     }
 
-    btnUnderline.addEventListener('click', () => applyMarkRobust('ul'));
-    btnHighlight.addEventListener('click', () => applyMarkRobust('hl'));
+    btnOk.addEventListener('click', applyCachedSelection);
+    btnOk2.addEventListener('click', applyCachedSelection);
 
-    btnUndo.addEventListener('click', () => {
-      if(!workEnabled || undoStack.length === 0) return;
-      workText.innerHTML = undoStack.pop();
-      autosaveNow();
-      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-      flashTip("Annullato.");
-    });
+    // ===== Quaderno
+    function normText(t){ return t.replace(/\s+/g, " ").trim(); }
 
-    btnClearMarks.addEventListener('click', () => {
-      if(!workEnabled) return;
-      pushUndo();
-      const marks = workText.querySelectorAll('.mark');
-      marks.forEach(m => {
-        const parent = m.parentNode;
-        while(m.firstChild) parent.insertBefore(m.firstChild, m);
-        parent.removeChild(m);
-        parent.normalize();
-      });
-      autosaveNow();
-      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-      flashTip("Segni rimossi (testo intatto).");
-    });
-
-    btnExtract.addEventListener('click', () => {
+    btnExtract.addEventListener('click', ()=>{
       if(!workEnabled) return;
       const marks = Array.from(workText.querySelectorAll('.mark'));
       if(marks.length === 0){
@@ -911,7 +1027,7 @@
       }
 
       const lines = [];
-      marks.forEach((m) => {
+      marks.forEach(m=>{
         const t = normText(m.textContent || "");
         if(!t) return;
         const tag = m.classList.contains('hl') ? "EVID" : "SOTT";
@@ -948,14 +1064,14 @@
       btnClearNotebook.disabled = !has;
     }
 
-    btnClearNotebook.addEventListener('click', () => {
+    btnClearNotebook.addEventListener('click', ()=>{
       notebookLines = [];
       renderNotebook();
       autosaveNow();
       flashTip("Quaderno svuotato.");
     });
 
-    btnCopy.addEventListener('click', async () => {
+    btnCopy.addEventListener('click', async ()=>{
       const txt = notebookLines.join("\n");
       try{
         await navigator.clipboard.writeText(txt);
@@ -973,7 +1089,7 @@
       }
     });
 
-    btnSaveTxt.addEventListener('click', () => {
+    btnSaveTxt.addEventListener('click', ()=>{
       const txt = notebookLines.join("\n");
       const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
       const url = URL.createObjectURL(blob);
@@ -987,31 +1103,29 @@
       flashTip("File .txt salvato.");
     });
 
+    // ===== Tip flash
     let tipTimer = null;
     function flashTip(msg){
-      const old = workTip.textContent;
       workTip.textContent = msg;
       workTip.style.borderColor = "rgba(255,183,3,0.55)";
       workTip.style.background = "rgba(255,255,255,0.92)";
       clearTimeout(tipTimer);
       tipTimer = setTimeout(() => {
-        workTip.textContent = workEnabled ? "Seleziona una frase e poi premi Sottolinea/Evidenzia." : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
         workTip.style.borderColor = "rgba(31,42,51,0.12)";
         workTip.style.background = "rgba(255,255,255,0.62)";
-      }, 1600);
+        setSelectionUI();
+      }, 1400);
     }
 
     // =========
-    //  AUTOSAVE (IndexedDB + fallback localStorage)
+    //  AUTOSAVE: IndexedDB + fallback
     // =========
     async function idbOpen(){
       return new Promise((resolve, reject) => {
         const req = indexedDB.open(DB_NAME, 1);
         req.onupgradeneeded = () => {
           const db = req.result;
-          if(!db.objectStoreNames.contains(DB_STORE)){
-            db.createObjectStore(DB_STORE);
-          }
+          if(!db.objectStoreNames.contains(DB_STORE)) db.createObjectStore(DB_STORE);
         };
         req.onsuccess = () => resolve(req.result);
         req.onerror = () => reject(req.error);
@@ -1038,16 +1152,13 @@
       });
     }
 
-    function lsKey(){ return "Libro01_Pascoli_vita_v2"; }
-
     async function autosaveNow(){
       const payload = {
-        v: 2,
+        v: 4,
         ts: Date.now(),
         workHTML: workText.innerHTML,
         notebook: notebookLines
       };
-
       try{
         await idbSet(PAGE_KEY, payload);
         setSaveState("OK (IndexedDB)");
@@ -1078,10 +1189,9 @@
       setSaveState(data ? "ripristinato" : "—");
     }
 
-    // START
+    // Start
     enableWorkUI(false);
     restoreIfAny();
-
   </script>
 </body>
 </html>
