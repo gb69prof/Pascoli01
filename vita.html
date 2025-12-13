@@ -3,27 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pascoli — La vita</title>
-  <meta name="description" content="Pascoli — La vita: cronologia essenziale con approfondimenti e modalità lavoro (annotazione a micro-blocchi, quaderno, export)." />
+  <title>Pascoli — La vita (testo)</title>
+  <meta name="description" content="Pascoli — La vita: testo libero incollabile e salvataggio in file .txt." />
 
   <style>
     :root{
       --bg1:#fbf7ef;
       --bg2:#e9f6ff;
       --ink:#1f2a33;
-      --muted:rgba(31,42,51,0.74);
-      --quiet:rgba(31,42,51,0.56);
+      --muted:rgba(31,42,51,0.72);
       --line:rgba(31,42,51,0.14);
-      --card:rgba(255,255,255,0.72);
+      --card:rgba(255,255,255,0.82);
       --shadow:0 18px 60px rgba(0,0,0,0.14);
       --r-xl:22px;
-      --r-lg:16px;
-      --max:1120px;
-
-      --hl: rgba(255, 183, 3, 0.30);
-      --ul: rgba(33, 158, 188, 0.78);
-      --hover: rgba(33, 158, 188, 0.10);
-      --pick: rgba(255, 183, 3, 0.16);
+      --max: 980px;
     }
 
     *{ box-sizing:border-box; }
@@ -36,74 +29,19 @@
         radial-gradient(820px 520px at 80% 18%, rgba(255,183,3,0.20), transparent 60%),
         linear-gradient(180deg, var(--bg2), var(--bg1));
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing: .2px;
+      letter-spacing:.2px;
     }
 
-    a{ color:inherit; text-decoration:none; }
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px 18px 28px; }
-
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 12px; margin-bottom: 12px; flex-wrap:wrap;
-    }
-    .crumbs{
-      display:flex; align-items:center; gap:10px;
-      font-weight: 900; letter-spacing:.3px; flex-wrap:wrap;
-    }
-
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 10px 12px; border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.88);
-      font-size: 12px; font-weight: 950;
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-      cursor:pointer;
-      touch-action: manipulation;
-    }
-    .pill:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.96); }
-    .pill[aria-pressed="true"]{
-      border-color: rgba(255,183,3,0.55);
-      outline: 2px solid rgba(255,183,3,0.22);
-      outline-offset: 2px;
-      background: rgba(255,255,255,0.98);
-    }
-
-    .badge{
-      display:inline-flex; align-items:center; gap: 6px;
-      font-size: 11px; font-weight: 950;
-      padding: 6px 8px; border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.75);
-      color: rgba(31,42,51,0.78);
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-    }
 
     .hero{
       border: 1px solid rgba(31,42,51,0.14);
       background: rgba(255,255,255,0.78);
       border-radius: var(--r-xl);
       box-shadow: var(--shadow);
-      overflow:hidden;
       padding: 14px 14px 12px;
       margin-bottom: 14px;
-      position:relative;
     }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(420px 220px at 18% 30%, rgba(255,183,3,0.18), transparent 60%),
-        radial-gradient(420px 220px at 82% 20%, rgba(33,158,188,0.18), transparent 60%);
-      pointer-events:none;
-    }
-    .heroInner{ position:relative; }
     .kicker{
       font-size: 12px; text-transform: uppercase;
       letter-spacing: 1px;
@@ -112,26 +50,14 @@
     }
     h1{
       margin: 6px 0 6px;
-      font-size: clamp(26px, 4.2vw, 44px);
+      font-size: clamp(26px, 4.2vw, 40px);
       line-height: 1.08;
-      letter-spacing: .2px;
     }
     .subtitle{
       margin: 0;
       color: rgba(31,42,51,0.80);
-      line-height: 1.5;
+      line-height: 1.55;
       font-size: 13px;
-      max-width: 980px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 390px;
-      gap: 16px;
-      align-items:start;
-    }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
     }
 
     .card{
@@ -143,1059 +69,148 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
-    .card .hd{
+    .hd{
       padding: 12px 14px 10px;
       border-bottom: 1px solid rgba(31,42,51,0.10);
-      background: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.25));
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.28));
       display:flex; align-items:center; justify-content:space-between; gap:10px;
       flex-wrap:wrap;
     }
-    .card .hd strong{
+    .hd strong{
       font-size: 12px;
       letter-spacing: .9px;
       text-transform: uppercase;
       color: rgba(31,42,51,0.76);
     }
-    .card .bd{ padding: 14px; }
+    .bd{ padding: 14px; }
 
-    /* ===== LAVORO ===== */
-    .workTools{ display:none; gap: 8px; flex-wrap:wrap; align-items:center; }
-    .workOn .workTools{ display:flex; }
-
-    .toolBtn{
+    .tools{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+    }
+    .btn{
       appearance:none;
       border: 1px solid rgba(31,42,51,0.14);
       background: rgba(255,255,255,0.92);
       font-weight: 950;
       border-radius: 999px;
-      padding: 8px 10px;
+      padding: 9px 11px;
       cursor:pointer;
       transition: transform .14s ease, background .14s ease, border-color .14s ease, outline .14s ease;
       user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-      font-size: 12px;
       touch-action: manipulation;
       white-space:nowrap;
+      font-size: 12px;
     }
-    .toolBtn:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,1); }
-    .toolBtn:disabled{ opacity: .55; cursor:not-allowed; transform:none; }
-    .toolBtn.active{
-      border-color: rgba(33,158,188,0.55);
-      outline: 2px solid rgba(33,158,188,0.22);
-      outline-offset: 2px;
-      background: rgba(233,246,255,0.85);
-    }
-    .toolBtn.warn{
-      border-color: rgba(255,183,3,0.55);
-      outline: 2px solid rgba(255,183,3,0.18);
-      outline-offset: 2px;
-      background: rgba(255,255,255,0.98);
-    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,1); }
+    .btn:active{ transform: translateY(0px); }
+    .btn.warn:hover{ border-color: rgba(255,183,3,0.55); }
 
-    .tip{
-      font-size:12px;
-      color: rgba(31,42,51,0.66);
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.12);
-      background: rgba(255,255,255,0.62);
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-    }
-
-    /* ===== Testo annotabile (MICRO-BLOCCHI) ===== */
-    .prose{
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-    }
-
-    /* meno spazio tra righe e tra blocchi */
-    .block{
-      position: relative;
-      margin: 0 0 6px;          /* <- ridotto (prima 10px) */
-      padding: 8px 10px;        /* <- più compatto */
-      border-radius: 14px;
-      border: 1px solid transparent;
-      background: rgba(255,255,255,0.62);
-      line-height: 1.45;        /* <- più stretto (prima 1.7) */
-      font-size: 14px;
-      color: rgba(31,42,51,0.88);
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .workOn .block:hover{
-      background: rgba(255,255,255,0.80);
-      border-color: rgba(33,158,188,0.22);
-      transform: translateY(-1px);
-    }
-    .block.selected{
-      background: rgba(255,255,255,0.92);
-      border-color: rgba(255,183,3,0.38);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.10);
-    }
-
-    .markBadge{
-      position:absolute;
-      top: 7px;
-      right: 8px;
-      display:none;
-      align-items:center;
-      gap: 6px;
-      padding: 6px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.86);
-      font-size: 11px;
-      font-weight: 950;
-      color: rgba(31,42,51,0.78);
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-    }
-    .block[data-mark="ul"] .markBadge,
-    .block[data-mark="hl"] .markBadge{ display:inline-flex; }
-
-    .block[data-mark="hl"]{
-      background: linear-gradient(0deg, var(--hl), var(--hl)), rgba(255,255,255,0.70);
-      border-color: rgba(255,183,3,0.22);
-    }
-    .block[data-mark="ul"]{
-      background: rgba(255,255,255,0.70);
-      border-color: rgba(33,158,188,0.22);
-      text-decoration: underline;
-      text-decoration-thickness: 3px;
-      text-decoration-color: var(--ul);
-      text-underline-offset: 4px;
-    }
-
-    .floating{
-      position: absolute;
-      z-index: 50;
-      display:none;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 8px;
+    textarea{
+      width:100%;
+      min-height: 52vh;
+      resize: vertical;
       border-radius: 16px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background:
-        radial-gradient(420px 200px at 20% 30%, rgba(255,183,3,0.14), transparent 60%),
-        radial-gradient(420px 200px at 80% 30%, rgba(33,158,188,0.14), transparent 60%),
-        rgba(255,255,255,0.96);
-      box-shadow: 0 18px 60px rgba(0,0,0,0.18);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      transform: translateY(-6px);
+      border: 1px solid rgba(31,42,51,0.16);
+      padding: 12px 12px;
+      font-size: 14px;
+      line-height: 1.55;
+      outline: none;
+      background: rgba(255,255,255,0.88);
+      color: rgba(31,42,51,0.92);
+    }
+    textarea:focus{
+      border-color: rgba(33,158,188,0.55);
+      box-shadow: 0 0 0 3px rgba(33,158,188,0.16);
     }
 
-    /* ===== Quaderno ===== */
-    .notebook{
-      margin-top: 12px;
-      border: 1px solid rgba(31,42,51,0.12);
-      background: rgba(255,255,255,0.82);
-      border-radius: 18px;
-      padding: 12px 12px 10px;
-    }
-    .notebookHd{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; flex-wrap:wrap; margin-bottom: 8px;
-    }
-    .notebookHd b{
-      font-size: 12px; letter-spacing: .9px; text-transform: uppercase;
-      color: rgba(31,42,51,0.76);
-    }
-    .nbActions{ display:flex; gap:8px; flex-wrap:wrap; }
-    .nbBox{
-      border: 1px dashed rgba(31,42,51,0.18);
-      border-radius: 14px;
-      padding: 10px 10px;
-      background: rgba(255,255,255,0.70);
-      min-height: 70px;
-      white-space: pre-wrap;
-      line-height: 1.45; /* <- più compatto */
-      font-size: 13px;
-      color: rgba(31,42,51,0.88);
-    }
-    .nbMeta{
-      margin-top: 8px;
+    .meta{
+      margin-top: 10px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
       font-size: 12px;
       color: rgba(31,42,51,0.62);
-      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
     }
 
-    /* ===== Timeline ===== */
-    .timeline{ display:flex; flex-direction:column; gap: 10px; }
-    .tItem{
-      width:100%;
-      text-align:left;
-      border: 1px solid rgba(31,42,51,0.12);
-      background: rgba(255,255,255,0.82);
-      border-radius: 16px;
-      padding: 10px 10px;
-      cursor:pointer;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .tItem:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,183,3,0.45);
-      background: rgba(255,255,255,0.94);
-    }
-    .tRow{ display:flex; align-items:flex-start; justify-content:space-between; gap: 10px; }
-    .tDate{ font-weight: 950; font-size: 12px; letter-spacing:.6px; color: rgba(31,42,51,0.72); white-space:nowrap; }
-    .tTitle{ font-weight: 950; font-size: 13px; color: rgba(31,42,51,0.90); margin: 0 0 3px; }
-    .tMini{ font-size: 12px; color: rgba(31,42,51,0.70); line-height: 1.45; }
-    .tChevron{ color: rgba(33,158,188,0.95); font-weight: 950; margin-left: 8px; }
-
-    footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
-
-    /* MODAL */
-    dialog{
-      border: none;
-      padding: 0;
-      width: min(920px, calc(100vw - 22px));
-      border-radius: 18px;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.24);
-      background: rgba(255,255,255,0.98);
-      overflow:hidden;
-    }
-    dialog::backdrop{
-      background: rgba(10,16,22,0.45);
-      backdrop-filter: blur(2px);
-    }
-    .modalHd{
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(31,42,51,0.12);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-      background:
-        radial-gradient(520px 240px at 20% 30%, rgba(255,183,3,0.18), transparent 60%),
-        radial-gradient(520px 240px at 80% 30%, rgba(33,158,188,0.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.80));
-    }
-    .modalTitle{ margin:0; font-size: 16px; font-weight: 950; color: rgba(31,42,51,0.92); line-height: 1.25; }
-    .modalSub{ margin: 6px 0 0; font-size: 12px; color: rgba(31,42,51,0.74); line-height:1.45; max-width: 72ch; }
-    .closeBtn{
-      appearance:none;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.92);
-      font-weight: 950;
-      border-radius: 999px;
-      padding: 8px 10px;
-      cursor:pointer;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-      white-space:nowrap;
-    }
-    .closeBtn:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,1); }
-    .modalBd{ padding: 12px 14px 14px; }
-
-    .tabs{ display:flex; gap: 8px; flex-wrap:wrap; margin-bottom: 10px; }
-    .tabBtn{
-      appearance:none;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.88);
-      padding: 9px 10px;
-      border-radius: 14px;
-      cursor:pointer;
-      font-weight: 950;
-      font-size: 12px;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-    }
-    .tabBtn:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,0.96); }
-    .tabBtn[aria-selected="true"]{
-      border-color: rgba(33,158,188,0.45);
-      outline: 2px solid rgba(33,158,188,0.25);
-      outline-offset: 2px;
-      background: rgba(233,246,255,0.72);
-    }
-    .panel{
-      border: 1px solid rgba(31,42,51,0.12);
-      background: rgba(255,255,255,0.82);
-      border-radius: 16px;
-      padding: 10px 10px;
-    }
-    .panel p{ margin: 0 0 10px; line-height: 1.55; font-size: 13px; color: rgba(31,42,51,0.86); }
-    .panel p:last-child{ margin-bottom:0; }
-
-    .links{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 10px; }
-    .chipLink{
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.88);
-      font-size: 12px;
-      font-weight: 950;
-      cursor:pointer;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-    }
-    .chipLink:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,183,3,0.45);
-      background: rgba(255,255,255,0.96);
-    }
+    footer{ margin-top: 14px; font-size: 12px; color: rgba(31,42,51,0.56); }
+    a{ color:inherit; text-decoration:none; border-bottom:1px dotted rgba(31,42,51,0.28); }
+    a:hover{ border-bottom-color: rgba(33,158,188,0.55); }
   </style>
 </head>
 
 <body>
   <div class="wrap">
 
-    <div class="topbar">
-      <div class="crumbs">
-        <span class="badge">🟢 OSSATURA</span>
-        <span class="badge" id="badgeWork" style="display:none;">🟡 LAVORO</span>
-        <span style="color:rgba(31,42,51,0.72); font-weight:900;">Pascoli</span>
-        <span style="color:rgba(31,42,51,0.45);">/</span>
-        <span style="font-weight:950;">La vita</span>
-      </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <button class="pill" id="toggleWork" type="button" aria-pressed="false">
-          🟡 Modalità lavoro: OFF
-        </button>
-        <a class="pill" href="index.html" aria-label="Torna alla home">↩︎ Home</a>
-      </div>
-    </div>
-
     <section class="hero" aria-label="Introduzione">
-      <div class="heroInner">
-        <div class="kicker">Cronologia essenziale + approfondimenti + lavoro “iPad-proof”</div>
-        <h1>La vita (senza museo)</h1>
-        <p class="subtitle">
-          A destra c’è la cronologia essenziale. A sinistra tocchi un <b>micro-blocco</b> e lo marchi:
-          <b>sottolinea</b> o <b>evidenzia</b>. Poi ricavi un <b>quaderno</b> salvabile in .txt.
-        </p>
-      </div>
+      <div class="kicker">Testo semplice + esportazione</div>
+      <h1>Pascoli — La vita</h1>
+      <p class="subtitle">
+        Incolla qui il testo (o scrivilo). Poi salvalo in un file <b>.txt</b>.
+      </p>
     </section>
 
-    <section class="grid" aria-label="Vita Pascoli: testo e timeline">
-
-      <!-- SINISTRA -->
-      <article class="card" aria-label="Sintesi della vita">
-        <div class="hd">
-          <strong>Sintesi (chiara, non cupa)</strong>
-
-          <div class="workTools" aria-label="Strumenti di lavoro">
-            <span class="tip" id="workTip">Tocca un micro-blocco → scegli un segno → fatto.</span>
-            <button class="toolBtn" id="btnUndo" type="button" disabled>↩︎ Undo</button>
-            <button class="toolBtn" id="btnClearMarks" type="button" disabled>🧼 Pulisci segni</button>
-          </div>
+    <section class="card" aria-label="Editor testo">
+      <div class="hd">
+        <strong>Testo</strong>
+        <div class="tools">
+          <button class="btn" id="btnSave" type="button">💾 Salva .txt</button>
+          <button class="btn warn" id="btnClear" type="button">🧼 Pulisci</button>
+          <a class="btn" href="index.html" style="display:inline-flex;align-items:center;gap:8px;">↩︎ Home</a>
         </div>
+      </div>
 
-        <div class="bd">
-          <div class="prose" id="workArea" aria-label="Testo annotabile">
-
-            <!-- ===== MICRO-BLOCCHI (testo originale spezzato) ===== -->
-
-            <!-- b1 (spezzato) -->
-            <div class="block" data-id="m1">
-              Giovanni Pascoli nasce a San Mauro di Romagna nel 1855.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m2">
-              L’infanzia viene spezzata dall’assassinio del padre Ruggero (10 agosto 1867).
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m3">
-              Negli anni immediatamente successivi, una serie di lutti familiari.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m4">
-              Da questa frattura nasce l’idea del <b>nido</b> come bisogno vitale.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m5">
-              Non un tema “carino”, ma un modo di sopravvivere al mondo.
-              <span class="markBadge">—</span>
-            </div>
-
-            <!-- b2 (spezzato) -->
-            <div class="block" data-id="m6">
-              Studia in collegio (Urbino) e poi a Bologna, allievo di Carducci.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m7">
-              Gli anni universitari sono agitati: partecipa a movimenti e proteste.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m8">
-              Perde la borsa di studio e subisce anche il carcere.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m9">
-              Più tardi torna agli studi e si laurea.
-              <span class="markBadge">—</span>
-            </div>
-
-            <!-- b3 (spezzato) -->
-            <div class="block" data-id="m10">
-              Inizia a insegnare e costruisce la propria vita attorno a un equilibrio fragile ma tenace.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m11">
-              Le sorelle, soprattutto Maria (“Mariù”).
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m12">
-              Quando Ida si sposa, Pascoli vive la cosa come un abbandono.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m13">
-              Non è un dettaglio sentimentale: è struttura psicologica.
-              <span class="markBadge">—</span>
-            </div>
-
-            <!-- b4 (spezzato) -->
-            <div class="block" data-id="m14">
-              Ottiene incarichi universitari importanti (Messina, poi Bologna).
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m15">
-              Nel 1903 succede a Carducci.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m16">
-              Ma la vera dimora, per lui, è Castelvecchio di Barga.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m17">
-              Campagna, natura, suoni, cose minime.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m18">
-              Muore nel 1912 a Bologna.
-              <span class="markBadge">—</span>
-            </div>
-
-            <!-- b5 (spezzato) -->
-            <div class="block" data-id="m19">
-              <b>Come usare questa pagina:</b> se vuoi solo orientarti, leggi.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m20">
-              Se vuoi allenarti, marchia 2–3 micro-blocchi e poi fai “Ricava testo”.
-              <span class="markBadge">—</span>
-            </div>
-            <div class="block" data-id="m21">
-              Il segno non è estetica: è una scelta.
-              <span class="markBadge">—</span>
-            </div>
-
-            <!-- Toolbar contestuale -->
-            <div class="floating" id="floating">
-              <button class="toolBtn" id="actUl" type="button">✏️ Sottolinea</button>
-              <button class="toolBtn" id="actHl" type="button">🖍️ Evidenzia</button>
-              <button class="toolBtn warn" id="actClear" type="button">✕ Togli segno</button>
-              <button class="toolBtn" id="actPin" type="button">📌 Aggiungi al quaderno</button>
-            </div>
-          </div>
-
-          <!-- Quaderno -->
-          <div class="notebook" aria-label="Quaderno dal lavoro">
-            <div class="notebookHd">
-              <b>🟡 Quaderno (dal tuo lavoro)</b>
-              <div class="nbActions">
-                <button class="toolBtn" id="btnExtract" type="button" disabled>📌 Ricava testo</button>
-                <button class="toolBtn" id="btnCopy" type="button" disabled>📋 Copia</button>
-                <button class="toolBtn" id="btnSaveTxt" type="button" disabled>💾 Salva .txt</button>
-                <button class="toolBtn" id="btnClearNotebook" type="button" disabled>🧽 Svuota quaderno</button>
-              </div>
-            </div>
-
-            <div class="nbBox" id="notebookText" aria-live="polite"></div>
-            <div class="nbMeta">
-              <span id="nbCount">0 righe</span>
-              <span id="saveState">autosave: —</span>
-            </div>
-          </div>
-
+      <div class="bd">
+        <textarea id="txt" placeholder="Incolla qui la vita di Pascoli..."></textarea>
+        <div class="meta">
+          <span id="count">0 caratteri</span>
+          <span id="stamp">—</span>
         </div>
-      </article>
-
-      <!-- DESTRA -->
-      <aside class="card" aria-label="Cronologia essenziale">
-        <div class="hd">
-          <strong>Cronologia essenziale</strong>
-          <span class="badge">tocca → approfondisci</span>
-        </div>
-        <div class="bd">
-          <div class="timeline" id="timeline"></div>
-
-          <div style="margin-top:12px; font-size:12px; color:rgba(31,42,51,0.62); line-height:1.5;">
-            Nota: i collegamenti “poesie” sono proposti come ponte didattico (puoi cambiarli).
-          </div>
-        </div>
-      </aside>
-
+      </div>
     </section>
 
     <footer>© <span id="year"></span> — Pascoli / Libro.0 — a cura di gbprof</footer>
   </div>
 
-  <!-- MODAL -->
-  <dialog id="modal">
-    <div class="modalHd">
-      <div>
-        <h2 class="modalTitle" id="mTitle">Titolo</h2>
-        <p class="modalSub" id="mSub">Sottotitolo</p>
-      </div>
-      <button class="closeBtn" id="mClose" type="button" aria-label="Chiudi">✕ Chiudi</button>
-    </div>
-    <div class="modalBd">
-      <div class="tabs" role="tablist" aria-label="Approfondimenti">
-        <button class="tabBtn" id="tabWorld" type="button" role="tab" aria-selected="true" aria-controls="panelWorld">
-          1) Immagine del mondo
-        </button>
-        <button class="tabBtn" id="tabPoems" type="button" role="tab" aria-selected="false" aria-controls="panelPoems">
-          2) Poesie collegate
-        </button>
-      </div>
-
-      <div class="panel" id="panelWorld" role="tabpanel" aria-labelledby="tabWorld"></div>
-      <div class="panel" id="panelPoems" role="tabpanel" aria-labelledby="tabPoems" hidden></div>
-    </div>
-  </dialog>
-
   <script>
-    const $ = (q, r=document) => r.querySelector(q);
+    const txt = document.getElementById('txt');
+    const count = document.getElementById('count');
+    const stamp = document.getElementById('stamp');
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Year
-    $('#year').textContent = new Date().getFullYear();
+    function updateMeta(){
+      const n = txt.value.length;
+      count.textContent = `${n} caratteri`;
+      if(n === 0) stamp.textContent = "—";
+      else stamp.textContent = `ultimo edit: ${new Date().toLocaleString()}`;
+    }
+    txt.addEventListener('input', updateMeta);
+    updateMeta();
 
-    // =========
-    //  TIMELINE
-    // =========
-    const EVENTS = [
-      { date:"1855", title:"Nasce a San Mauro di Romagna", mini:"Origine rurale, “cose” e natura come alfabeti.",
-        sub:"31 dicembre 1855: famiglia numerosa, contesto rurale.",
-        world:`<p>L’inizio è lessico: le cose minime diventano lingua.</p>`,
-        poems:[{label:"Myricae (cornice)", href:"#", note:"Natura, suoni, frammenti."}]
-      },
-      { date:"1867", title:"Assassinio del padre (10 agosto)", mini:"La frattura: trauma e domanda senza risposta.",
-        sub:"10 agosto 1867: Ruggero Pascoli ucciso; omicidio impunito.",
-        world:`<p>La realtà può essere ingiusta senza spiegazione: esperienza, non teoria.</p>`,
-        poems:[{label:"X agosto", href:"testi/x-agosto.html", note:"Nodo sorgivo."}]
-      },
-      { date:"1895", title:"Ida si sposa: ferita affettiva", mini:"Vissuto come abbandono (struttura psicologica).",
-        sub:"Evento privato ma strutturante.",
-        world:`<p>Il “fanciullino” è vulnerabilità che non si chiude: percezione e ferita.</p>`,
-        poems:[{label:"Il gelsomino notturno", href:"testi/gelsomino-notturno.html", note:"Soglia/intimità."}]
-      },
-      { date:"1912", title:"Muore a Bologna (6 aprile)", mini:"Vita e opera inseparabili.",
-        sub:"6 aprile 1912: morte; sepolto a Castelvecchio.",
-        world:`<p>Pascoli è una risposta poetica a una frattura originaria.</p>`,
-        poems:[{label:"Ripasso: X agosto", href:"testi/x-agosto.html", note:"Nodo sorgivo."}]
-      }
-    ];
-
-    const tl = $('#timeline');
-    EVENTS.forEach((ev) => {
-      const btn = document.createElement('button');
-      btn.type = "button";
-      btn.className = "tItem";
-      btn.innerHTML = `
-        <div class="tRow">
-          <div style="min-width:0;">
-            <div class="tTitle">${escapeHTML(ev.title)}</div>
-            <div class="tMini">${escapeHTML(ev.mini)}</div>
-          </div>
-          <div style="display:flex; align-items:flex-start;">
-            <div class="tDate">${escapeHTML(ev.date)}</div>
-            <div class="tChevron">›</div>
-          </div>
-        </div>
-      `;
-      btn.addEventListener('click', () => openModal(ev));
-      tl.appendChild(btn);
+    document.getElementById('btnClear').addEventListener('click', () => {
+      txt.value = "";
+      updateMeta();
+      txt.focus();
     });
 
-    // Modal
-    const modal = $('#modal');
-    const mTitle = $('#mTitle');
-    const mSub = $('#mSub');
-    const panelWorld = $('#panelWorld');
-    const panelPoems = $('#panelPoems');
-    const tabWorld = $('#tabWorld');
-    const tabPoems = $('#tabPoems');
-
-    function setTab(which){
-      const isWorld = which === 'world';
-      tabWorld.setAttribute('aria-selected', isWorld ? 'true' : 'false');
-      tabPoems.setAttribute('aria-selected', isWorld ? 'false' : 'true');
-      panelWorld.hidden = !isWorld;
-      panelPoems.hidden = isWorld;
-    }
-    tabWorld.addEventListener('click', () => setTab('world'));
-    tabPoems.addEventListener('click', () => setTab('poems'));
-
-    $('#mClose').addEventListener('click', () => modal.close());
-    modal.addEventListener('click', (e) => {
-      const rect = modal.getBoundingClientRect();
-      const inDialog =
-        e.clientX >= rect.left && e.clientX <= rect.right &&
-        e.clientY >= rect.top && e.clientY <= rect.bottom;
-      if(!inDialog) modal.close();
-    });
-
-    function openModal(ev){
-      mTitle.textContent = `${ev.date} — ${ev.title}`;
-      mSub.textContent = ev.sub || "";
-      panelWorld.innerHTML = ev.world || "<p>(da completare)</p>";
-      panelPoems.innerHTML = `
-        <p style="margin:0 0 8px; font-weight:950;">Collegamenti consigliati:</p>
-        ${renderPoems(ev.poems || [])}
-      `;
-      setTab('world');
-      if(typeof modal.showModal === "function") modal.showModal();
-      else alert("Il tuo browser non supporta i dialog.");
-    }
-
-    function renderPoems(list){
-      if(!list.length) return `<p>Nessun collegamento impostato.</p>`;
-      const chips = list.map(p => {
-        const href = p.href || "#";
-        const label = escapeHTML(p.label || "link");
-        const title = escapeHTML(p.note || "");
-        return `<a class="chipLink" href="${href}" title="${title}">📎 ${label}</a>`;
-      }).join("");
-      return `<div class="links">${chips}</div>`;
-    }
-
-    function escapeHTML(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    // =========
-    //  LAVORO: annotazione a micro-blocchi
-    // =========
-    const toggleWork = $('#toggleWork');
-    const badgeWork = $('#badgeWork');
-    const workTip = $('#workTip');
-
-    const btnUndo = $('#btnUndo');
-    const btnClearMarks = $('#btnClearMarks');
-
-    const btnExtract = $('#btnExtract');
-    const btnCopy = $('#btnCopy');
-    const btnSaveTxt = $('#btnSaveTxt');
-    const btnClearNotebook = $('#btnClearNotebook');
-
-    const notebookText = $('#notebookText');
-    const nbCount = $('#nbCount');
-    const saveState = $('#saveState');
-
-    const workArea = $('#workArea');
-    const floating = $('#floating');
-    const actUl = $('#actUl');
-    const actHl = $('#actHl');
-    const actClear = $('#actClear');
-    const actPin = $('#actPin');
-
-    const blocks = Array.from(workArea.querySelectorAll('.block'));
-
-    let workEnabled = false;
-    let selectedId = null;
-
-    const undoStack = [];
-    const UNDO_MAX = 30;
-
-    let notebookLines = [];
-
-    const DB_NAME = "Libro01_Pascoli";
-    const DB_STORE = "pages";
-    const PAGE_KEY = "vita";
-    function lsKey(){ return "Libro01_Pascoli_vita_micro_v2"; }
-    function setSaveState(msg){ saveState.textContent = "autosave: " + msg; }
-
-    function enableWorkUI(on){
-      workEnabled = on;
-      document.body.classList.toggle('workOn', on);
-      badgeWork.style.display = on ? "inline-flex" : "none";
-      toggleWork.setAttribute('aria-pressed', on ? "true" : "false");
-      toggleWork.textContent = on ? "🟡 Modalità lavoro: ON" : "🟡 Modalità lavoro: OFF";
-
-      if(!on){
-        clearSelection();
-        hideFloating();
-      }
-
-      btnUndo.disabled = !(on && undoStack.length > 0);
-      btnClearMarks.disabled = !on;
-      btnExtract.disabled = !on;
-
-      workTip.textContent = on
-        ? "Tocca un micro-blocco → marchia → (opz.) aggiungi al quaderno."
-        : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
-
-      updateNotebookUI();
-    }
-
-    toggleWork.addEventListener('click', () => enableWorkUI(!workEnabled));
-
-    function clearSelection(){
-      selectedId = null;
-      blocks.forEach(b => b.classList.remove('selected'));
-    }
-    function getBlockById(id){
-      return blocks.find(b => b.dataset.id === id) || null;
-    }
-    function hideFloating(){ floating.style.display = "none"; }
-
-    function showFloatingForBlock(block){
-      const areaRect = workArea.getBoundingClientRect();
-      const bRect = block.getBoundingClientRect();
-
-      const top = (bRect.bottom - areaRect.top) + 8 + workArea.scrollTop;
-      const left = Math.min(Math.max(8, (bRect.left - areaRect.left)), (areaRect.width - 8));
-
-      floating.style.display = "flex";
-      floating.style.top = top + "px";
-      floating.style.left = left + "px";
-    }
-
-    [actUl, actHl, actClear, actPin].forEach(b=>{
-      b.addEventListener('pointerdown', (e)=>{ if(workEnabled) e.preventDefault(); }, {passive:false});
-      b.addEventListener('touchstart', (e)=>{ if(workEnabled) e.preventDefault(); }, {passive:false});
-      b.addEventListener('mousedown', (e)=>{ if(workEnabled) e.preventDefault(); });
-    });
-
-    function snapshotState(){
-      const marks = {};
-      blocks.forEach(b => {
-        const m = b.getAttribute("data-mark") || "";
-        if(m) marks[b.dataset.id] = m;
-      });
-      return { marks, notebook: [...notebookLines] };
-    }
-
-    function restoreState(state){
-      blocks.forEach(b=>{
-        const id = b.dataset.id;
-        const m = state.marks && state.marks[id] ? state.marks[id] : "";
-        if(m) b.setAttribute("data-mark", m);
-        else b.removeAttribute("data-mark");
-        updateBadge(b);
-      });
-      notebookLines = Array.isArray(state.notebook) ? state.notebook : [];
-      renderNotebook();
-      autosaveNow();
-      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-    }
-
-    function pushUndo(){
-      undoStack.push(snapshotState());
-      if(undoStack.length > UNDO_MAX) undoStack.shift();
-      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-    }
-
-    btnUndo.addEventListener('click', ()=>{
-      if(!workEnabled || undoStack.length === 0) return;
-      const prev = undoStack.pop();
-      restoreState(prev);
-      flashTip("Undo fatto.");
-    });
-
-    function updateBadge(block){
-      const badge = block.querySelector('.markBadge');
-      const mark = block.getAttribute("data-mark");
-      if(!badge) return;
-      if(mark === "hl") badge.textContent = "🖍️ evidenziato";
-      else if(mark === "ul") badge.textContent = "✏️ sottolineato";
-      else badge.textContent = "—";
-    }
-    blocks.forEach(updateBadge);
-
-    blocks.forEach(block=>{
-      block.addEventListener('click', ()=>{
-        if(!workEnabled) return;
-        clearSelection();
-        selectedId = block.dataset.id;
-        block.classList.add('selected');
-        showFloatingForBlock(block);
-      });
-    });
-
-    document.addEventListener('click', (e)=>{
-      if(!workEnabled) return;
-      const t = e.target;
-      const clickedInsideBlock = t.closest && t.closest('.block');
-      const clickedFloating = t.closest && t.closest('#floating');
-      if(!clickedInsideBlock && !clickedFloating){
-        hideFloating();
-        clearSelection();
-      }
-    });
-
-    function markSelected(type){
-      if(!workEnabled || !selectedId) return;
-      const b = getBlockById(selectedId);
-      if(!b) return;
-      pushUndo();
-      b.setAttribute("data-mark", type);
-      updateBadge(b);
-      autosaveNow();
-      flashTip(type === "hl" ? "Evidenziato." : "Sottolineato.");
-    }
-
-    function clearMarkSelected(){
-      if(!workEnabled || !selectedId) return;
-      const b = getBlockById(selectedId);
-      if(!b) return;
-      pushUndo();
-      b.removeAttribute("data-mark");
-      updateBadge(b);
-      autosaveNow();
-      flashTip("Segno rimosso.");
-    }
-
-    actUl.addEventListener('click', ()=> markSelected("ul"));
-    actHl.addEventListener('click', ()=> markSelected("hl"));
-    actClear.addEventListener('click', ()=> clearMarkSelected());
-
-    function blockText(block){
-      const clone = block.cloneNode(true);
-      const badge = clone.querySelector('.markBadge');
-      if(badge) badge.remove();
-      return clone.textContent.replace(/\s+/g," ").trim();
-    }
-
-    function addSelectedToNotebook(){
-      if(!workEnabled || !selectedId) return;
-      const b = getBlockById(selectedId);
-      if(!b) return;
-
-      const text = blockText(b);
-      if(!text) return;
-
-      const mark = b.getAttribute("data-mark");
-      const tag = mark === "hl" ? "EVID" : (mark === "ul" ? "SOTT" : "NOTE");
-      const line = `[${tag}] ${text}`;
-
-      pushUndo();
-      if(!notebookLines.includes(line)) notebookLines.push(line);
-
-      renderNotebook();
-      autosaveNow();
-      flashTip("Aggiunto al quaderno.");
-    }
-
-    actPin.addEventListener('click', addSelectedToNotebook);
-
-    btnClearMarks.addEventListener('click', ()=>{
-      if(!workEnabled) return;
-      pushUndo();
-      blocks.forEach(b=>{
-        b.removeAttribute("data-mark");
-        updateBadge(b);
-      });
-      autosaveNow();
-      flashTip("Segni rimossi.");
-    });
-
-    btnExtract.addEventListener('click', ()=>{
-      if(!workEnabled) return;
-      const lines = [];
-      blocks.forEach(b=>{
-        const mark = b.getAttribute("data-mark");
-        if(!mark) return;
-        const tag = mark === "hl" ? "EVID" : "SOTT";
-        const t = blockText(b);
-        if(!t) return;
-        lines.push(`[${tag}] ${t}`);
-      });
-
-      if(lines.length === 0){
-        flashTip("Non hai marcato nulla.");
+    document.getElementById('btnSave').addEventListener('click', () => {
+      const content = txt.value.trim();
+      if(!content){
+        alert("Non c'è testo da salvare.");
+        txt.focus();
         return;
       }
-
-      pushUndo();
-      lines.forEach(l=>{ if(!notebookLines.includes(l)) notebookLines.push(l); });
-
-      renderNotebook();
-      autosaveNow();
-      flashTip("Quaderno aggiornato dai segni.");
-    });
-
-    function renderNotebook(){
-      notebookText.textContent = notebookLines.join("\n");
-      nbCount.textContent = `${notebookLines.length} righe`;
-      updateNotebookUI();
-    }
-
-    function updateNotebookUI(){
-      const has = notebookLines.length > 0;
-      btnCopy.disabled = !has;
-      btnSaveTxt.disabled = !has;
-      btnClearNotebook.disabled = !has;
-    }
-
-    btnClearNotebook.addEventListener('click', ()=>{
-      if(!workEnabled) return;
-      pushUndo();
-      notebookLines = [];
-      renderNotebook();
-      autosaveNow();
-      flashTip("Quaderno svuotato.");
-    });
-
-    btnCopy.addEventListener('click', async ()=>{
-      const txt = notebookLines.join("\n");
-      try{
-        await navigator.clipboard.writeText(txt);
-        flashTip("Copiato.");
-      }catch(e){
-        const ta = document.createElement('textarea');
-        ta.value = txt;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        flashTip("Copiato.");
-      }
-    });
-
-    btnSaveTxt.addEventListener('click', ()=>{
-      const txt = notebookLines.join("\n");
-      const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       const url = URL.createObjectURL(blob);
+
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Pascoli_vita_quaderno_${new Date().toISOString().slice(0,10)}.txt`;
+      a.download = `Pascoli_vita_${new Date().toISOString().slice(0,10)}.txt`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+
       setTimeout(() => URL.revokeObjectURL(url), 800);
-      flashTip("File .txt salvato.");
-    });
-
-    let tipTimer = null;
-    function flashTip(msg){
-      workTip.textContent = msg;
-      workTip.style.borderColor = "rgba(255,183,3,0.55)";
-      workTip.style.background = "rgba(255,255,255,0.92)";
-      clearTimeout(tipTimer);
-      tipTimer = setTimeout(() => {
-        workTip.style.borderColor = "rgba(31,42,51,0.12)";
-        workTip.style.background = "rgba(255,255,255,0.62)";
-        workTip.textContent = workEnabled
-          ? "Tocca un micro-blocco → marchia → (opz.) aggiungi al quaderno."
-          : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
-      }, 1400);
-    }
-
-    // =========
-    //  AUTOSAVE: IndexedDB + fallback localStorage
-    // =========
-    async function idbOpen(){
-      return new Promise((resolve, reject) => {
-        const req = indexedDB.open(DB_NAME, 1);
-        req.onupgradeneeded = () => {
-          const db = req.result;
-          if(!db.objectStoreNames.contains(DB_STORE)) db.createObjectStore(DB_STORE);
-        };
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      });
-    }
-
-    async function idbSet(key, value){
-      const db = await idbOpen();
-      return new Promise((resolve, reject) => {
-        const tx = db.transaction(DB_STORE, "readwrite");
-        tx.objectStore(DB_STORE).put(value, key);
-        tx.oncomplete = () => resolve(true);
-        tx.onerror = () => reject(tx.error);
-      });
-    }
-
-    async function idbGet(key){
-      const db = await idbOpen();
-      return new Promise((resolve, reject) => {
-        const tx = db.transaction(DB_STORE, "readonly");
-        const req = tx.objectStore(DB_STORE).get(key);
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      });
-    }
-
-    function buildPayload(){
-      const marks = {};
-      blocks.forEach(b=>{
-        const m = b.getAttribute("data-mark") || "";
-        if(m) marks[b.dataset.id] = m;
-      });
-      return { v: 2, ts: Date.now(), marks, notebook: notebookLines };
-    }
-
-    async function autosaveNow(){
-      const payload = buildPayload();
-      try{
-        await idbSet(PAGE_KEY, payload);
-        setSaveState("OK (IndexedDB)");
-      }catch(e){
-        try{
-          localStorage.setItem(lsKey(), JSON.stringify(payload));
-          setSaveState("OK (localStorage)");
-        }catch(err){
-          setSaveState("errore");
-        }
-      }
-    }
-
-    async function restoreIfAny(){
-      let data = null;
-      try{ data = await idbGet(PAGE_KEY); }catch(e){}
-      if(!data){
-        try{
-          const raw = localStorage.getItem(lsKey());
-          if(raw) data = JSON.parse(raw);
-        }catch(e){}
-      }
-
-      if(data && data.marks){
-        blocks.forEach(b=>{
-          const id = b.dataset.id;
-          const m = data.marks[id] || "";
-          if(m) b.setAttribute("data-mark", m);
-          else b.removeAttribute("data-mark");
-          updateBadge(b);
-        });
-      }
-      if(data && Array.isArray(data.notebook)) notebookLines = data.notebook;
-
-      renderNotebook();
-      setSaveState(data ? "ripristinato" : "—");
-    }
-
-    enableWorkUI(false);
-    restoreIfAny();
-
-    window.addEventListener('resize', ()=>{
-      if(!workEnabled) return;
-      hideFloating();
-      clearSelection();
     });
   </script>
 </body>
