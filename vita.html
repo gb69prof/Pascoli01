@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pascoli — La vita</title>
-  <meta name="description" content="Pascoli — La vita: cronologia essenziale con approfondimenti su immagine del mondo e poesie collegate." />
+  <meta name="description" content="Pascoli — La vita: cronologia essenziale con approfondimenti e modalità lavoro (sottolinea, evidenzia, quaderno, export)." />
 
   <style>
     :root{
-      /* Palette viva (fanciullino): carta + cielo + giallo caldo (coerente con index) */
+      /* Palette viva (fanciullino) */
       --bg1:#fbf7ef;
       --bg2:#e9f6ff;
       --ink:#1f2a33;
@@ -17,12 +17,16 @@
       --line:rgba(31,42,51,0.14);
       --card:rgba(255,255,255,0.72);
       --card2:rgba(255,255,255,0.90);
-      --accent:#ffb703;
-      --accent2:#219ebc;
+      --accent:#ffb703;     /* giallo caldo */
+      --accent2:#219ebc;    /* azzurro vivo */
       --shadow:0 18px 60px rgba(0,0,0,0.14);
       --r-xl:22px;
       --r-lg:16px;
       --max:1120px;
+
+      /* segni */
+      --hl: rgba(255, 183, 3, 0.38);
+      --ul: rgba(33, 158, 188, 0.75);
     }
 
     *{ box-sizing:border-box; }
@@ -47,12 +51,16 @@
       justify-content:space-between;
       gap: 12px;
       margin-bottom: 12px;
+      flex-wrap:wrap;
     }
 
     .crumbs{
-      display:flex; align-items:center; gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-weight: 900;
       letter-spacing:.3px;
+      flex-wrap:wrap;
     }
 
     .pill{
@@ -68,8 +76,29 @@
       user-select:none;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      cursor:pointer;
     }
     .pill:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.96); }
+    .pill[aria-pressed="true"]{
+      border-color: rgba(255,183,3,0.55);
+      outline: 2px solid rgba(255,183,3,0.22);
+      outline-offset: 2px;
+      background: rgba(255,255,255,0.98);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 950;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.75);
+      color: rgba(31,42,51,0.78);
+      user-select:none;
+    }
 
     .hero{
       border: 1px solid rgba(31,42,51,0.14);
@@ -121,7 +150,6 @@
       .grid{ grid-template-columns: 1fr; }
     }
 
-    /* Card base */
     .card{
       border: 1px solid rgba(31,42,51,0.14);
       background: var(--card);
@@ -136,6 +164,7 @@
       border-bottom: 1px solid rgba(31,42,51,0.10);
       background: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.25));
       display:flex; align-items:center; justify-content:space-between; gap:10px;
+      flex-wrap:wrap;
     }
     .card .hd strong{
       font-size: 12px;
@@ -145,7 +174,7 @@
     }
     .card .bd{ padding: 14px; }
 
-    /* Testo a sinistra */
+    /* TESTO */
     .prose p{
       margin: 0 0 10px;
       line-height: 1.7;
@@ -170,7 +199,95 @@
       font-size: 13px; line-height:1.55; color: rgba(31,42,51,0.84);
     }
 
-    /* Timeline a destra */
+    /* TOOLBAR lavoro (solo quando ON) */
+    .workTools{
+      display:none;
+      gap: 8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .workOn .workTools{ display:flex; }
+
+    .toolBtn{
+      appearance:none;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.92);
+      font-weight: 950;
+      border-radius: 999px;
+      padding: 8px 10px;
+      cursor:pointer;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      user-select:none;
+      font-size: 12px;
+    }
+    .toolBtn:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,1); }
+    .toolBtn:disabled{
+      opacity: .55;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .tip{
+      font-size:12px;
+      color: rgba(31,42,51,0.66);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(31,42,51,0.12);
+      background: rgba(255,255,255,0.62);
+    }
+
+    /* SEGNI */
+    .mark{
+      border-radius: 6px;
+      padding: 0 .08em;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    .mark.hl{ background: var(--hl); }
+    .mark.ul{
+      background: rgba(255,255,255,0.0);
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-decoration-color: var(--ul);
+      text-underline-offset: 3px;
+    }
+
+    /* QUADERNO */
+    .notebook{
+      margin-top: 14px;
+      border: 1px solid rgba(31,42,51,0.12);
+      background: rgba(255,255,255,0.82);
+      border-radius: 18px;
+      padding: 12px 12px 10px;
+    }
+    .notebookHd{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-bottom: 8px;
+    }
+    .notebookHd b{
+      font-size: 12px; letter-spacing: .9px; text-transform: uppercase;
+      color: rgba(31,42,51,0.76);
+    }
+    .nbActions{ display:flex; gap:8px; flex-wrap:wrap; }
+    .nbBox{
+      border: 1px dashed rgba(31,42,51,0.18);
+      border-radius: 14px;
+      padding: 10px 10px;
+      background: rgba(255,255,255,0.70);
+      min-height: 70px;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      font-size: 13px;
+      color: rgba(31,42,51,0.88);
+    }
+    .nbMeta{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(31,42,51,0.62);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+
+    /* TIMELINE */
     .timeline{
       display:flex;
       flex-direction:column;
@@ -223,19 +340,6 @@
       color: rgba(33,158,188,0.95);
       font-weight: 950;
       margin-left: 8px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 950;
-      padding: 6px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.75);
-      color: rgba(31,42,51,0.78);
     }
 
     footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
@@ -371,70 +475,101 @@
     <div class="topbar">
       <div class="crumbs">
         <span class="badge">🟢 OSSATURA</span>
+        <span class="badge" id="badgeWork" style="display:none;">🟡 LAVORO</span>
         <span style="color:rgba(31,42,51,0.72); font-weight:900;">Pascoli</span>
         <span style="color:rgba(31,42,51,0.45);">/</span>
         <span style="font-weight:950;">La vita</span>
       </div>
 
-      <a class="pill" href="index.html" aria-label="Torna alla home">
-        ↩︎ Home
-      </a>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <button class="pill" id="toggleWork" type="button" aria-pressed="false" title="Attiva/Disattiva strumenti di lavoro">
+          🟡 Modalità lavoro: OFF
+        </button>
+        <a class="pill" href="index.html" aria-label="Torna alla home">↩︎ Home</a>
+      </div>
     </div>
 
     <section class="hero" aria-label="Introduzione">
       <div class="heroInner">
-        <div class="kicker">Cronologia essenziale + approfondimenti mirati</div>
+        <div class="kicker">Cronologia essenziale + approfondimenti + intervento sul testo</div>
         <h1>La vita (senza museo)</h1>
         <p class="subtitle">
-          Qui non trovi “tutta la biografia”: trovi i nodi che hanno costruito Pascoli.
-          A destra c’è la cronologia essenziale. Tocchi un punto e si aprono due cose:
-          <b>1) come contribuisce alla sua immagine del mondo</b> e <b>2) quali poesie puoi collegare</b>.
+          A destra c’è la cronologia essenziale. A sinistra puoi leggere e, se attivi la <b>Modalità lavoro</b>,
+          puoi <b>sottolineare</b>, <b>evidenziare</b> e <b>ricavare un testo</b> da salvare.
         </p>
       </div>
     </section>
 
     <section class="grid" aria-label="Vita Pascoli: testo e timeline">
 
-      <!-- SINISTRA: testo -->
+      <!-- SINISTRA -->
       <article class="card" aria-label="Sintesi della vita">
         <div class="hd">
           <strong>Sintesi (chiara, non cupa)</strong>
-          <span class="badge">🎈 fanciullino ≠ zucchero</span>
-        </div>
-        <div class="bd prose">
-          <p>
-            Giovanni Pascoli nasce a San Mauro di Romagna nel 1855. L’infanzia viene spezzata dall’assassinio del padre Ruggero (10 agosto 1867) e,
-            negli anni immediatamente successivi, da una serie di lutti familiari. Da questa frattura nasce l’idea del <b>nido</b> come bisogno vitale:
-            non un tema “carino”, ma un modo di sopravvivere al mondo.
-          </p>
-          <p>
-            Studia in collegio (Urbino) e poi a Bologna, allievo di Carducci. Gli anni universitari sono agitati: partecipa a movimenti e proteste,
-            perde la borsa di studio e subisce anche il carcere. Più tardi torna agli studi e si laurea.
-          </p>
-          <p>
-            Inizia a insegnare e costruisce la propria vita attorno a un equilibrio fragile ma tenace: le sorelle, soprattutto Maria (“Mariù”).
-            Quando Ida si sposa, Pascoli vive la cosa come un abbandono: non è un dettaglio sentimentale, è struttura psicologica.
-          </p>
-          <p>
-            Ottiene incarichi universitari importanti (Messina, poi Bologna) e nel 1903 succede a Carducci.
-            Ma la vera dimora, per lui, è Castelvecchio di Barga: campagna, natura, suoni, cose minime. Muore nel 1912 a Bologna.
-          </p>
 
-          <div class="noteBox">
-            <div class="t">Come usare questa pagina</div>
-            <div class="b">
-              Se vuoi solo orientarti: leggi questa colonna e basta. Se vuoi capire davvero “perché Pascoli è Pascoli”:
-              apri 2–3 nodi della timeline. Non serve aprirli tutti.
+          <div class="workTools" aria-label="Strumenti di lavoro">
+            <button class="toolBtn" id="btnUnderline" type="button" disabled title="Sottolinea la selezione (Modalità lavoro ON)">✏️ Sottolinea</button>
+            <button class="toolBtn" id="btnHighlight" type="button" disabled title="Evidenzia la selezione (Modalità lavoro ON)">🖍️ Evidenzia</button>
+            <button class="toolBtn" id="btnUndo" type="button" disabled title="Annulla ultima azione">↩︎ Annulla</button>
+            <button class="toolBtn" id="btnClearMarks" type="button" disabled title="Rimuove sottolineature/evidenziature (testo invariato)">🧼 Pulisci segni</button>
+            <span class="tip" id="workTip">Seleziona una frase e premi un pulsante.</span>
+          </div>
+        </div>
+
+        <div class="bd prose" id="workArea">
+          <div id="workText">
+            <p>
+              Giovanni Pascoli nasce a San Mauro di Romagna nel 1855. L’infanzia viene spezzata dall’assassinio del padre Ruggero (10 agosto 1867) e,
+              negli anni immediatamente successivi, da una serie di lutti familiari. Da questa frattura nasce l’idea del <b>nido</b> come bisogno vitale:
+              non un tema “carino”, ma un modo di sopravvivere al mondo.
+            </p>
+            <p>
+              Studia in collegio (Urbino) e poi a Bologna, allievo di Carducci. Gli anni universitari sono agitati: partecipa a movimenti e proteste,
+              perde la borsa di studio e subisce anche il carcere. Più tardi torna agli studi e si laurea.
+            </p>
+            <p>
+              Inizia a insegnare e costruisce la propria vita attorno a un equilibrio fragile ma tenace: le sorelle, soprattutto Maria (“Mariù”).
+              Quando Ida si sposa, Pascoli vive la cosa come un abbandono: non è un dettaglio sentimentale, è struttura psicologica.
+            </p>
+            <p>
+              Ottiene incarichi universitari importanti (Messina, poi Bologna) e nel 1903 succede a Carducci.
+              Ma la vera dimora, per lui, è Castelvecchio di Barga: campagna, natura, suoni, cose minime. Muore nel 1912 a Bologna.
+            </p>
+
+            <div class="noteBox">
+              <div class="t">Come usare questa pagina</div>
+              <div class="b">
+                Se vuoi solo orientarti: leggi e basta. Se vuoi allenarti: attiva <b>Modalità lavoro</b>,
+                marca 2–3 frasi e poi fai <b>Ricava testo</b>.
+              </div>
             </div>
           </div>
 
-          <div style="margin-top:12px; font-size:12px; color:rgba(31,42,51,0.62); line-height:1.5;">
-            Fonte sintetica: il testo biografico fornito da te 
+          <!-- Quaderno -->
+          <div class="notebook" aria-label="Quaderno dal lavoro">
+            <div class="notebookHd">
+              <b>🟡 Quaderno (dal tuo lavoro)</b>
+              <div class="nbActions">
+                <button class="toolBtn" id="btnExtract" type="button" disabled title="Crea un testo con le parti evidenziate/sottolineate">
+                  📌 Ricava testo
+                </button>
+                <button class="toolBtn" id="btnCopy" type="button" disabled title="Copia il testo del quaderno">📋 Copia</button>
+                <button class="toolBtn" id="btnSaveTxt" type="button" disabled title="Salva un file .txt">💾 Salva .txt</button>
+                <button class="toolBtn" id="btnClearNotebook" type="button" disabled title="Svuota il quaderno (non tocca i segni)">🧽 Svuota quaderno</button>
+              </div>
+            </div>
+
+            <div class="nbBox" id="notebookText" aria-live="polite"></div>
+            <div class="nbMeta">
+              <span id="nbCount">0 righe</span>
+              <span id="saveState">autosave: —</span>
+            </div>
           </div>
+
         </div>
       </article>
 
-      <!-- DESTRA: timeline -->
+      <!-- DESTRA -->
       <aside class="card" aria-label="Cronologia essenziale">
         <div class="hd">
           <strong>Cronologia essenziale</strong>
@@ -444,7 +579,7 @@
           <div class="timeline" id="timeline"></div>
 
           <div style="margin-top:12px; font-size:12px; color:rgba(31,42,51,0.62); line-height:1.5;">
-            Nota: i collegamenti “poesie” sono proposti come <b>ponte didattico</b> (puoi cambiarli quando vuoi).
+            Nota: i collegamenti “poesie” sono proposti come ponte didattico (puoi cambiarli).
           </div>
         </div>
       </aside>
@@ -484,7 +619,9 @@
     // Year
     $('#year').textContent = new Date().getFullYear();
 
-    // Dati timeline (nodi essenziali, presi dal tuo testo + collegamenti didattici)
+    // =========
+    //  DATI TIMELINE (come prima)
+    // =========
     const EVENTS = [
       {
         date: "1855",
@@ -494,14 +631,13 @@
         world: `
           <p>
             L’inizio non è “biografia”: è <b>lessico</b>. Pascoli impara presto che le cose minime (campi, animali, suoni)
-            non sono sfondo: sono <b>lingua</b>. Da qui la sua attenzione quasi microscopica al dettaglio.
+            non sono sfondo: sono <b>lingua</b>. Da qui la sua attenzione al dettaglio.
           </p>
           <p>
-            Il fanciullino non nasce in astratto: nasce in un mondo dove il piccolo ha già valore e presenza.
+            Il fanciullino non nasce in astratto: nasce in un mondo dove il piccolo ha già valore.
           </p>
         `,
         poems: [
-          { label: "Romagna (se la usi)", href: "#", note: "Se hai una pagina dedicata, metti qui il link." },
           { label: "Myricae (cornice)", href: "#", note: "Raccolta: natura, suoni, frammenti." }
         ]
       },
@@ -516,8 +652,7 @@
             Non è “pessimismo filosofico”: è esperienza.
           </p>
           <p>
-            Da questa ferita nasce anche la scrittura come <b>registrazione di segni</b> (presagi, suoni, lampi), perché quando il senso manca,
-            il mondo sembra parlare per indizi.
+            Quando il senso manca, il mondo sembra parlare per indizi: suoni, lampi, presagi.
           </p>
         `,
         poems: [
@@ -533,15 +668,14 @@
         world: `
           <p>
             Il <b>nido</b> non è un simbolo tenero: è un dispositivo di difesa.
-            Se il mondo può colpire dentro casa, allora la casa diventa ossessione, ricostruzione, rito.
+            Se il mondo può colpire dentro casa, la casa diventa ricostruzione e rito.
           </p>
           <p>
-            Da qui anche l’infanzia come luogo perduto: non nostalgia da cartolina, ma <b>assenza che brucia</b>.
+            Da qui l’infanzia come luogo perduto: non nostalgia, ma assenza viva.
           </p>
         `,
         poems: [
-          { label: "Il nido (tema)", href: "#", note: "Se vuoi: crea una pagina-tema sul “nido”." },
-          { label: "Novembre / Temporale / L’assiuolo (se li usi)", href: "#", note: "Natura come eco emotiva, non decorazione." }
+          { label: "Tema: il nido (pagina futura)", href: "#", note: "Puoi creare una pagina-tema sul “nido”." }
         ]
       },
       {
@@ -551,55 +685,42 @@
         sub: "1876 perdita borsa; 1879 carcere; 1882 laurea (tesi su Alceo).",
         world: `
           <p>
-            Qui entra un elemento spesso ignorato: Pascoli non è solo “campagna”.
-            Conosce conflitto, storia, ideologia. Ma quella energia non diventa epopea: diventa <b>tensione interna</b>.
-          </p>
-          <p>
-            La sua modernità sta anche qui: un intellettuale che ha visto la frattura sociale, ma parla con voce obliqua,
-            laterale, anti-retorica.
+            Pascoli non è solo “campagna”. Conosce conflitto e storia, ma quell’energia diventa <b>tensione interna</b>,
+            voce laterale, anti-retorica.
           </p>
         `,
         poems: [
-          { label: "Poemi conviviali (se li accenni)", href: "#", note: "Classico e moderno: un ponte." },
-          { label: "Testo su “segni/presagi” (pagina mondo)", href: "mondo.html", note: "Quando la farai: qui ci sta bene." }
+          { label: "Poemi conviviali (se li accenni)", href: "#", note: "Classico e moderno: un ponte." }
         ]
       },
       {
         date: "1882–1895",
         title: "Insegnamento e “ricomposizione”",
-        mini: "Matera, Massa, Livorno: lavoro e tentativo di equilibrio.",
-        sub: "Insegnamenti nei licei; vicino alle sorelle Ida e Maria.",
+        mini: "Lavoro e tentativo di equilibrio con le sorelle.",
+        sub: "Insegnamenti nei licei; vicino a Ida e Maria.",
         world: `
           <p>
-            L’insegnamento è un fatto pratico, ma per Pascoli è anche un modo per tenere in piedi una vita
-            che tende a scomporsi.
-          </p>
-          <p>
-            La ricomposizione familiare (con le sorelle) non è contorno: è la forma concreta del “nido” ricostruito.
+            L’insegnamento è anche un modo per tenere in piedi una vita che tende a scomporsi.
+            La ricomposizione familiare è la forma concreta del “nido” ricostruito.
           </p>
         `,
         poems: [
-          { label: "Myricae (cose minime)", href: "#", note: "Seleziona 2–3 testi brevi per mostrare il metodo." },
-          { label: "Digitale purpurea", href: "testi/digitale-purpurea.html", note: "Se la usi come testo del percorso." }
+          { label: "Digitale purpurea", href: "testi/digitale-purpurea.html", note: "Se la usi nel percorso." }
         ]
       },
       {
         date: "1895",
         title: "Ida si sposa: ferita affettiva",
         mini: "Vissuto come abbandono: il nido non regge.",
-        sub: "Evento privato, ma strutturante: cambia l’equilibrio familiare.",
+        sub: "Evento privato ma strutturante: cambia l’equilibrio familiare.",
         world: `
           <p>
-            Questo nodo spiega una cosa: Pascoli “adulto” non coincide con “stabile”.
             Alcuni passaggi normali (un matrimonio) per lui diventano <b>crollo di struttura</b>.
-          </p>
-          <p>
-            Il fanciullino, qui, è anche questo: una vulnerabilità che non si chiude.
+            Il fanciullino è anche vulnerabilità che non si chiude.
           </p>
         `,
         poems: [
-          { label: "Il gelsomino notturno", href: "testi/gelsomino-notturno.html", note: "Se lo lavori: matrimonio, intimità, soglia." },
-          { label: "Poesie del “nido” (tema)", href: "#", note: "Puoi creare una pagina-tema che raccoglie rimandi." }
+          { label: "Il gelsomino notturno", href: "testi/gelsomino-notturno.html", note: "Matrimonio, intimità, soglia." }
         ]
       },
       {
@@ -609,55 +730,47 @@
         sub: "Dimora prediletta: natura, quiete, lavoro poetico.",
         world: `
           <p>
-            Castelvecchio non è “paesaggio”: è un <b>laboratorio sensoriale</b>.
-            Suoni, insetti, vento, luci: diventano una grammatica.
-          </p>
-          <p>
-            Qui l’immagine del mondo si fa chiarissima: la realtà è fatta di <b>minimi segnali</b> che sembrano parlare
-            più delle grandi spiegazioni.
+            Castelvecchio è un <b>laboratorio sensoriale</b>: suoni, vento, luci diventano grammatica.
+            La realtà parla in minimi segnali.
           </p>
         `,
         poems: [
-          { label: "L’assiuolo (se lo fai)", href: "#", note: "Suono come presagio." },
-          { label: "Temporale / Il lampo (se li fai)", href: "#", note: "Visione rapida, impressione, scatto." }
+          { label: "L’assiuolo (se lo fai)", href: "#", note: "Suono come presagio." }
         ]
       },
       {
         date: "1903",
         title: "Succede a Carducci a Bologna",
-        mini: "Prestigio, ma fatica: non ama la macchina accademica.",
-        sub: "Cattedra di Letteratura Italiana (Bologna): incarico prestigioso.",
+        mini: "Prestigio, ma non guarigione: scrittura anti-trionfalistica.",
+        sub: "Cattedra a Bologna: incarico prestigioso.",
         world: `
           <p>
-            Questo è il paradosso pascoliano: la gloria arriva, ma non guarisce.
-            La sua scrittura resta anti-trionfalistica: non è fatta per celebrare, è fatta per <b>registrare</b>.
+            La gloria arriva, ma non guarisce. La scrittura resta fatta per <b>registrare</b>, non per celebrare.
           </p>
         `,
         poems: [
-          { label: "Poetica del fanciullino (pagina poetica)", href: "poetica.html", note: "Quando la farai: collega qui." }
+          { label: "Poetica del fanciullino (pagina futura)", href: "#", note: "Quando la farai: collega qui." }
         ]
       },
       {
         date: "1912",
         title: "Muore a Bologna (6 aprile)",
-        mini: "Chiude a 56 anni: vita e opera restano inseparabili.",
-        sub: "6 aprile 1912: morte prematura; sepolto a Castelvecchio.",
+        mini: "Vita e opera inseparabili: risposta poetica a una frattura.",
+        sub: "6 aprile 1912: morte; sepolto a Castelvecchio.",
         world: `
           <p>
-            Qui puoi far passare l’idea più semplice e più vera:
-            Pascoli non è “uno stile”. È una risposta (in forma poetica) a una frattura originaria.
+            Idea semplice e vera: Pascoli non è “uno stile”. È una risposta (in forma poetica) a una frattura originaria.
           </p>
         `,
         poems: [
-          { label: "Ripasso: X agosto", href: "testi/x-agosto.html", note: "Il nodo sorgivo." },
-          { label: "Ripasso: Digitale purpurea", href: "testi/digitale-purpurea.html", note: "L’ambiguità dei segni." }
+          { label: "Ripasso: X agosto", href: "testi/x-agosto.html", note: "Nodo sorgivo." }
         ]
       }
     ];
 
     // Render timeline
     const tl = $('#timeline');
-    EVENTS.forEach((ev, i) => {
+    EVENTS.forEach((ev) => {
       const btn = document.createElement('button');
       btn.type = "button";
       btn.className = "tItem";
@@ -677,13 +790,14 @@
       tl.appendChild(btn);
     });
 
-    // Modal logic
+    // =========
+    //  MODAL
+    // =========
     const modal = $('#modal');
     const mTitle = $('#mTitle');
     const mSub = $('#mSub');
     const panelWorld = $('#panelWorld');
     const panelPoems = $('#panelPoems');
-
     const tabWorld = $('#tabWorld');
     const tabPoems = $('#tabPoems');
 
@@ -694,13 +808,11 @@
       panelWorld.hidden = !isWorld;
       panelPoems.hidden = isWorld;
     }
-
     tabWorld.addEventListener('click', () => setTab('world'));
     tabPoems.addEventListener('click', () => setTab('poems'));
 
     $('#mClose').addEventListener('click', () => modal.close());
     modal.addEventListener('click', (e) => {
-      // chiudi cliccando fuori dalla card
       const rect = modal.getBoundingClientRect();
       const inDialog =
         e.clientX >= rect.left && e.clientX <= rect.right &&
@@ -711,37 +823,26 @@
     function openModal(ev){
       mTitle.textContent = `${ev.date} — ${ev.title}`;
       mSub.textContent = ev.sub || "";
-
       panelWorld.innerHTML = ev.world || "<p>(da completare)</p>";
-
       panelPoems.innerHTML = `
-        <p style="margin:0 0 8px; font-weight:950;">
-          Collegamenti consigliati:
-        </p>
+        <p style="margin:0 0 8px; font-weight:950;">Collegamenti consigliati:</p>
         ${renderPoems(ev.poems || [])}
         <p style="margin-top:10px; color:rgba(31,42,51,0.70);">
-          Se un link è “#”, significa: non hai ancora la pagina. Quando la crei, sostituisci “#” con il percorso giusto.
+          Se un link è “#”, significa: pagina non ancora creata.
         </p>
       `;
-
       setTab('world');
-
       if(typeof modal.showModal === "function") modal.showModal();
       else alert("Il tuo browser non supporta i dialog. Apri con un browser moderno.");
     }
 
     function renderPoems(list){
-      if(!list.length){
-        return `<p>Nessun collegamento impostato.</p>`;
-      }
+      if(!list.length) return `<p>Nessun collegamento impostato.</p>`;
       const chips = list.map(p => {
         const href = p.href || "#";
         const label = escapeHTML(p.label || "link");
         const title = escapeHTML(p.note || "");
-        const safeHref = href;
-        return `<a class="chipLink" href="${safeHref}" title="${title}">
-                  📎 ${label}
-                </a>`;
+        return `<a class="chipLink" href="${href}" title="${title}">📎 ${label}</a>`;
       }).join("");
       return `<div class="links">${chips}</div>`;
     }
@@ -754,6 +855,424 @@
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
     }
+
+    // =========
+    //  LAVORO: underline / highlight / quaderno / export / autosave
+    // =========
+    const toggleWork = $('#toggleWork');
+    const badgeWork = $('#badgeWork');
+    const btnUnderline = $('#btnUnderline');
+    const btnHighlight = $('#btnHighlight');
+    const btnUndo = $('#btnUndo');
+    const btnClearMarks = $('#btnClearMarks');
+    const btnExtract = $('#btnExtract');
+    const btnCopy = $('#btnCopy');
+    const btnSaveTxt = $('#btnSaveTxt');
+    const btnClearNotebook = $('#btnClearNotebook');
+    const workTip = $('#workTip');
+
+    const workText = $('#workText');
+    const notebookText = $('#notebookText');
+    const nbCount = $('#nbCount');
+    const saveState = $('#saveState');
+
+    let workEnabled = false;
+
+    // Undo stack (snapshots HTML)
+    const undoStack = [];
+    const UNDO_MAX = 25;
+
+    // Notebook lines
+    let notebookLines = [];
+
+    // Storage (IndexedDB + fallback)
+    const DB_NAME = "Libro01_Pascoli";
+    const DB_STORE = "pages";
+    const PAGE_KEY = "vita";
+
+    function setSaveState(msg){
+      saveState.textContent = "autosave: " + msg;
+    }
+
+    function pushUndo(){
+      // salva snapshot del workText (solo parte lavorabile)
+      undoStack.push(workText.innerHTML);
+      if(undoStack.length > UNDO_MAX) undoStack.shift();
+      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
+    }
+
+    function enableWorkUI(on){
+      workEnabled = on;
+      document.body.classList.toggle('workOn', on);
+      badgeWork.style.display = on ? "inline-flex" : "none";
+      toggleWork.setAttribute('aria-pressed', on ? "true" : "false");
+      toggleWork.textContent = on ? "🟡 Modalità lavoro: ON" : "🟡 Modalità lavoro: OFF";
+
+      const dis = !on;
+      btnUnderline.disabled = dis;
+      btnHighlight.disabled = dis;
+      btnClearMarks.disabled = dis;
+      btnExtract.disabled = dis;
+
+      // undo dipende anche dallo stack
+      btnUndo.disabled = !(on && undoStack.length > 0);
+
+      // notebook actions dipendono da contenuto
+      updateNotebookUI();
+
+      workTip.textContent = on
+        ? "Seleziona una frase e premi un pulsante."
+        : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
+    }
+
+    toggleWork.addEventListener('click', () => {
+      enableWorkUI(!workEnabled);
+    });
+
+    // Utility: verifica selezione dentro workText
+    function getSelectionRangeInside(container){
+      const sel = window.getSelection();
+      if(!sel || sel.rangeCount === 0) return null;
+      const range = sel.getRangeAt(0);
+      if(range.collapsed) return null;
+
+      const common = range.commonAncestorContainer;
+      const inContainer = container.contains(common.nodeType === 1 ? common : common.parentNode);
+      if(!inContainer) return null;
+
+      // evita selezioni che includono tool/notebook ecc (qui già isolato dentro workText)
+      return range;
+    }
+
+    // Utility: normalizza spazi per estrazione
+    function normText(t){
+      return t.replace(/\s+/g, " ").trim();
+    }
+
+    // Applica mark
+    function applyMark(type){
+      if(!workEnabled) return;
+
+      const range = getSelectionRangeInside(workText);
+      if(!range){
+        flashTip("Seleziona prima una porzione di testo dentro la colonna sinistra.");
+        return;
+      }
+
+      // non permettere di marcare dentro un link o in elementi interattivi (qui praticamente non ci sono)
+      const selectedText = normText(range.toString());
+      if(!selectedText){
+        flashTip("Selezione vuota.");
+        return;
+      }
+
+      // Snapshot per undo
+      pushUndo();
+
+      try{
+        // Estraggo contenuto selezionato
+        const frag = range.extractContents();
+
+        // Creo wrapper
+        const span = document.createElement('span');
+        span.className = `mark ${type === 'ul' ? 'ul' : 'hl'}`;
+        span.setAttribute('data-mark', type);
+        span.setAttribute('data-ts', String(Date.now()));
+
+        span.appendChild(frag);
+
+        // Inserisco
+        range.insertNode(span);
+
+        // Ripristina selezione su fine (pulito)
+        window.getSelection().removeAllRanges();
+
+        // Merge semplice: evita doppi wrapper adiacenti dello stesso tipo (leggero)
+        mergeAdjacentMarks(span);
+
+        // Autosave
+        autosaveNow();
+        btnUndo.disabled = !(workEnabled && undoStack.length > 0);
+        flashTip(type === 'ul' ? "Sottolineatura fatta." : "Evidenziazione fatta.");
+      }catch(err){
+        // Undo del tentativo
+        if(undoStack.length){
+          workText.innerHTML = undoStack.pop();
+        }
+        btnUndo.disabled = !(workEnabled && undoStack.length > 0);
+        flashTip("Qui la selezione è “difficile” da marcare. Prova con una selezione più corta (una sola frase).");
+      }
+    }
+
+    function mergeAdjacentMarks(node){
+      if(!node || node.nodeType !== 1) return;
+      const cls = node.className;
+
+      // merge con precedente
+      const prev = node.previousSibling;
+      if(prev && prev.nodeType === 1 && prev.className === cls){
+        while(node.firstChild) prev.appendChild(node.firstChild);
+        node.remove();
+        node = prev;
+      }
+
+      // merge con successivo
+      const next = node.nextSibling;
+      if(next && next.nodeType === 1 && next.className === cls){
+        while(next.firstChild) node.appendChild(next.firstChild);
+        next.remove();
+      }
+    }
+
+    btnUnderline.addEventListener('click', () => applyMark('ul'));
+    btnHighlight.addEventListener('click', () => applyMark('hl'));
+
+    // Undo
+    btnUndo.addEventListener('click', () => {
+      if(!workEnabled || undoStack.length === 0) return;
+      workText.innerHTML = undoStack.pop();
+      autosaveNow();
+      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
+      flashTip("Annullato.");
+    });
+
+    // Clear marks only
+    btnClearMarks.addEventListener('click', () => {
+      if(!workEnabled) return;
+      pushUndo();
+      const marks = workText.querySelectorAll('.mark');
+      marks.forEach(m => {
+        const parent = m.parentNode;
+        while(m.firstChild) parent.insertBefore(m.firstChild, m);
+        parent.removeChild(m);
+        parent.normalize();
+      });
+      autosaveNow();
+      btnUndo.disabled = !(workEnabled && undoStack.length > 0);
+      flashTip("Segni rimossi (testo intatto).");
+    });
+
+    // Extract to notebook
+    btnExtract.addEventListener('click', () => {
+      if(!workEnabled) return;
+      const marks = Array.from(workText.querySelectorAll('.mark'));
+      if(marks.length === 0){
+        flashTip("Non hai ancora segnato nulla.");
+        return;
+      }
+
+      // Prende i mark in ordine DOM e crea righe numerate
+      const lines = [];
+      marks.forEach((m) => {
+        const t = normText(m.textContent || "");
+        if(!t) return;
+        const tag = m.classList.contains('hl') ? "EVID" : "SOTT";
+        lines.push(`[${tag}] ${t}`);
+      });
+
+      if(lines.length === 0){
+        flashTip("Segni presenti, ma senza testo leggibile.");
+        return;
+      }
+
+      // Sostituisce il quaderno con estrazione “pulita”
+      notebookLines = dedupePreserveOrder(lines);
+      renderNotebook();
+      autosaveNow();
+      flashTip("Quaderno aggiornato.");
+    });
+
+    function dedupePreserveOrder(arr){
+      const seen = new Set();
+      const out = [];
+      for(const x of arr){
+        if(seen.has(x)) continue;
+        seen.add(x);
+        out.push(x);
+      }
+      return out;
+    }
+
+    function renderNotebook(){
+      notebookText.textContent = notebookLines.join("\n");
+      nbCount.textContent = `${notebookLines.length} righe`;
+      updateNotebookUI();
+    }
+
+    function updateNotebookUI(){
+      const has = notebookLines.length > 0;
+      btnCopy.disabled = !has;
+      btnSaveTxt.disabled = !has;
+      btnClearNotebook.disabled = !has;
+    }
+
+    btnClearNotebook.addEventListener('click', () => {
+      notebookLines = [];
+      renderNotebook();
+      autosaveNow();
+      flashTip("Quaderno svuotato.");
+    });
+
+    // Copy
+    btnCopy.addEventListener('click', async () => {
+      const txt = notebookLines.join("\n");
+      try{
+        await navigator.clipboard.writeText(txt);
+        flashTip("Copiato.");
+      }catch(e){
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = txt;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        flashTip("Copiato.");
+      }
+    });
+
+    // Save .txt
+    btnSaveTxt.addEventListener('click', () => {
+      const txt = notebookLines.join("\n");
+      const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Pascoli_vita_quaderno_${new Date().toISOString().slice(0,10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 800);
+      flashTip("File .txt salvato.");
+    });
+
+    // Tip flash
+    let tipTimer = null;
+    function flashTip(msg){
+      const old = workTip.textContent;
+      workTip.textContent = msg;
+      workTip.style.borderColor = "rgba(255,183,3,0.55)";
+      workTip.style.background = "rgba(255,255,255,0.92)";
+      clearTimeout(tipTimer);
+      tipTimer = setTimeout(() => {
+        workTip.textContent = workEnabled ? "Seleziona una frase e premi un pulsante." : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
+        workTip.style.borderColor = "rgba(31,42,51,0.12)";
+        workTip.style.background = "rgba(255,255,255,0.62)";
+      }, 1600);
+    }
+
+    // =========
+    //  AUTOSAVE: IndexedDB (fallback localStorage)
+    // =========
+    async function idbOpen(){
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if(!db.objectStoreNames.contains(DB_STORE)){
+            db.createObjectStore(DB_STORE);
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function idbSet(key, value){
+      const db = await idbOpen();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(DB_STORE, "readwrite");
+        tx.objectStore(DB_STORE).put(value, key);
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    async function idbGet(key){
+      const db = await idbOpen();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(DB_STORE, "readonly");
+        const req = tx.objectStore(DB_STORE).get(key);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function lsKey(){ return "Libro01_Pascoli_vita_v1"; }
+
+    async function autosaveNow(){
+      const payload = {
+        v: 1,
+        ts: Date.now(),
+        workHTML: workText.innerHTML,
+        notebook: notebookLines
+      };
+
+      try{
+        await idbSet(PAGE_KEY, payload);
+        setSaveState("OK (IndexedDB)");
+      }catch(e){
+        try{
+          localStorage.setItem(lsKey(), JSON.stringify(payload));
+          setSaveState("OK (localStorage)");
+        }catch(err){
+          setSaveState("errore");
+        }
+      }
+    }
+
+    async function restoreIfAny(){
+      // prova IndexedDB
+      let data = null;
+      try{
+        data = await idbGet(PAGE_KEY);
+      }catch(e){ /* ignore */ }
+
+      // fallback localStorage
+      if(!data){
+        try{
+          const raw = localStorage.getItem(lsKey());
+          if(raw) data = JSON.parse(raw);
+        }catch(e){ /* ignore */ }
+      }
+
+      if(data && data.workHTML){
+        workText.innerHTML = data.workHTML;
+      }
+      if(data && Array.isArray(data.notebook)){
+        notebookLines = data.notebook;
+        renderNotebook();
+      }else{
+        renderNotebook();
+      }
+
+      if(data){
+        setSaveState("ripristinato");
+      }else{
+        setSaveState("—");
+      }
+    }
+
+    // =========
+    //  START
+    // =========
+    enableWorkUI(false);     // parte in lettura
+    restoreIfAny();
+
+    // In modalità lavoro, abilitare azioni notebook quando ci sono righe
+    // (già gestito da renderNotebook / updateNotebookUI)
+
+    // Focus/selection hint: se l’utente seleziona testo, in modalità lavoro abilitiamo i bottoni (già non disabilitati)
+    // Però possiamo dare un piccolo suggerimento.
+    document.addEventListener('selectionchange', () => {
+      if(!workEnabled) return;
+      const r = getSelectionRangeInside(workText);
+      if(r) workTip.textContent = "Selezione pronta → scegli Sottolinea o Evidenzia.";
+      else workTip.textContent = "Seleziona una frase e premi un pulsante.";
+    });
+
   </script>
 </body>
 </html>
