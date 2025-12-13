@@ -8,7 +8,6 @@
 
   <style>
     :root{
-      /* Palette viva (fanciullino) */
       --bg1:#fbf7ef;
       --bg2:#e9f6ff;
       --ink:#1f2a33;
@@ -17,14 +16,13 @@
       --line:rgba(31,42,51,0.14);
       --card:rgba(255,255,255,0.72);
       --card2:rgba(255,255,255,0.90);
-      --accent:#ffb703;     /* giallo caldo */
-      --accent2:#219ebc;    /* azzurro vivo */
+      --accent:#ffb703;
+      --accent2:#219ebc;
       --shadow:0 18px 60px rgba(0,0,0,0.14);
       --r-xl:22px;
       --r-lg:16px;
       --max:1120px;
 
-      /* segni */
       --hl: rgba(255, 183, 3, 0.38);
       --ul: rgba(33, 158, 188, 0.75);
     }
@@ -174,7 +172,6 @@
     }
     .card .bd{ padding: 14px; }
 
-    /* TESTO */
     .prose p{
       margin: 0 0 10px;
       line-height: 1.7;
@@ -199,13 +196,7 @@
       font-size: 13px; line-height:1.55; color: rgba(31,42,51,0.84);
     }
 
-    /* TOOLBAR lavoro (solo quando ON) */
-    .workTools{
-      display:none;
-      gap: 8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+    .workTools{ display:none; gap: 8px; flex-wrap:wrap; align-items:center; }
     .workOn .workTools{ display:flex; }
 
     .toolBtn{
@@ -219,13 +210,10 @@
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
       user-select:none;
       font-size: 12px;
+      touch-action: manipulation;
     }
     .toolBtn:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,1); }
-    .toolBtn:disabled{
-      opacity: .55;
-      cursor:not-allowed;
-      transform:none;
-    }
+    .toolBtn:disabled{ opacity: .55; cursor:not-allowed; transform:none; }
 
     .tip{
       font-size:12px;
@@ -234,9 +222,9 @@
       border-radius: 999px;
       border: 1px solid rgba(31,42,51,0.12);
       background: rgba(255,255,255,0.62);
+      user-select:none;
     }
 
-    /* SEGNI */
     .mark{
       border-radius: 6px;
       padding: 0 .08em;
@@ -252,7 +240,6 @@
       text-underline-offset: 3px;
     }
 
-    /* QUADERNO */
     .notebook{
       margin-top: 14px;
       border: 1px solid rgba(31,42,51,0.12);
@@ -287,13 +274,7 @@
       display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
     }
 
-    /* TIMELINE */
-    .timeline{
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-    }
-
+    .timeline{ display:flex; flex-direction:column; gap: 10px; }
     .tItem{
       width:100%;
       text-align:left;
@@ -311,40 +292,14 @@
       border-color: rgba(255,183,3,0.45);
       background: rgba(255,255,255,0.94);
     }
-
-    .tRow{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 10px;
-    }
-    .tDate{
-      font-weight: 950;
-      font-size: 12px;
-      letter-spacing:.6px;
-      color: rgba(31,42,51,0.72);
-      white-space:nowrap;
-    }
-    .tTitle{
-      font-weight: 950;
-      font-size: 13px;
-      color: rgba(31,42,51,0.90);
-      margin: 0 0 3px;
-    }
-    .tMini{
-      font-size: 12px;
-      color: rgba(31,42,51,0.70);
-      line-height: 1.45;
-    }
-    .tChevron{
-      color: rgba(33,158,188,0.95);
-      font-weight: 950;
-      margin-left: 8px;
-    }
+    .tRow{ display:flex; align-items:flex-start; justify-content:space-between; gap: 10px; }
+    .tDate{ font-weight: 950; font-size: 12px; letter-spacing:.6px; color: rgba(31,42,51,0.72); white-space:nowrap; }
+    .tTitle{ font-weight: 950; font-size: 13px; color: rgba(31,42,51,0.90); margin: 0 0 3px; }
+    .tMini{ font-size: 12px; color: rgba(31,42,51,0.70); line-height: 1.45; }
+    .tChevron{ color: rgba(33,158,188,0.95); font-weight: 950; margin-left: 8px; }
 
     footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
 
-    /* MODAL */
     dialog{
       border: none;
       padding: 0;
@@ -370,20 +325,8 @@
         radial-gradient(520px 240px at 80% 30%, rgba(33,158,188,0.18), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.80));
     }
-    .modalTitle{
-      margin:0;
-      font-size: 16px;
-      font-weight: 950;
-      color: rgba(31,42,51,0.92);
-      line-height: 1.25;
-    }
-    .modalSub{
-      margin: 6px 0 0;
-      font-size: 12px;
-      color: rgba(31,42,51,0.74);
-      line-height:1.45;
-      max-width: 72ch;
-    }
+    .modalTitle{ margin:0; font-size: 16px; font-weight: 950; color: rgba(31,42,51,0.92); line-height: 1.25; }
+    .modalSub{ margin: 6px 0 0; font-size: 12px; color: rgba(31,42,51,0.74); line-height:1.45; max-width: 72ch; }
     .closeBtn{
       appearance:none;
       border: 1px solid rgba(31,42,51,0.14);
@@ -397,15 +340,9 @@
       white-space:nowrap;
     }
     .closeBtn:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,1); }
-
     .modalBd{ padding: 12px 14px 14px; }
 
-    .tabs{
-      display:flex;
-      gap: 8px;
-      flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
+    .tabs{ display:flex; gap: 8px; flex-wrap:wrap; margin-bottom: 10px; }
     .tabBtn{
       appearance:none;
       border: 1px solid rgba(31,42,51,0.14);
@@ -425,27 +362,16 @@
       outline-offset: 2px;
       background: rgba(233,246,255,0.72);
     }
-
     .panel{
       border: 1px solid rgba(31,42,51,0.12);
       background: rgba(255,255,255,0.82);
       border-radius: 16px;
       padding: 10px 10px;
     }
-    .panel p{
-      margin: 0 0 10px;
-      line-height: 1.65;
-      font-size: 13px;
-      color: rgba(31,42,51,0.86);
-    }
+    .panel p{ margin: 0 0 10px; line-height: 1.65; font-size: 13px; color: rgba(31,42,51,0.86); }
     .panel p:last-child{ margin-bottom:0; }
 
-    .links{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    .links{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 10px; }
     .chipLink{
       display:inline-flex;
       align-items:center;
@@ -508,10 +434,10 @@
           <strong>Sintesi (chiara, non cupa)</strong>
 
           <div class="workTools" aria-label="Strumenti di lavoro">
-            <button class="toolBtn" id="btnUnderline" type="button" disabled title="Sottolinea la selezione (Modalità lavoro ON)">✏️ Sottolinea</button>
-            <button class="toolBtn" id="btnHighlight" type="button" disabled title="Evidenzia la selezione (Modalità lavoro ON)">🖍️ Evidenzia</button>
-            <button class="toolBtn" id="btnUndo" type="button" disabled title="Annulla ultima azione">↩︎ Annulla</button>
-            <button class="toolBtn" id="btnClearMarks" type="button" disabled title="Rimuove sottolineature/evidenziature (testo invariato)">🧼 Pulisci segni</button>
+            <button class="toolBtn" id="btnUnderline" type="button" disabled>✏️ Sottolinea</button>
+            <button class="toolBtn" id="btnHighlight" type="button" disabled>🖍️ Evidenzia</button>
+            <button class="toolBtn" id="btnUndo" type="button" disabled>↩︎ Annulla</button>
+            <button class="toolBtn" id="btnClearMarks" type="button" disabled>🧼 Pulisci segni</button>
             <span class="tip" id="workTip">Seleziona una frase e premi un pulsante.</span>
           </div>
         </div>
@@ -550,12 +476,10 @@
             <div class="notebookHd">
               <b>🟡 Quaderno (dal tuo lavoro)</b>
               <div class="nbActions">
-                <button class="toolBtn" id="btnExtract" type="button" disabled title="Crea un testo con le parti evidenziate/sottolineate">
-                  📌 Ricava testo
-                </button>
-                <button class="toolBtn" id="btnCopy" type="button" disabled title="Copia il testo del quaderno">📋 Copia</button>
-                <button class="toolBtn" id="btnSaveTxt" type="button" disabled title="Salva un file .txt">💾 Salva .txt</button>
-                <button class="toolBtn" id="btnClearNotebook" type="button" disabled title="Svuota il quaderno (non tocca i segni)">🧽 Svuota quaderno</button>
+                <button class="toolBtn" id="btnExtract" type="button" disabled>📌 Ricava testo</button>
+                <button class="toolBtn" id="btnCopy" type="button" disabled>📋 Copia</button>
+                <button class="toolBtn" id="btnSaveTxt" type="button" disabled>💾 Salva .txt</button>
+                <button class="toolBtn" id="btnClearNotebook" type="button" disabled>🧽 Svuota quaderno</button>
               </div>
             </div>
 
@@ -620,151 +544,38 @@
     $('#year').textContent = new Date().getFullYear();
 
     // =========
-    //  DATI TIMELINE (come prima)
+    //  TIMELINE DATA
     // =========
     const EVENTS = [
-      {
-        date: "1855",
-        title: "Nasce a San Mauro di Romagna",
-        mini: "Origine rurale, “cose” e natura come alfabeti.",
-        sub: "31 dicembre 1855: famiglia numerosa, benessere rurale moderato.",
-        world: `
-          <p>
-            L’inizio non è “biografia”: è <b>lessico</b>. Pascoli impara presto che le cose minime (campi, animali, suoni)
-            non sono sfondo: sono <b>lingua</b>. Da qui la sua attenzione al dettaglio.
-          </p>
-          <p>
-            Il fanciullino non nasce in astratto: nasce in un mondo dove il piccolo ha già valore.
-          </p>
-        `,
-        poems: [
-          { label: "Myricae (cornice)", href: "#", note: "Raccolta: natura, suoni, frammenti." }
-        ]
+      { date:"1855", title:"Nasce a San Mauro di Romagna", mini:"Origine rurale, “cose” e natura come alfabeti.",
+        sub:"31 dicembre 1855: famiglia numerosa, benessere rurale moderato.",
+        world:`<p>L’inizio è lessico: le cose minime diventano lingua.</p>`,
+        poems:[{label:"Myricae (cornice)", href:"#", note:"Natura, suoni, frammenti."}]
       },
-      {
-        date: "1867",
-        title: "Assassinio del padre (10 agosto)",
-        mini: "La frattura: trauma e domanda senza risposta.",
-        sub: "10 agosto 1867: Ruggero Pascoli ucciso in un agguato; omicidio impunito.",
-        world: `
-          <p>
-            Qui si accende l’idea pascoliana più dura: la realtà può essere <b>ingiusta senza spiegazione</b>.
-            Non è “pessimismo filosofico”: è esperienza.
-          </p>
-          <p>
-            Quando il senso manca, il mondo sembra parlare per indizi: suoni, lampi, presagi.
-          </p>
-        `,
-        poems: [
-          { label: "X agosto", href: "testi/x-agosto.html", note: "Collegamento diretto al 10 agosto." },
-          { label: "La cavalla storna (se la tratti)", href: "#", note: "Altro nodo memoriale legato al padre." }
-        ]
+      { date:"1867", title:"Assassinio del padre (10 agosto)", mini:"La frattura: trauma e domanda senza risposta.",
+        sub:"10 agosto 1867: Ruggero Pascoli ucciso in un agguato; omicidio impunito.",
+        world:`<p>La realtà può essere ingiusta senza spiegazione: esperienza, non teoria.</p>`,
+        poems:[{label:"X agosto", href:"testi/x-agosto.html", note:"Nodo sorgivo."}]
       },
-      {
-        date: "1868–1871",
-        title: "Catena di lutti familiari",
-        mini: "Il “guscio” si rompe: nasce il bisogno del nido.",
-        sub: "Negli anni successivi muoiono madre, sorella e fratelli (frattura del nucleo).",
-        world: `
-          <p>
-            Il <b>nido</b> non è un simbolo tenero: è un dispositivo di difesa.
-            Se il mondo può colpire dentro casa, la casa diventa ricostruzione e rito.
-          </p>
-          <p>
-            Da qui l’infanzia come luogo perduto: non nostalgia, ma assenza viva.
-          </p>
-        `,
-        poems: [
-          { label: "Tema: il nido (pagina futura)", href: "#", note: "Puoi creare una pagina-tema sul “nido”." }
-        ]
+      { date:"1868–1871", title:"Catena di lutti familiari", mini:"Il guscio si rompe: nasce il bisogno del nido.",
+        sub:"Negli anni successivi muoiono madre, sorella e fratelli.",
+        world:`<p>Il nido è difesa, ricostruzione, rito.</p>`,
+        poems:[{label:"Tema: il nido (pagina futura)", href:"#", note:"Crea pagina-tema."}]
       },
-      {
-        date: "1873–1882",
-        title: "Bologna: Carducci, politica, inquietudine",
-        mini: "Studio + scosse: protesta, perdita borsa, carcere.",
-        sub: "1876 perdita borsa; 1879 carcere; 1882 laurea (tesi su Alceo).",
-        world: `
-          <p>
-            Pascoli non è solo “campagna”. Conosce conflitto e storia, ma quell’energia diventa <b>tensione interna</b>,
-            voce laterale, anti-retorica.
-          </p>
-        `,
-        poems: [
-          { label: "Poemi conviviali (se li accenni)", href: "#", note: "Classico e moderno: un ponte." }
-        ]
+      { date:"1873–1882", title:"Bologna: Carducci, politica, inquietudine", mini:"Protesta, perdita borsa, carcere.",
+        sub:"1876 perdita borsa; 1879 carcere; 1882 laurea.",
+        world:`<p>Conflitto e storia: energia che diventa tensione interna.</p>`,
+        poems:[{label:"Poemi conviviali (se li accenni)", href:"#", note:"Ponte classico/moderno."}]
       },
-      {
-        date: "1882–1895",
-        title: "Insegnamento e “ricomposizione”",
-        mini: "Lavoro e tentativo di equilibrio con le sorelle.",
-        sub: "Insegnamenti nei licei; vicino a Ida e Maria.",
-        world: `
-          <p>
-            L’insegnamento è anche un modo per tenere in piedi una vita che tende a scomporsi.
-            La ricomposizione familiare è la forma concreta del “nido” ricostruito.
-          </p>
-        `,
-        poems: [
-          { label: "Digitale purpurea", href: "testi/digitale-purpurea.html", note: "Se la usi nel percorso." }
-        ]
+      { date:"1895", title:"Ida si sposa: ferita affettiva", mini:"Vissuto come abbandono.",
+        sub:"Evento privato ma strutturante.",
+        world:`<p>Il fanciullino è vulnerabilità che non si chiude.</p>`,
+        poems:[{label:"Il gelsomino notturno", href:"testi/gelsomino-notturno.html", note:"Soglia/intimità."}]
       },
-      {
-        date: "1895",
-        title: "Ida si sposa: ferita affettiva",
-        mini: "Vissuto come abbandono: il nido non regge.",
-        sub: "Evento privato ma strutturante: cambia l’equilibrio familiare.",
-        world: `
-          <p>
-            Alcuni passaggi normali (un matrimonio) per lui diventano <b>crollo di struttura</b>.
-            Il fanciullino è anche vulnerabilità che non si chiude.
-          </p>
-        `,
-        poems: [
-          { label: "Il gelsomino notturno", href: "testi/gelsomino-notturno.html", note: "Matrimonio, intimità, soglia." }
-        ]
-      },
-      {
-        date: "1895–1912",
-        title: "Castelvecchio di Barga: il rifugio",
-        mini: "Campagna come casa poetica; Maria accanto.",
-        sub: "Dimora prediletta: natura, quiete, lavoro poetico.",
-        world: `
-          <p>
-            Castelvecchio è un <b>laboratorio sensoriale</b>: suoni, vento, luci diventano grammatica.
-            La realtà parla in minimi segnali.
-          </p>
-        `,
-        poems: [
-          { label: "L’assiuolo (se lo fai)", href: "#", note: "Suono come presagio." }
-        ]
-      },
-      {
-        date: "1903",
-        title: "Succede a Carducci a Bologna",
-        mini: "Prestigio, ma non guarigione: scrittura anti-trionfalistica.",
-        sub: "Cattedra a Bologna: incarico prestigioso.",
-        world: `
-          <p>
-            La gloria arriva, ma non guarisce. La scrittura resta fatta per <b>registrare</b>, non per celebrare.
-          </p>
-        `,
-        poems: [
-          { label: "Poetica del fanciullino (pagina futura)", href: "#", note: "Quando la farai: collega qui." }
-        ]
-      },
-      {
-        date: "1912",
-        title: "Muore a Bologna (6 aprile)",
-        mini: "Vita e opera inseparabili: risposta poetica a una frattura.",
-        sub: "6 aprile 1912: morte; sepolto a Castelvecchio.",
-        world: `
-          <p>
-            Idea semplice e vera: Pascoli non è “uno stile”. È una risposta (in forma poetica) a una frattura originaria.
-          </p>
-        `,
-        poems: [
-          { label: "Ripasso: X agosto", href: "testi/x-agosto.html", note: "Nodo sorgivo." }
-        ]
+      { date:"1912", title:"Muore a Bologna (6 aprile)", mini:"Vita e opera inseparabili.",
+        sub:"6 aprile 1912: morte; sepolto a Castelvecchio.",
+        world:`<p>Pascoli è una risposta poetica a una frattura originaria.</p>`,
+        poems:[{label:"Ripasso: X agosto", href:"testi/x-agosto.html", note:"Nodo sorgivo."}]
       }
     ];
 
@@ -827,13 +638,10 @@
       panelPoems.innerHTML = `
         <p style="margin:0 0 8px; font-weight:950;">Collegamenti consigliati:</p>
         ${renderPoems(ev.poems || [])}
-        <p style="margin-top:10px; color:rgba(31,42,51,0.70);">
-          Se un link è “#”, significa: pagina non ancora creata.
-        </p>
       `;
       setTab('world');
       if(typeof modal.showModal === "function") modal.showModal();
-      else alert("Il tuo browser non supporta i dialog. Apri con un browser moderno.");
+      else alert("Il tuo browser non supporta i dialog.");
     }
 
     function renderPoems(list){
@@ -857,7 +665,7 @@
     }
 
     // =========
-    //  LAVORO: underline / highlight / quaderno / export / autosave
+    //  LAVORO (FIX robusto)
     // =========
     const toggleWork = $('#toggleWork');
     const badgeWork = $('#badgeWork');
@@ -878,7 +686,10 @@
 
     let workEnabled = false;
 
-    // Undo stack (snapshots HTML)
+    // Range cache: salva l’ultima selezione valida (fondamentale su iPad)
+    let cachedRange = null;
+
+    // Undo stack (snapshot HTML)
     const undoStack = [];
     const UNDO_MAX = 25;
 
@@ -890,12 +701,9 @@
     const DB_STORE = "pages";
     const PAGE_KEY = "vita";
 
-    function setSaveState(msg){
-      saveState.textContent = "autosave: " + msg;
-    }
+    function setSaveState(msg){ saveState.textContent = "autosave: " + msg; }
 
     function pushUndo(){
-      // salva snapshot del workText (solo parte lavorabile)
       undoStack.push(workText.innerHTML);
       if(undoStack.length > UNDO_MAX) undoStack.shift();
       btnUndo.disabled = !(workEnabled && undoStack.length > 0);
@@ -913,121 +721,164 @@
       btnHighlight.disabled = dis;
       btnClearMarks.disabled = dis;
       btnExtract.disabled = dis;
-
-      // undo dipende anche dallo stack
       btnUndo.disabled = !(on && undoStack.length > 0);
 
-      // notebook actions dipendono da contenuto
       updateNotebookUI();
 
       workTip.textContent = on
-        ? "Seleziona una frase e premi un pulsante."
+        ? "Seleziona una frase e poi premi Sottolinea/Evidenzia."
         : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
     }
 
-    toggleWork.addEventListener('click', () => {
-      enableWorkUI(!workEnabled);
+    toggleWork.addEventListener('click', () => enableWorkUI(!workEnabled));
+
+    // IMPORTANTISSIMO: su iPad il click sul bottone “uccide” la selezione.
+    // Quindi blocchiamo il focus sul bottone e usiamo la selezione cache.
+    [btnUnderline, btnHighlight, btnUndo, btnClearMarks, btnExtract, btnCopy, btnSaveTxt, btnClearNotebook].forEach(b=>{
+      b.addEventListener('pointerdown', (e)=>{ if(workEnabled) e.preventDefault(); }, {passive:false});
+      b.addEventListener('mousedown', (e)=>{ if(workEnabled) e.preventDefault(); });
+      b.addEventListener('touchstart', (e)=>{ if(workEnabled) e.preventDefault(); }, {passive:false});
     });
 
-    // Utility: verifica selezione dentro workText
-    function getSelectionRangeInside(container){
-      const sel = window.getSelection();
-      if(!sel || sel.rangeCount === 0) return null;
-      const range = sel.getRangeAt(0);
-      if(range.collapsed) return null;
-
+    function isRangeInside(range, container){
+      if(!range) return false;
       const common = range.commonAncestorContainer;
-      const inContainer = container.contains(common.nodeType === 1 ? common : common.parentNode);
-      if(!inContainer) return null;
-
-      // evita selezioni che includono tool/notebook ecc (qui già isolato dentro workText)
-      return range;
+      const node = common.nodeType === 1 ? common : common.parentNode;
+      return container.contains(node);
     }
 
-    // Utility: normalizza spazi per estrazione
-    function normText(t){
-      return t.replace(/\s+/g, " ").trim();
+    function captureSelection(){
+      if(!workEnabled) return;
+      const sel = window.getSelection();
+      if(!sel || sel.rangeCount === 0) return;
+      const r = sel.getRangeAt(0);
+      if(r.collapsed) return;
+      if(!isRangeInside(r, workText)) return;
+
+      // clona e salva
+      cachedRange = r.cloneRange();
+      workTip.textContent = "Selezione pronta → scegli Sottolinea o Evidenzia.";
     }
 
-    // Applica mark
-    function applyMark(type){
+    document.addEventListener('selectionchange', captureSelection);
+
+    // Helper per TreeWalker text nodes nel range
+    function getTextNodesInRange(range, container){
+      const nodes = [];
+      const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+        acceptNode(node){
+          if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          // Interseca range?
+          const nodeRange = document.createRange();
+          nodeRange.selectNodeContents(node);
+          const intersects =
+            range.compareBoundaryPoints(Range.END_TO_START, nodeRange) < 0 &&
+            range.compareBoundaryPoints(Range.START_TO_END, nodeRange) > 0;
+          return intersects ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      let n;
+      while((n = walker.nextNode())) nodes.push(n);
+      return nodes;
+    }
+
+    function normText(t){ return t.replace(/\s+/g, " ").trim(); }
+
+    function wrapTextPortion(textNode, start, end, className){
+      const text = textNode.nodeValue;
+      const before = text.slice(0, start);
+      const mid = text.slice(start, end);
+      const after = text.slice(end);
+
+      const frag = document.createDocumentFragment();
+      if(before) frag.appendChild(document.createTextNode(before));
+
+      const span = document.createElement('span');
+      span.className = "mark " + className;
+      span.setAttribute('data-mark', className === "ul" ? "ul" : "hl");
+      span.setAttribute('data-ts', String(Date.now()));
+      span.textContent = mid;
+      frag.appendChild(span);
+
+      if(after) frag.appendChild(document.createTextNode(after));
+
+      textNode.parentNode.replaceChild(frag, textNode);
+    }
+
+    function applyMarkRobust(kind){
       if(!workEnabled) return;
 
-      const range = getSelectionRangeInside(workText);
+      // usa cachedRange se disponibile, altrimenti prova a leggere selezione live
+      let range = cachedRange && isRangeInside(cachedRange, workText) ? cachedRange.cloneRange() : null;
+
       if(!range){
-        flashTip("Seleziona prima una porzione di testo dentro la colonna sinistra.");
+        const sel = window.getSelection();
+        if(sel && sel.rangeCount){
+          const r2 = sel.getRangeAt(0);
+          if(!r2.collapsed && isRangeInside(r2, workText)) range = r2.cloneRange();
+        }
+      }
+
+      if(!range || range.collapsed){
+        flashTip("Seleziona prima una frase nel testo (colonna sinistra).");
         return;
       }
 
-      // non permettere di marcare dentro un link o in elementi interattivi (qui praticamente non ci sono)
-      const selectedText = normText(range.toString());
-      if(!selectedText){
-        flashTip("Selezione vuota.");
+      // evita di marcare già dentro un mark: se la selezione è tutta dentro mark, non fare casino
+      const sc = range.startContainer.nodeType === 1 ? range.startContainer : range.startContainer.parentNode;
+      const ec = range.endContainer.nodeType === 1 ? range.endContainer : range.endContainer.parentNode;
+      if(sc && sc.closest && sc.closest('.mark') && ec && ec.closest && ec.closest('.mark')){
+        flashTip("Sei già dentro un segno. Seleziona un po’ più fuori.");
         return;
       }
 
-      // Snapshot per undo
       pushUndo();
 
       try{
-        // Estraggo contenuto selezionato
-        const frag = range.extractContents();
+        const nodes = getTextNodesInRange(range, workText);
+        if(nodes.length === 0){
+          flashTip("Selezione non valida. Prova a selezionare solo testo (non spazi).");
+          return;
+        }
 
-        // Creo wrapper
-        const span = document.createElement('span');
-        span.className = `mark ${type === 'ul' ? 'ul' : 'hl'}`;
-        span.setAttribute('data-mark', type);
-        span.setAttribute('data-ts', String(Date.now()));
+        // Processa dal fondo verso l’alto per non rompere gli offset dei nodi successivi
+        for(let i = nodes.length - 1; i >= 0; i--){
+          const node = nodes[i];
+          const nodeRange = document.createRange();
+          nodeRange.selectNodeContents(node);
 
-        span.appendChild(frag);
+          const start = (node === range.startContainer) ? range.startOffset : 0;
+          const end = (node === range.endContainer) ? range.endOffset : node.nodeValue.length;
 
-        // Inserisco
-        range.insertNode(span);
+          // clamp
+          const s = Math.max(0, Math.min(start, node.nodeValue.length));
+          const e = Math.max(0, Math.min(end, node.nodeValue.length));
+          if(e <= s) continue;
 
-        // Ripristina selezione su fine (pulito)
-        window.getSelection().removeAllRanges();
+          wrapTextPortion(node, s, e, kind);
+        }
 
-        // Merge semplice: evita doppi wrapper adiacenti dello stesso tipo (leggero)
-        mergeAdjacentMarks(span);
+        // pulisci selezione cache (evita riapplicazioni strane)
+        cachedRange = null;
+        const sel = window.getSelection();
+        if(sel) sel.removeAllRanges();
 
-        // Autosave
         autosaveNow();
         btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-        flashTip(type === 'ul' ? "Sottolineatura fatta." : "Evidenziazione fatta.");
+        flashTip(kind === "ul" ? "Sottolineatura fatta." : "Evidenziazione fatta.");
       }catch(err){
-        // Undo del tentativo
+        // rollback
         if(undoStack.length){
           workText.innerHTML = undoStack.pop();
         }
         btnUndo.disabled = !(workEnabled && undoStack.length > 0);
-        flashTip("Qui la selezione è “difficile” da marcare. Prova con una selezione più corta (una sola frase).");
+        flashTip("Safari ha fatto resistenza. Seleziona una frase più corta e riprova.");
       }
     }
 
-    function mergeAdjacentMarks(node){
-      if(!node || node.nodeType !== 1) return;
-      const cls = node.className;
+    btnUnderline.addEventListener('click', () => applyMarkRobust('ul'));
+    btnHighlight.addEventListener('click', () => applyMarkRobust('hl'));
 
-      // merge con precedente
-      const prev = node.previousSibling;
-      if(prev && prev.nodeType === 1 && prev.className === cls){
-        while(node.firstChild) prev.appendChild(node.firstChild);
-        node.remove();
-        node = prev;
-      }
-
-      // merge con successivo
-      const next = node.nextSibling;
-      if(next && next.nodeType === 1 && next.className === cls){
-        while(next.firstChild) node.appendChild(next.firstChild);
-        next.remove();
-      }
-    }
-
-    btnUnderline.addEventListener('click', () => applyMark('ul'));
-    btnHighlight.addEventListener('click', () => applyMark('hl'));
-
-    // Undo
     btnUndo.addEventListener('click', () => {
       if(!workEnabled || undoStack.length === 0) return;
       workText.innerHTML = undoStack.pop();
@@ -1036,7 +887,6 @@
       flashTip("Annullato.");
     });
 
-    // Clear marks only
     btnClearMarks.addEventListener('click', () => {
       if(!workEnabled) return;
       pushUndo();
@@ -1052,7 +902,6 @@
       flashTip("Segni rimossi (testo intatto).");
     });
 
-    // Extract to notebook
     btnExtract.addEventListener('click', () => {
       if(!workEnabled) return;
       const marks = Array.from(workText.querySelectorAll('.mark'));
@@ -1061,7 +910,6 @@
         return;
       }
 
-      // Prende i mark in ordine DOM e crea righe numerate
       const lines = [];
       marks.forEach((m) => {
         const t = normText(m.textContent || "");
@@ -1070,12 +918,6 @@
         lines.push(`[${tag}] ${t}`);
       });
 
-      if(lines.length === 0){
-        flashTip("Segni presenti, ma senza testo leggibile.");
-        return;
-      }
-
-      // Sostituisce il quaderno con estrazione “pulita”
       notebookLines = dedupePreserveOrder(lines);
       renderNotebook();
       autosaveNow();
@@ -1113,14 +955,12 @@
       flashTip("Quaderno svuotato.");
     });
 
-    // Copy
     btnCopy.addEventListener('click', async () => {
       const txt = notebookLines.join("\n");
       try{
         await navigator.clipboard.writeText(txt);
         flashTip("Copiato.");
       }catch(e){
-        // fallback
         const ta = document.createElement('textarea');
         ta.value = txt;
         ta.style.position = "fixed";
@@ -1133,7 +973,6 @@
       }
     });
 
-    // Save .txt
     btnSaveTxt.addEventListener('click', () => {
       const txt = notebookLines.join("\n");
       const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
@@ -1148,7 +987,6 @@
       flashTip("File .txt salvato.");
     });
 
-    // Tip flash
     let tipTimer = null;
     function flashTip(msg){
       const old = workTip.textContent;
@@ -1157,14 +995,14 @@
       workTip.style.background = "rgba(255,255,255,0.92)";
       clearTimeout(tipTimer);
       tipTimer = setTimeout(() => {
-        workTip.textContent = workEnabled ? "Seleziona una frase e premi un pulsante." : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
+        workTip.textContent = workEnabled ? "Seleziona una frase e poi premi Sottolinea/Evidenzia." : "Modalità lettura: pulita. (Attiva lavoro se vuoi intervenire.)";
         workTip.style.borderColor = "rgba(31,42,51,0.12)";
         workTip.style.background = "rgba(255,255,255,0.62)";
       }, 1600);
     }
 
     // =========
-    //  AUTOSAVE: IndexedDB (fallback localStorage)
+    //  AUTOSAVE (IndexedDB + fallback localStorage)
     // =========
     async function idbOpen(){
       return new Promise((resolve, reject) => {
@@ -1200,11 +1038,11 @@
       });
     }
 
-    function lsKey(){ return "Libro01_Pascoli_vita_v1"; }
+    function lsKey(){ return "Libro01_Pascoli_vita_v2"; }
 
     async function autosaveNow(){
       const payload = {
-        v: 1,
+        v: 2,
         ts: Date.now(),
         workHTML: workText.innerHTML,
         notebook: notebookLines
@@ -1224,54 +1062,25 @@
     }
 
     async function restoreIfAny(){
-      // prova IndexedDB
       let data = null;
-      try{
-        data = await idbGet(PAGE_KEY);
-      }catch(e){ /* ignore */ }
-
-      // fallback localStorage
+      try{ data = await idbGet(PAGE_KEY); }catch(e){}
       if(!data){
         try{
           const raw = localStorage.getItem(lsKey());
           if(raw) data = JSON.parse(raw);
-        }catch(e){ /* ignore */ }
+        }catch(e){}
       }
 
-      if(data && data.workHTML){
-        workText.innerHTML = data.workHTML;
-      }
-      if(data && Array.isArray(data.notebook)){
-        notebookLines = data.notebook;
-        renderNotebook();
-      }else{
-        renderNotebook();
-      }
+      if(data && data.workHTML) workText.innerHTML = data.workHTML;
+      if(data && Array.isArray(data.notebook)) notebookLines = data.notebook;
 
-      if(data){
-        setSaveState("ripristinato");
-      }else{
-        setSaveState("—");
-      }
+      renderNotebook();
+      setSaveState(data ? "ripristinato" : "—");
     }
 
-    // =========
-    //  START
-    // =========
-    enableWorkUI(false);     // parte in lettura
+    // START
+    enableWorkUI(false);
     restoreIfAny();
-
-    // In modalità lavoro, abilitare azioni notebook quando ci sono righe
-    // (già gestito da renderNotebook / updateNotebookUI)
-
-    // Focus/selection hint: se l’utente seleziona testo, in modalità lavoro abilitiamo i bottoni (già non disabilitati)
-    // Però possiamo dare un piccolo suggerimento.
-    document.addEventListener('selectionchange', () => {
-      if(!workEnabled) return;
-      const r = getSelectionRangeInside(workText);
-      if(r) workTip.textContent = "Selezione pronta → scegli Sottolinea o Evidenzia.";
-      else workTip.textContent = "Seleziona una frase e premi un pulsante.";
-    });
 
   </script>
 </body>
