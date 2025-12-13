@@ -8,15 +8,15 @@
 
   <style>
     :root{
-      /* Palette più viva (fanciullino): carta chiara + cielo + giallo caldo */
+      /* Palette viva (fanciullino): carta + cielo + giallo caldo */
       --bg1:#fbf7ef;        /* carta */
       --bg2:#e9f6ff;        /* cielo */
       --ink:#1f2a33;        /* inchiostro */
       --muted:rgba(31,42,51,0.72);
       --quiet:rgba(31,42,51,0.56);
       --line:rgba(31,42,51,0.14);
-      --card:rgba(255,255,255,0.70);
-      --card2:rgba(255,255,255,0.86);
+      --card:rgba(255,255,255,0.72);
+      --card2:rgba(255,255,255,0.90);
       --accent:#ffb703;     /* giallo caldo */
       --accent2:#219ebc;    /* azzurro */
       --shadow:0 18px 60px rgba(0,0,0,0.14);
@@ -39,36 +39,72 @@
     }
 
     a{ color:inherit; text-decoration:none; }
-    a:focus{ outline: 2px solid rgba(33,158,188,0.55); outline-offset: 2px; border-radius: 12px; }
-
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px 18px 28px; }
 
-    /* Frase */
-    .titleline{ text-align:center; margin: 2px 0 16px; }
-    .phrase{
-      display:inline-block;
-      font-weight: 900;
+    /* HEADER: frase + significato */
+    .titleline{ text-align:center; margin: 2px 0 10px; }
+    .phraseBtn{
+      appearance:none;
+      border: 1px solid rgba(31,42,51,0.12);
+      background: rgba(255,255,255,0.78);
+      color: var(--ink);
+      font-weight: 950;
       font-size: clamp(26px, 4.8vw, 50px);
       line-height: 1.06;
       padding: 10px 14px;
       border-radius: 18px;
-      border: 1px solid transparent;
       cursor: pointer;
-      user-select:none;
-      background: rgba(255,255,255,0.55);
-      transition: transform .14s ease, border-color .14s ease, background .14s ease;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
-    .phrase:hover{
+    .phraseBtn:hover{
       transform: translateY(-1px);
       border-color: rgba(255,183,3,0.55);
-      background: rgba(255,255,255,0.80);
+      background: rgba(255,255,255,0.92);
     }
-    .phrase[contenteditable="true"]{ user-select:text; cursor:text; }
-    .micro{ margin-top: 6px; font-size: 12px; color: var(--quiet); }
+    .phraseBtn:focus{
+      outline: 2px solid rgba(33,158,188,0.55);
+      outline-offset: 3px;
+    }
+
+    .meaning{
+      margin: 10px auto 16px;
+      max-width: 980px;
+      border: 1px solid rgba(31,42,51,0.12);
+      background: rgba(255,255,255,0.82);
+      border-radius: var(--r-xl);
+      padding: 12px 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      text-align:left;
+    }
+    .meaning p{
+      margin: 0;
+      line-height: 1.6;
+      font-size: 14px;
+      color: rgba(31,42,51,0.86);
+    }
+    .meaning .mini{
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--quiet);
+      line-height: 1.5;
+    }
+    .meaning details{
+      margin-top: 10px;
+      border-top: 1px dashed rgba(31,42,51,0.18);
+      padding-top: 10px;
+    }
+    .meaning summary{
+      cursor:pointer;
+      font-weight: 850;
+      color: rgba(31,42,51,0.86);
+      list-style:none;
+    }
+    .meaning summary::-webkit-details-marker{ display:none; }
 
     /* Cards */
     .card{
-      border: 1px solid var(--line);
+      border: 1px solid rgba(31,42,51,0.14);
       background: var(--card);
       border-radius: var(--r-xl);
       box-shadow: var(--shadow);
@@ -79,7 +115,7 @@
     .card .hd{
       padding: 12px 14px 10px;
       border-bottom: 1px solid rgba(31,42,51,0.10);
-      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.20));
+      background: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.25));
     }
     .card .hd strong{
       font-size: 12px;
@@ -102,34 +138,13 @@
 
     .stage{
       position: relative;
-      min-height: 520px;
       border-radius: var(--r-xl);
       border: 1px solid rgba(31,42,51,0.14);
       overflow: hidden;
       background:
-        radial-gradient(700px 340px at 30% 40%, rgba(255,183,3,0.16), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18));
-    }
-
-    .stageInner{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:stretch;
-      justify-content:stretch;
-    }
-
-    /* FOTO */
-    .portrait{
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:stretch;
-      justify-content:stretch;
-      cursor:pointer;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.20)),
-        url("assets/pascoli-foto.png") center/cover no-repeat;
+        radial-gradient(700px 340px at 30% 40%, rgba(255,183,3,0.14), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.20));
+      min-height: clamp(360px, 52vh, 560px);
     }
 
     .hint{
@@ -138,12 +153,47 @@
       left:12px;
       font-size: 12px;
       color: rgba(31,42,51,0.72);
-      background: rgba(255,255,255,0.78);
+      background: rgba(255,255,255,0.82);
       border: 1px solid rgba(31,42,51,0.12);
       padding: 6px 10px;
       border-radius: 999px;
+      z-index: 5;
     }
 
+    .stageInner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+      padding: 14px;
+    }
+
+    /* FOTO: si vede intera */
+    .portraitBtn{
+      width:100%;
+      height:100%;
+      border: 1px solid rgba(31,42,51,0.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.70);
+      cursor:pointer;
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .portraitBtn img{
+      width:100%;
+      height:100%;
+      object-fit: contain;   /* <-- QUI la foto non viene tagliata */
+      object-position: center;
+      display:block;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.65);
+    }
+
+    /* CTA */
     .cta{
       position:absolute;
       bottom: 14px;
@@ -154,30 +204,15 @@
       padding: 10px 12px;
       border-radius: 14px;
       border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.88);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       cursor:pointer;
       user-select:none;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      z-index: 6;
     }
-    .cta:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.92); }
-
-    /* VIDEO */
-    .videoWrap{
-      width:100%;
-      height:100%;
-      background: #ffffff;
-      display:flex;
-      align-items:stretch;
-      justify-content:stretch;
-    }
-    .videoWrap iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-    }
+    .cta:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.96); }
 
     .backToPhoto{
       position:absolute;
@@ -186,12 +221,29 @@
       padding: 8px 10px;
       border-radius: 999px;
       border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.86);
+      background: rgba(255,255,255,0.90);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       cursor:pointer;
       user-select:none;
       display:none;
+      z-index: 6;
+    }
+
+    /* VIDEO */
+    .videoWrap{
+      width:100%;
+      height:100%;
+      border: 1px solid rgba(31,42,51,0.12);
+      border-radius: 18px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .videoWrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
     }
 
     /* Indice */
@@ -204,71 +256,20 @@
       padding: 10px 10px;
       border-radius: 14px;
       border: 1px solid transparent;
-      background: rgba(255,255,255,0.70);
+      background: rgba(255,255,255,0.78);
       margin: 8px 0;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
     }
-    .nav a:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,0.92); }
-    .label{ font-weight: 850; font-size: 13px; }
+    .nav a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,183,3,0.45);
+      background: rgba(255,255,255,0.94);
+    }
+    .label{ font-weight: 900; font-size: 13px; }
     .sub{ color: var(--quiet); font-size: 12px; }
     .chev{ color: rgba(33,158,188,0.95); font-weight: 900; }
 
     footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
-
-    /* MODAL bussola */
-    .modal[hidden]{ display:none; }
-    .modal{
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-    }
-    .backdrop{ position:absolute; inset:0; background: rgba(0,0,0,0.40); }
-    .dialog{
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      border-radius: var(--r-xl);
-      border: 1px solid rgba(31,42,51,0.16);
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 18px 60px rgba(0,0,0,0.18);
-      overflow:hidden;
-    }
-    .dialog .dh{
-      padding: 12px 14px 10px;
-      border-bottom: 1px solid rgba(31,42,51,0.12);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background: linear-gradient(180deg, rgba(255,183,3,0.22), transparent);
-    }
-    .dialog .dh strong{ font-size: 12px; letter-spacing:.9px; text-transform: uppercase; color: rgba(31,42,51,0.72); }
-    .x{
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.80);
-      color: rgba(31,42,51,0.90);
-      border-radius: 12px;
-      padding: 8px 10px;
-      cursor:pointer;
-      font-weight: 900;
-    }
-    .dialog .db{ padding: 14px 16px 16px; }
-    .dialog h3{ margin:0; font-size: 18px; font-weight: 950; }
-    .dialog p{ margin: 10px 0 0; line-height: 1.65; font-size: 14px; color: rgba(31,42,51,0.86); }
-    .dialog ul{ margin: 10px 0 0; padding-left: 18px; line-height: 1.65; font-size: 14px; color: rgba(31,42,51,0.86); }
-    .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
-    .linkbtn{
-      display:inline-flex; align-items:center; gap: 8px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.92);
-      font-size: 12px;
-      font-weight: 850;
-    }
 
     @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
   </style>
@@ -277,14 +278,33 @@
 <body>
   <div class="wrap">
 
-    <!-- Frase (editabile + bussola) -->
+    <!-- Frase: SOLO cliccabile -->
     <div class="titleline">
-      <div id="phrase" class="phrase" contenteditable="true" spellcheck="false"
-           title="Puoi modificare la frase. Clicca per aprire la bussola.">
+      <button id="phraseBtn" class="phraseBtn" type="button" aria-controls="meaningBox" aria-expanded="false">
         Io non sono mai cresciuto
-      </div>
-      <div class="micro">Puoi modificarla. Clic per leggerne il significato (bussola).</div>
+      </button>
     </div>
+
+    <!-- Significato: SUBITO sotto (sempre visibile) -->
+    <section id="meaningBox" class="meaning" aria-label="Significato della frase">
+      <p>
+        Qui “non crescere” non significa restare bambini. Significa restare <b>esposti</b>:
+        non imparare davvero a difendersi dal mondo. Il <b>fanciullino</b> non è una favola dolce:
+        è uno sguardo che sente troppo e trasforma le cose in <b>segni</b> (suoni, dettagli, presagi).
+      </p>
+      <div class="mini">
+        In questa web app la frase è la bussola: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
+      </div>
+
+      <details id="moreMeaning">
+        <summary>Approfondisci (30 secondi)</summary>
+        <p style="margin-top:10px;">
+          Pascoli non “sceglie” di essere semplice: la sua forma è necessità.
+          Frasi brevi, immagini accostate, silenzi, suoni: è un modo di scrivere che registra un mondo fragile.
+          Non consola: fa vedere ciò che di solito resta sotto.
+        </p>
+      </details>
+    </section>
 
     <!-- TOP: FOTO/VIDEO + FILOSOFIA -->
     <section class="topgrid" aria-label="Home Pascoli">
@@ -292,10 +312,14 @@
       <!-- Stage: foto -> video (clic) -->
       <div class="stage" aria-label="Pascoli (foto o video)">
         <div class="hint" id="hint">clic sulla foto: eco di Pascoli</div>
+
         <div class="stageInner" id="stageInner">
           <!-- FOTO (cliccabile) -->
-          <div class="portrait" id="portrait" role="img" aria-label="Foto di Pascoli"></div>
+          <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
+            <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
+          </button>
         </div>
+
         <button class="cta" id="cta" type="button">▶︎ Guarda l’eco di Pascoli</button>
         <button class="backToPhoto" id="backToPhoto" type="button">↩︎ Torna alla foto</button>
       </div>
@@ -380,84 +404,22 @@
     <footer>© <span id="year"></span> — Pascoli / Libro.0 — a cura di gbprof</footer>
   </div>
 
-  <!-- MODAL: Bussola della frase -->
-  <div id="modalBussola" class="modal" hidden aria-hidden="true">
-    <div class="backdrop" data-close="bussola"></div>
-    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="bussolaTitle">
-      <div class="dh">
-        <strong>Bussola</strong>
-        <button class="x" data-close="bussola" type="button" aria-label="Chiudi">✕</button>
-      </div>
-      <div class="db">
-        <h3 id="bussolaTitle">Io non sono mai cresciuto</h3>
-        <p>
-          Qui “non crescere” non significa restare bambini. Significa restare <b>esposti</b>:
-          non imparare davvero a difendersi dal mondo.
-          In Pascoli le cose diventano segni: un rumore, un fiore, una notte.
-        </p>
-        <ul>
-          <li>Il <b>fanciullino</b> non è tenerezza: è percezione senza difese.</li>
-          <li>La poesia non consola: fa vedere ciò che di solito resta sotto.</li>
-          <li>La forma (frasi brevi, accostate) non è un gioco: è necessità.</li>
-        </ul>
-        <p>Questa frase è la bussola del percorso: <b>Vita</b> → <b>Mondo</b> → <b>Poetica</b> → <b>Testi</b>.</p>
-        <div class="row">
-          <a class="linkbtn" href="vita.html">Vai a “La vita”</a>
-          <a class="linkbtn" href="mondo.html">Vai a “Immagine del mondo”</a>
-          <a class="linkbtn" href="poetica.html">Vai a “Poetica”</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
     const $ = (q, r=document) => r.querySelector(q);
 
     // Year
     $('#year').textContent = new Date().getFullYear();
 
-    // Phrase persistence
-    const phrase = $('#phrase');
-    const KEY = 'pascoli_home_phrase_v3';
-    const saved = localStorage.getItem(KEY);
-    if(saved && saved.trim()) phrase.textContent = saved;
+    // Frase: clic = apri/chiudi "Approfondisci" (il significato base è già visibile)
+    const phraseBtn = $('#phraseBtn');
+    const details = $('#moreMeaning');
 
-    const savePhrase = () => {
-      const t = (phrase.textContent || '').trim();
-      if(t) localStorage.setItem(KEY, t);
-    };
-    phrase.addEventListener('input', savePhrase);
-    phrase.addEventListener('blur', savePhrase);
-
-    // Bussola modal
-    const modalB = $('#modalBussola');
-    const bussolaTitle = $('#bussolaTitle');
-    const openBussola = () => {
-      const t = (phrase.textContent || '').trim();
-      bussolaTitle.textContent = t || 'Io non sono mai cresciuto';
-      modalB.hidden = false;
-      modalB.setAttribute('aria-hidden','false');
-    };
-    const closeBussola = () => {
-      modalB.hidden = true;
-      modalB.setAttribute('aria-hidden','true');
-    };
-
-    // contenteditable: non aprire bussola mentre selezioni testo
-    let editing = false;
-    phrase.addEventListener('focus', ()=> editing = true);
-    phrase.addEventListener('blur',  ()=> editing = false);
-
-    phrase.addEventListener('click', () => {
-      if(editing) return;
-      const sel = window.getSelection();
-      if(sel && sel.toString().length > 0) return;
-      openBussola();
+    phraseBtn.addEventListener('click', () => {
+      details.open = !details.open;
+      phraseBtn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      // piccolo effetto: porta lo sguardo sul significato
+      $('#meaningBox').scrollIntoView({behavior:'smooth', block:'start'});
     });
-    phrase.addEventListener('dblclick', (e)=>{ e.preventDefault(); openBussola(); });
-
-    document.querySelectorAll('[data-close="bussola"]').forEach(el => el.addEventListener('click', closeBussola));
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !modalB.hidden) closeBussola(); });
 
     // Foto -> Video (HeyGen)
     const stageInner = $('#stageInner');
@@ -465,7 +427,7 @@
     const hint = $('#hint');
     const backToPhoto = $('#backToPhoto');
 
-    const heygenIframe = `
+    const heygenHTML = `
       <div class="videoWrap" id="videoWrap">
         <iframe
           src="https://app.heygen.com/embedded-player/e5c1a51af56e43589b800ebb00cb1507"
@@ -474,13 +436,14 @@
           allow="encrypted-media; fullscreen;"
           allowfullscreen
         ></iframe>
-      </div>`;
+      </div>
+    `;
 
     let showingVideo = false;
 
     function showVideo(){
       if(showingVideo) return;
-      stageInner.innerHTML = heygenIframe;
+      stageInner.innerHTML = heygenHTML;
       showingVideo = true;
       cta.style.display = 'none';
       hint.textContent = 'video: eco di Pascoli';
@@ -489,21 +452,22 @@
 
     function showPhoto(){
       if(!showingVideo) return;
-      stageInner.innerHTML = '<div class="portrait" id="portrait" role="img" aria-label="Foto di Pascoli"></div>';
+      stageInner.innerHTML = `
+        <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
+          <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
+        </button>
+      `;
       showingVideo = false;
       cta.style.display = 'inline-flex';
       hint.textContent = 'clic sulla foto: eco di Pascoli';
       backToPhoto.style.display = 'none';
-
-      // re-bind click for new portrait node
-      $('#portrait').addEventListener('click', showVideo);
+      $('#portraitBtn').addEventListener('click', showVideo);
     }
 
-    // initial bindings
-    $('#portrait').addEventListener('click', showVideo);
+    // binding iniziale
+    $('#portraitBtn').addEventListener('click', showVideo);
     cta.addEventListener('click', showVideo);
     backToPhoto.addEventListener('click', showPhoto);
   </script>
 </body>
 </html>
-
