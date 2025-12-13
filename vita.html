@@ -7,12 +7,13 @@
 
 <style>
 :root{
-  --bg1:#fbf7ef;
-  --bg2:#e9f6ff;
+  --bg1:#fdf8ef;
+  --bg2:#eaf6ff;
   --ink:#1f2a33;
-  --card:rgba(255,255,255,.8);
-  --hl:rgba(255,183,3,.3);
-  --ul:rgba(33,158,188,.8);
+  --card:rgba(255,255,255,.85);
+  --hl:rgba(255,183,3,.35);
+  --ul:rgba(33,158,188,.85);
+  --accent:rgba(33,158,188,.15);
 }
 
 *{box-sizing:border-box}
@@ -24,62 +25,87 @@ body{
   color:var(--ink);
 }
 
-.wrap{max-width:1100px;margin:auto;padding:20px}
-
-h1{margin:.3em 0}
-
-.card{
-  background:var(--card);
-  border-radius:20px;
-  padding:16px;
-  box-shadow:0 10px 40px rgba(0,0,0,.12);
+.wrap{
+  max-width:1080px;
+  margin:auto;
+  padding:22px;
 }
 
-/* 🔒 BLOCCO TOTALE SELEZIONE iOS */
+h1{
+  margin:0 0 8px;
+  font-size:32px;
+}
+
+.subtitle{
+  font-size:14px;
+  color:#445;
+  margin-bottom:18px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 18px 50px rgba(0,0,0,.12);
+}
+
+/* 🔒 iPad: blocco totale selezione */
 .prose,
-.block,
-.block *{
+.micro,
+.micro *{
   user-select:none;
   -webkit-user-select:none;
   -webkit-touch-callout:none;
 }
 
-/* blocchi */
-.block{
-  padding:12px;
+/* MICRO-BLOCCHI */
+.micro{
+  padding:12px 14px;
   margin-bottom:10px;
   border-radius:14px;
-  background:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.75);
   cursor:pointer;
+  line-height:1.6;
+  font-size:14px;
   transition:.15s;
 }
 
-.block:hover{background:rgba(255,255,255,.9)}
-.block.selected{outline:2px solid rgba(255,183,3,.5)}
-
-.block[data-mark="hl"]{
-  background:linear-gradient(0deg,var(--hl),var(--hl)),rgba(255,255,255,.8)
+.micro:hover{
+  background:rgba(255,255,255,.95);
 }
-.block[data-mark="ul"]{
+
+.micro.selected{
+  outline:2px solid rgba(255,183,3,.55);
+}
+
+.micro[data-mark="hl"]{
+  background:
+    linear-gradient(0deg,var(--hl),var(--hl)),
+    rgba(255,255,255,.9);
+}
+
+.micro[data-mark="ul"]{
+  background:rgba(255,255,255,.9);
   text-decoration:underline;
   text-decoration-thickness:3px;
   text-decoration-color:var(--ul);
   text-underline-offset:4px;
 }
 
-/* toolbar */
-#floating{
+/* TOOLBAR */
+#toolbar{
   position:absolute;
   display:none;
   gap:6px;
   background:white;
   padding:8px;
   border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  z-index:10;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  z-index:100;
 }
 
-button{
+#toolbar button{
   border:none;
   border-radius:999px;
   padding:8px 12px;
@@ -87,18 +113,23 @@ button{
   cursor:pointer;
 }
 
-/* quaderno */
+/* QUADERNO */
 #notebook{
-  margin-top:16px;
-  padding:12px;
+  margin-top:18px;
+  padding:16px;
   background:white;
-  border-radius:16px;
+  border-radius:18px;
 }
 
 #notebookText{
   white-space:pre-wrap;
   font-size:13px;
-  margin-top:8px;
+  margin:10px 0;
+}
+
+.nbActions button{
+  margin-right:6px;
+  margin-top:6px;
 }
 </style>
 </head>
@@ -107,96 +138,157 @@ button{
 <div class="wrap">
 
 <h1>Pascoli — La vita</h1>
+<p class="subtitle">
+Testo a micro-blocchi: ogni tocco è una scelta, non un gesto automatico.
+</p>
 
-<div class="card prose" id="workArea">
+<div class="card prose" id="area">
 
-  <div class="block" data-id="b1">
-    Giovanni Pascoli nasce a San Mauro di Romagna nel 1855. L’infanzia viene spezzata
-    dall’assassinio del padre Ruggero (10 agosto 1867).
+  <!-- MICRO-BLOCCHI (TESTO RIFATTO FEDELMENTE) -->
+
+  <div class="micro">
+    Giovanni Pascoli nasce a San Mauro di Romagna nel 1855.
   </div>
 
-  <div class="block" data-id="b2">
-    Studia a Bologna con Carducci. Gli anni universitari sono agitati: politica,
-    perdita della borsa di studio, carcere.
+  <div class="micro">
+    La sua infanzia viene spezzata dall’assassinio del padre Ruggero,
+    avvenuto il 10 agosto 1867.
   </div>
 
-  <div class="block" data-id="b3">
-    Vive con le sorelle. Il matrimonio di Ida è vissuto come un abbandono:
-    non è sentimento, è struttura psicologica.
+  <div class="micro">
+    Nei pochi anni successivi muoiono anche la madre e altri familiari:
+    una sequenza di lutti senza spiegazione.
+  </div>
+
+  <div class="micro">
+    Da questa frattura nasce l’idea del <b>nido</b>:
+    non un tema sentimentale, ma un bisogno di sopravvivenza.
+  </div>
+
+  <div class="micro">
+    Pascoli studia in collegio a Urbino e poi all’università di Bologna,
+    dove è allievo di Carducci.
+  </div>
+
+  <div class="micro">
+    Gli anni universitari sono agitati:
+    partecipa a proteste politiche,
+    perde la borsa di studio
+    e conosce anche il carcere.
+  </div>
+
+  <div class="micro">
+    In seguito riprende gli studi,
+    si laurea
+    e inizia la carriera di insegnante.
+  </div>
+
+  <div class="micro">
+    Costruisce la propria vita attorno alle sorelle,
+    in particolare Maria, detta “Mariù”.
+  </div>
+
+  <div class="micro">
+    Il matrimonio di Ida viene vissuto come un abbandono:
+    non è un dettaglio affettivo,
+    ma una ferita strutturale.
+  </div>
+
+  <div class="micro">
+    Ottiene incarichi universitari importanti,
+    fino a succedere a Carducci a Bologna nel 1903.
+  </div>
+
+  <div class="micro">
+    La sua vera dimora resta però Castelvecchio di Barga:
+    campagna, natura, suoni,
+    cose minime.
+  </div>
+
+  <div class="micro">
+    Pascoli muore a Bologna nel 1912,
+    ma viene sepolto a Castelvecchio.
   </div>
 
 </div>
 
-<!-- toolbar -->
-<div id="floating">
+<!-- TOOLBAR -->
+<div id="toolbar">
   <button id="ul">✏️</button>
   <button id="hl">🖍️</button>
   <button id="pin">📌</button>
   <button id="clear">✕</button>
 </div>
 
-<!-- quaderno -->
+<!-- QUADERNO -->
 <div id="notebook" class="card">
-  <b>Quaderno</b>
+  <b>🟡 Quaderno</b>
   <div id="notebookText"></div>
-  <button id="copy">Copia</button>
-  <button id="save">Salva .txt</button>
+  <div class="nbActions">
+    <button id="copy">Copia</button>
+    <button id="save">Salva .txt</button>
+    <button id="wipe">Svuota</button>
+  </div>
 </div>
 
 </div>
 
 <script>
-const blocks=[...document.querySelectorAll('.block')]
-const floating=document.getElementById('floating')
-let selected=null
-let notebook=[]
+const micros=[...document.querySelectorAll('.micro')]
+const bar=document.getElementById('toolbar')
+let sel=null
+let notes=[]
 
-blocks.forEach(b=>{
-  b.addEventListener('click',e=>{
-    blocks.forEach(x=>x.classList.remove('selected'))
-    selected=b
-    b.classList.add('selected')
-
-    const r=b.getBoundingClientRect()
-    floating.style.top=window.scrollY+r.bottom+6+'px'
-    floating.style.left=r.left+'px'
-    floating.style.display='flex'
+micros.forEach(m=>{
+  m.addEventListener('click',()=>{
+    micros.forEach(x=>x.classList.remove('selected'))
+    sel=m
+    m.classList.add('selected')
+    const r=m.getBoundingClientRect()
+    bar.style.top=window.scrollY+r.bottom+6+'px'
+    bar.style.left=r.left+'px'
+    bar.style.display='flex'
   })
 })
 
-document.getElementById('ul').onclick=()=>mark('ul')
-document.getElementById('hl').onclick=()=>mark('hl')
-document.getElementById('clear').onclick=()=>mark(null)
-
 function mark(type){
-  if(!selected)return
-  if(type) selected.dataset.mark=type
-  else delete selected.dataset.mark
+  if(!sel)return
+  if(type) sel.dataset.mark=type
+  else delete sel.dataset.mark
 }
 
-document.getElementById('pin').onclick=()=>{
-  if(!selected)return
-  const t=selected.textContent.trim()
-  if(!notebook.includes(t)){
-    notebook.push(t)
-    renderNotebook()
+ul.onclick=()=>mark('ul')
+hl.onclick=()=>mark('hl')
+clear.onclick=()=>mark(null)
+
+pin.onclick=()=>{
+  if(!sel)return
+  const t=sel.textContent.trim()
+  if(!notes.includes(t)){
+    notes.push(t)
+    render()
   }
 }
 
-function renderNotebook(){
-  document.getElementById('notebookText').textContent=notebook.join('\n')
+function render(){
+  notebookText.textContent=notes.join('\n')
 }
 
-document.getElementById('copy').onclick=()=>{
-  navigator.clipboard.writeText(notebook.join('\n'))
+copy.onclick=()=>{
+  navigator.clipboard.writeText(notes.join('\n'))
 }
 
-document.getElementById('save').onclick=()=>{
-  const blob=new Blob([notebook.join('\n')],{type:'text/plain'})
+save.onclick=()=>{
+  const b=new Blob([notes.join('\n')],{type:'text/plain'})
   const a=document.createElement('a')
-  a.href=URL.createObjectURL(blob)
+  a.href=URL.createObjectURL(b)
   a.download='pascoli_vita.txt'
   a.click()
+}
+
+wipe.onclick=()=>{
+  notes=[]
+  render()
 }
 </script>
 
