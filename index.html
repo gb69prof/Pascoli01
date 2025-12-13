@@ -8,292 +8,369 @@
 
   <style>
     :root{
-      --bg:#0b0f14;
-      --ink:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.72);
-      --quiet:rgba(255,255,255,0.55);
-      --line:rgba(255,255,255,0.12);
-      --card:rgba(255,255,255,0.04);
-      --accent:#caa86a;
-      --shadow:0 18px 60px rgba(0,0,0,0.55);
+      /* Palette più viva (fanciullino): carta chiara + cielo + giallo caldo */
+      --bg1:#fbf7ef;        /* carta */
+      --bg2:#e9f6ff;        /* cielo */
+      --ink:#1f2a33;        /* inchiostro */
+      --muted:rgba(31,42,51,0.72);
+      --quiet:rgba(31,42,51,0.56);
+      --line:rgba(31,42,51,0.14);
+      --card:rgba(255,255,255,0.70);
+      --card2:rgba(255,255,255,0.86);
+      --accent:#ffb703;     /* giallo caldo */
+      --accent2:#219ebc;    /* azzurro */
+      --shadow:0 18px 60px rgba(0,0,0,0.14);
       --r-xl:22px;
       --r-lg:16px;
-      --max:1100px;
+      --max:1120px;
     }
 
-    *{box-sizing:border-box;}
-    html,body{height:100%;}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       color:var(--ink);
       background:
-        radial-gradient(1000px 520px at 50% -10%, rgba(202,168,106,0.12), transparent 60%),
-        radial-gradient(800px 520px at 10% 40%, rgba(120,194,176,0.08), transparent 62%),
-        linear-gradient(180deg, #070a0d, var(--bg));
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing:.2px;
+        radial-gradient(900px 520px at 20% 10%, rgba(33,158,188,0.18), transparent 62%),
+        radial-gradient(820px 520px at 80% 18%, rgba(255,183,3,0.20), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg1));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing: .2px;
     }
 
-    a{color:inherit;text-decoration:none;}
-    a:focus{outline:2px solid rgba(202,168,106,.55); outline-offset:2px; border-radius:12px;}
+    a{ color:inherit; text-decoration:none; }
+    a:focus{ outline: 2px solid rgba(33,158,188,0.55); outline-offset: 2px; border-radius: 12px; }
 
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 28px;}
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px 18px 28px; }
 
-    /* Phrase */
-    .titleline{text-align:center; margin: 2px 0 16px;}
+    /* Frase */
+    .titleline{ text-align:center; margin: 2px 0 16px; }
     .phrase{
       display:inline-block;
-      font-weight:850;
-      font-size:clamp(26px,4.8vw,48px);
-      line-height:1.06;
-      padding:10px 14px;
-      border-radius:16px;
-      border:1px solid transparent;
-      cursor:pointer;
+      font-weight: 900;
+      font-size: clamp(26px, 4.8vw, 50px);
+      line-height: 1.06;
+      padding: 10px 14px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      cursor: pointer;
       user-select:none;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      background: rgba(255,255,255,0.55);
+      transition: transform .14s ease, border-color .14s ease, background .14s ease;
     }
-    .phrase:hover{ transform: translateY(-1px); background:rgba(255,255,255,0.03); border-color: rgba(202,168,106,.22);}
+    .phrase:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,183,3,0.55);
+      background: rgba(255,255,255,0.80);
+    }
     .phrase[contenteditable="true"]{ user-select:text; cursor:text; }
-
-    .micro{margin-top:6px; font-size:12px; color:var(--quiet);}
+    .micro{ margin-top: 6px; font-size: 12px; color: var(--quiet); }
 
     /* Cards */
     .card{
-      border:1px solid var(--line);
-      background:var(--card);
-      border-radius:var(--r-xl);
-      box-shadow:var(--shadow);
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow);
       overflow:hidden;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .card .hd{
-      padding:12px 14px 10px;
-      border-bottom:1px solid rgba(255,255,255,0.10);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid rgba(31,42,51,0.10);
+      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.20));
     }
     .card .hd strong{
-      font-size:12px;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,0.82);
+      font-size: 12px;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+      color: rgba(31,42,51,0.76);
     }
-    .card .bd{padding:14px;}
+    .card .bd{ padding: 14px; }
 
-    /* Top split: image + philosophy */
+    /* TOP: immagine/video + filosofia */
     .topgrid{
       display:grid;
-      grid-template-columns: 1fr 380px;
-      gap:16px;
-      align-items:stretch;
+      grid-template-columns: 1fr 390px;
+      gap: 16px;
+      align-items: stretch;
     }
     @media (max-width: 980px){
       .topgrid{ grid-template-columns: 1fr; }
     }
 
     .stage{
-      position:relative;
-      min-height:520px;
-      border-radius:var(--r-xl);
-      border:1px solid rgba(255,255,255,0.14);
-      overflow:hidden;
+      position: relative;
+      min-height: 520px;
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(31,42,51,0.14);
+      overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.62)),
+        radial-gradient(700px 340px at 30% 40%, rgba(255,183,3,0.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18));
+    }
+
+    .stageInner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+    }
+
+    /* FOTO */
+    .portrait{
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+      cursor:pointer;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.20)),
         url("assets/pascoli-foto.png") center/cover no-repeat;
     }
 
-    .stage .hint{
+    .hint{
       position:absolute;
-      top:12px; left:12px;
-      font-size:12px;
-      color:rgba(255,255,255,0.72);
-      background:rgba(0,0,0,0.45);
-      border:1px solid rgba(255,255,255,0.14);
-      padding:6px 10px;
-      border-radius:999px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      top:12px;
+      left:12px;
+      font-size: 12px;
+      color: rgba(31,42,51,0.72);
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(31,42,51,0.12);
+      padding: 6px 10px;
+      border-radius: 999px;
     }
 
-    .stage .btn{
+    .cta{
       position:absolute;
-      bottom:16px;
-      left:16px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.16);
-      background:rgba(0,0,0,0.55);
-      color:rgba(255,255,255,0.92);
-      font-size:12px;
-      font-weight:700;
+      bottom: 14px;
+      left: 14px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.82);
+      font-size: 12px;
+      font-weight: 800;
       cursor:pointer;
+      user-select:none;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
-    .stage .btn:hover{ transform: translateY(-1px); background:rgba(0,0,0,0.62); border-color: rgba(202,168,106,.28); }
+    .cta:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.92); }
 
-    /* Index row */
-    .indexgrid{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:16px;
+    /* VIDEO */
+    .videoWrap{
+      width:100%;
+      height:100%;
+      background: #ffffff;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+    }
+    .videoWrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
     }
 
+    .backToPhoto{
+      position:absolute;
+      top:12px;
+      right:12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.86);
+      font-size: 12px;
+      font-weight: 800;
+      cursor:pointer;
+      user-select:none;
+      display:none;
+    }
+
+    /* Indice */
+    .indexgrid{ margin-top: 16px; }
     .nav a{
       display:flex;
+      align-items:center;
       justify-content:space-between;
-      gap:10px;
-      padding:10px 10px;
-      border-radius:14px;
-      border:1px solid transparent;
-      background:rgba(255,255,255,0.03);
-      margin:8px 0;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      background: rgba(255,255,255,0.70);
+      margin: 8px 0;
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
     }
-    .nav a:hover{ transform: translateY(-1px); background:rgba(255,255,255,0.055); border-color: rgba(202,168,106,.20); }
-    .label{font-weight:760; font-size:13px;}
-    .sub{font-size:12px; color:var(--quiet);}
-    .chev{color:rgba(202,168,106,0.95); font-weight:900;}
+    .nav a:hover{ transform: translateY(-1px); border-color: rgba(255,183,3,0.45); background: rgba(255,255,255,0.92); }
+    .label{ font-weight: 850; font-size: 13px; }
+    .sub{ color: var(--quiet); font-size: 12px; }
+    .chev{ color: rgba(33,158,188,0.95); font-weight: 900; }
 
-    /* Modal */
-    .modal[hidden]{display:none;}
+    footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
+
+    /* MODAL bussola */
+    .modal[hidden]{ display:none; }
     .modal{
-      position:fixed;
-      inset:0;
-      z-index:100;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:18px;
+      padding: 18px;
     }
-    .backdrop{position:absolute; inset:0; background:rgba(0,0,0,0.72);}
+    .backdrop{ position:absolute; inset:0; background: rgba(0,0,0,0.40); }
     .dialog{
-      position:relative;
-      width:100%;
-      max-width:880px;
-      border-radius:var(--r-xl);
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(7,10,13,0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow:var(--shadow);
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(31,42,51,0.16);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.18);
       overflow:hidden;
     }
     .dialog .dh{
-      padding:12px 14px 10px;
-      border-bottom:1px solid rgba(255,255,255,0.10);
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid rgba(31,42,51,0.12);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+      background: linear-gradient(180deg, rgba(255,183,3,0.22), transparent);
     }
-    .dialog .dh strong{
-      font-size:12px; letter-spacing:.9px; text-transform:uppercase; color:rgba(255,255,255,0.82);
-    }
+    .dialog .dh strong{ font-size: 12px; letter-spacing:.9px; text-transform: uppercase; color: rgba(31,42,51,0.72); }
     .x{
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.05);
-      color:rgba(255,255,255,0.90);
-      border-radius:12px;
-      padding:8px 10px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.80);
+      color: rgba(31,42,51,0.90);
+      border-radius: 12px;
+      padding: 8px 10px;
       cursor:pointer;
-      font-weight:800;
+      font-weight: 900;
     }
-    .dialog .db{padding:14px 16px 16px;}
-    .dialog h3{margin:0; font-size:18px; font-weight:900;}
-    .dialog p{margin:10px 0 0; color:rgba(255,255,255,0.82); line-height:1.65; font-size:14px;}
-    .dialog ul{margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,0.80); line-height:1.65; font-size:14px;}
-    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+    .dialog .db{ padding: 14px 16px 16px; }
+    .dialog h3{ margin:0; font-size: 18px; font-weight: 950; }
+    .dialog p{ margin: 10px 0 0; line-height: 1.65; font-size: 14px; color: rgba(31,42,51,0.86); }
+    .dialog ul{ margin: 10px 0 0; padding-left: 18px; line-height: 1.65; font-size: 14px; color: rgba(31,42,51,0.86); }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
     .linkbtn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.05);
-      color:rgba(255,255,255,0.92);
-      font-size:12px;
-      font-weight:750;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(31,42,51,0.14);
+      background: rgba(255,255,255,0.92);
+      font-size: 12px;
+      font-weight: 850;
     }
-    .linkbtn:hover{ transform: translateY(-1px); background:rgba(255,255,255,0.07); border-color: rgba(202,168,106,.28); }
 
-    footer{margin-top:16px; font-size:12px; color:var(--quiet);}
-    @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+    @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
   </style>
 </head>
 
 <body>
   <div class="wrap">
 
-    <!-- Phrase (editable + bussola) -->
+    <!-- Frase (editabile + bussola) -->
     <div class="titleline">
       <div id="phrase" class="phrase" contenteditable="true" spellcheck="false"
            title="Puoi modificare la frase. Clicca per aprire la bussola.">
         Io non sono mai cresciuto
       </div>
-      <div class="micro">Puoi modificarla. Clic per leggere il significato (bussola).</div>
+      <div class="micro">Puoi modificarla. Clic per leggerne il significato (bussola).</div>
     </div>
 
-    <!-- TOP: image + philosophy -->
+    <!-- TOP: FOTO/VIDEO + FILOSOFIA -->
     <section class="topgrid" aria-label="Home Pascoli">
-      <div class="stage" role="img" aria-label="Pascoli (immagine)">
-        <div class="hint">clic: eco di Pascoli</div>
-        <button id="openEcho" class="btn" type="button">Ascolta l’eco di Pascoli</button>
+
+      <!-- Stage: foto -> video (clic) -->
+      <div class="stage" aria-label="Pascoli (foto o video)">
+        <div class="hint" id="hint">clic sulla foto: eco di Pascoli</div>
+        <div class="stageInner" id="stageInner">
+          <!-- FOTO (cliccabile) -->
+          <div class="portrait" id="portrait" role="img" aria-label="Foto di Pascoli"></div>
+        </div>
+        <button class="cta" id="cta" type="button">▶︎ Guarda l’eco di Pascoli</button>
+        <button class="backToPhoto" id="backToPhoto" type="button">↩︎ Torna alla foto</button>
       </div>
 
+      <!-- Filosofia -->
       <aside class="card" aria-label="Filosofia del libro">
         <div class="hd"><strong>Filosofia di questo libro</strong></div>
         <div class="bd">
-          <p style="margin:0; color:rgba(255,255,255,0.82); line-height:1.6; font-size:13px;">
-            Questa non è una lezione-museo. È un percorso attraversabile.
+          <p style="margin:0; line-height:1.6; font-size:13px; color:rgba(31,42,51,0.86);">
+            Questa web app non è una lezione-museo. È un percorso attraversabile.
             Qui trovi ciò che serve per capire Pascoli senza perderti, e spazi per lavorare davvero.
           </p>
-          <p style="margin:10px 0 0; color:rgba(255,255,255,0.78); line-height:1.6; font-size:13px;">
+          <p style="margin:10px 0 0; line-height:1.6; font-size:13px; color:rgba(31,42,51,0.82);">
             Non tutto è obbligatorio: la profondità è una tua scelta.
             Il nostro compito è farti vedere dove sei, cosa stai facendo, e dove puoi andare.
           </p>
-          <p style="margin:10px 0 0; color:rgba(255,255,255,0.78); line-height:1.6; font-size:13px;">
-            Il percorso è semplice: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
+          <p style="margin:10px 0 0; line-height:1.6; font-size:13px; color:rgba(31,42,51,0.82);">
+            Percorso essenziale: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
             Gli approfondimenti arrivano dopo, quando servono.
           </p>
         </div>
       </aside>
+
     </section>
 
-    <!-- INDEX -->
-    <section class="indexgrid" aria-label="Indice della web app" style="margin-top:16px;">
+    <!-- Indice -->
+    <section class="indexgrid" aria-label="Indice della web app">
       <div class="card nav">
         <div class="hd"><strong>Indice</strong></div>
         <div class="bd">
           <a href="vita.html">
-            <div><div class="label">1. La vita</div><div class="sub">sintesi + pagine collegate</div></div>
+            <div>
+              <div class="label">1. La vita</div>
+              <div class="sub">sintesi + pagine collegate</div>
+            </div>
             <div class="chev">›</div>
           </a>
 
           <a href="mondo.html">
-            <div><div class="label">2. L’immagine del mondo</div><div class="sub">segni, presagi, realtà instabile</div></div>
+            <div>
+              <div class="label">2. L’immagine del mondo</div>
+              <div class="sub">segni, presagi, realtà instabile</div>
+            </div>
             <div class="chev">›</div>
           </a>
 
           <a href="poetica.html">
-            <div><div class="label">3. La poetica</div><div class="sub">fanciullino, forma, lingua</div></div>
+            <div>
+              <div class="label">3. La poetica</div>
+              <div class="sub">fanciullino, forma, lingua</div>
+            </div>
             <div class="chev">›</div>
           </a>
 
           <a href="testi/gelsomino-notturno.html">
-            <div><div class="label">4. I testi — Il gelsomino notturno</div><div class="sub">pagina + lavoro sul testo</div></div>
+            <div>
+              <div class="label">4. I testi — Il gelsomino notturno</div>
+              <div class="sub">pagina + lavoro sul testo</div>
+            </div>
             <div class="chev">›</div>
           </a>
 
           <a href="testi/x-agosto.html">
-            <div><div class="label">4. I testi — X agosto</div><div class="sub">pagina + lavoro sul testo</div></div>
+            <div>
+              <div class="label">4. I testi — X agosto</div>
+              <div class="sub">pagina + lavoro sul testo</div>
+            </div>
             <div class="chev">›</div>
           </a>
 
           <a href="testi/digitale-purpurea.html">
-            <div><div class="label">4. I testi — Digitale purpurea</div><div class="sub">pagina + lavoro sul testo</div></div>
+            <div>
+              <div class="label">4. I testi — Digitale purpurea</div>
+              <div class="sub">pagina + lavoro sul testo</div>
+            </div>
             <div class="chev">›</div>
           </a>
         </div>
@@ -333,40 +410,15 @@
     </div>
   </div>
 
-  <!-- MODAL: Eco di Pascoli (segnaposto: testo + voce browser, opzionale) -->
-  <div id="modalEco" class="modal" hidden aria-hidden="true">
-    <div class="backdrop" data-close="eco"></div>
-    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="ecoTitle">
-      <div class="dh">
-        <strong id="ecoTitle">Eco di Pascoli</strong>
-        <button class="x" data-close="eco" type="button" aria-label="Chiudi">✕</button>
-      </div>
-      <div class="db">
-        <p style="margin-top:0;">
-          Io sono l’eco di Giovanni Pascoli. Non sono il poeta della quiete.
-          Sono il poeta di un mondo che scricchiola: segni, suoni, fratture.
-          Il fanciullino, in me, non è una favola: è uno sguardo che trema e vede.
-        </p>
-        <p>
-          Se ti sembra semplice, è perché la mia lingua è costretta: frasi brevi, immagini accostate,
-          silenzi. Non per “stile”, ma per necessità.
-        </p>
-        <div class="row">
-          <button class="linkbtn" id="btnSpeak" type="button">🔊 Voce</button>
-          <button class="linkbtn" id="btnStop" type="button">⏹ Stop</button>
-        </div>
-        <p style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62);">
-          Nota: la voce usa il browser (SpeechSynthesis). Se non disponibile, resta il testo.
-        </p>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const phrase = document.getElementById('phrase');
+    const $ = (q, r=document) => r.querySelector(q);
 
-    // Persist phrase
-    const KEY = 'pascoli_home_phrase_v2';
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+
+    // Phrase persistence
+    const phrase = $('#phrase');
+    const KEY = 'pascoli_home_phrase_v3';
     const saved = localStorage.getItem(KEY);
     if(saved && saved.trim()) phrase.textContent = saved;
 
@@ -377,22 +429,21 @@
     phrase.addEventListener('input', savePhrase);
     phrase.addEventListener('blur', savePhrase);
 
-    // Modals
-    const modalB = document.getElementById('modalBussola');
-    const modalE = document.getElementById('modalEco');
-
-    const open = (m) => { m.hidden = false; m.setAttribute('aria-hidden','false'); };
-    const close = (m) => { m.hidden = true; m.setAttribute('aria-hidden','true'); };
-
-    // Title inside bussola follows edited phrase
-    const bussolaTitle = document.getElementById('bussolaTitle');
+    // Bussola modal
+    const modalB = $('#modalBussola');
+    const bussolaTitle = $('#bussolaTitle');
     const openBussola = () => {
       const t = (phrase.textContent || '').trim();
       bussolaTitle.textContent = t || 'Io non sono mai cresciuto';
-      open(modalB);
+      modalB.hidden = false;
+      modalB.setAttribute('aria-hidden','false');
+    };
+    const closeBussola = () => {
+      modalB.hidden = true;
+      modalB.setAttribute('aria-hidden','true');
     };
 
-    // click opens bussola when not selecting text
+    // contenteditable: non aprire bussola mentre selezioni testo
     let editing = false;
     phrase.addEventListener('focus', ()=> editing = true);
     phrase.addEventListener('blur',  ()=> editing = false);
@@ -405,45 +456,54 @@
     });
     phrase.addEventListener('dblclick', (e)=>{ e.preventDefault(); openBussola(); });
 
-    document.getElementById('openEcho').addEventListener('click', ()=> open(modalE));
+    document.querySelectorAll('[data-close="bussola"]').forEach(el => el.addEventListener('click', closeBussola));
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !modalB.hidden) closeBussola(); });
 
-    document.querySelectorAll('[data-close="bussola"]').forEach(el => el.addEventListener('click', ()=> close(modalB)));
-    document.querySelectorAll('[data-close="eco"]').forEach(el => el.addEventListener('click', ()=> { stopSpeak(); close(modalE); }));
+    // Foto -> Video (HeyGen)
+    const stageInner = $('#stageInner');
+    const cta = $('#cta');
+    const hint = $('#hint');
+    const backToPhoto = $('#backToPhoto');
 
-    document.addEventListener('keydown', (e)=>{
-      if(e.key !== 'Escape') return;
-      if(!modalE.hidden) { stopSpeak(); close(modalE); }
-      else if(!modalB.hidden) close(modalB);
-    });
+    const heygenIframe = `
+      <div class="videoWrap" id="videoWrap">
+        <iframe
+          src="https://app.heygen.com/embedded-player/e5c1a51af56e43589b800ebb00cb1507"
+          title="HeyGen video player"
+          frameborder="0"
+          allow="encrypted-media; fullscreen;"
+          allowfullscreen
+        ></iframe>
+      </div>`;
 
-    // Optional voice
-    const btnSpeak = document.getElementById('btnSpeak');
-    const btnStop  = document.getElementById('btnStop');
+    let showingVideo = false;
 
-    const canSpeak = () => ('speechSynthesis' in window) && typeof SpeechSynthesisUtterance !== 'undefined';
-    const stopSpeak = () => { if(canSpeak()) window.speechSynthesis.cancel(); };
-
-    const doSpeak = () => {
-      if(!canSpeak()) return;
-      stopSpeak();
-      const text = Array.from(modalE.querySelectorAll('.db p')).map(p=>p.textContent.trim()).join(' ');
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'it-IT';
-      u.rate = 0.95;
-      window.speechSynthesis.speak(u);
-    };
-
-    btnSpeak.addEventListener('click', doSpeak);
-    btnStop.addEventListener('click', stopSpeak);
-
-    if(!canSpeak()){
-      btnSpeak.textContent = '🔊 Voce (non disponibile)';
-      btnSpeak.style.opacity = 0.55;
-      btnSpeak.style.cursor = 'not-allowed';
-      btnSpeak.disabled = true;
+    function showVideo(){
+      if(showingVideo) return;
+      stageInner.innerHTML = heygenIframe;
+      showingVideo = true;
+      cta.style.display = 'none';
+      hint.textContent = 'video: eco di Pascoli';
+      backToPhoto.style.display = 'inline-flex';
     }
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+    function showPhoto(){
+      if(!showingVideo) return;
+      stageInner.innerHTML = '<div class="portrait" id="portrait" role="img" aria-label="Foto di Pascoli"></div>';
+      showingVideo = false;
+      cta.style.display = 'inline-flex';
+      hint.textContent = 'clic sulla foto: eco di Pascoli';
+      backToPhoto.style.display = 'none';
+
+      // re-bind click for new portrait node
+      $('#portrait').addEventListener('click', showVideo);
+    }
+
+    // initial bindings
+    $('#portrait').addEventListener('click', showVideo);
+    cta.addEventListener('click', showVideo);
+    backToPhoto.addEventListener('click', showPhoto);
   </script>
 </body>
 </html>
+
