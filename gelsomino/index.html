@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Il gelsomino notturno – Pascoli</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="left">
+        <div class="badge"><span class="dot"></span> Pascoli – Poesie</div>
+        <a class="chip" href="../index.html">← Home</a>
+      </div>
+      <nav class="nav">
+        <a class="chip" href="#strofe">Strofe</a>
+        <a class="chip" href="#taccuino">Taccuino</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="heroText">
+        <h1 class="h1">Il gelsomino notturno</h1>
+        <p class="sub">Una poesia “di notte” che parla di vita e di soglia: l’intimità degli altri e la solitudine di chi guarda.</p>
+        <span class="kicker">Versi + realtà simbolica, strofa per strofa</span>
+        <p class="note">
+          Clicca le immagini per ingrandirle. Qui sotto trovi, per ogni strofa, i versi e una visualizzazione della “realtà” evocata.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="figure">
+          <img src="assets/pascoli_video.png" alt="Pascoli – immagine introduttiva" data-zoom="assets/pascoli_video.png" data-title="Immagine introduttiva" />
+        </div>
+        <div class="figcap">Immagine introduttiva</div>
+      </div>
+    </section>
+
+    <h2 id="strofe" class="sectionTitle">Strofe</h2>
+
+    <div class="grid">
+      
+    </div>
+
+    <section id="taccuino" class="taccuino">
+      <label>
+        <span>Taccuino personale</span>
+        <small>si salva nel dispositivo (localStorage)</small>
+      </label>
+      <textarea id="taccuinoText" placeholder="Scrivi qui la tua lettura: immagini, simboli, parole-chiave, collegamenti..."></textarea>
+      <div class="actions">
+        <button class="btn" id="saveNote">Salva</button>
+        <button class="btn ghost" id="clearNote">Svuota</button>
+      </div>
+    </section>
+
+    <div class="footer">© Lezione interattiva – gbprof • Pascoli</div>
+  </div>
+
+  <!-- Modal immagini -->
+  <div class="modal" id="imgModal" aria-hidden="true">
+    <div class="modalContent" role="dialog" aria-modal="true">
+      <div class="modalTop">
+        <b id="imgModalTitle">Immagine</b>
+        <button id="imgModalClose" type="button">Chiudi</button>
+      </div>
+      <img class="modalImg" id="imgModalImg" alt="Zoom" />
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
