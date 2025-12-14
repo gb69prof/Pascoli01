@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pascoli – Immagine del mondo</title>
+<link rel="stylesheet" href="mondo.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="home" href="index.html">← Home</a>
+  <div>
+    <h1>L’immagine del mondo</h1>
+    <p class="sub">Miniature → riquadro a destra. Click sul riquadro → schermo intero.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="text">
+    <p>
+      La visione del mondo di Pascoli nasce dal dolore dei lutti familiari. Il nido-famiglia diventa rifugio,
+      la poesia è stupore, la scienza non consola. Le cose umili diventano simboli.
+    </p>
+
+    <h2>Schemi (clic)</h2>
+    <div class="thumbs">
+      <button class="t" onclick="show('assets/stupore.png','Stupore')">
+        <img src="assets/stupore.png" alt="Stupore"><span>Stupore</span>
+      </button>
+      <button class="t" onclick="show('assets/scienza.png','Scienza')">
+        <img src="assets/scienza.png" alt="Scienza"><span>Scienza</span>
+      </button>
+      <button class="t" onclick="show('assets/politica.png','Politica')">
+        <img src="assets/politica.png" alt="Politica"><span>Politica</span>
+      </button>
+      <button class="t" onclick="show('assets/nido_famiglia.png','Nido-famiglia')">
+        <img src="assets/nido_famiglia.png" alt="Nido-famiglia"><span>Nido</span>
+      </button>
+      <button class="t wide" onclick="show('assets/immagine_mondo.png','Schema generale')">
+        <img src="assets/immagine_mondo.png" alt="Schema generale"><span>Schema generale</span>
+      </button>
+    </div>
+
+    <h2>Appunti</h2>
+    <textarea id="notes" placeholder="Incolla o scrivi qui…"></textarea>
+    <div class="btns">
+      <button onclick="copyNotes()">Copia</button>
+      <button onclick="downloadNotes()">Scarica .txt</button>
+      <button class="ghost" onclick="clearNotes()">Svuota</button>
+    </div>
+  </section>
+
+  <section class="viewer">
+    <div class="viewerTop">
+      <b id="label">Schema generale</b>
+      <span class="hint">Click sull’immagine per ingrandire</span>
+    </div>
+
+    <!-- CLICK QUI => MODALE SCHERMO INTERO -->
+    <img id="big" class="big" src="assets/immagine_mondo.png" alt="Schema generale" onclick="openModal()">
+  </section>
+</main>
+
+<!-- MODALE SCHERMO INTERO -->
+<div id="modal" class="modal" onclick="closeModal(event)">
+  <div class="modalBox">
+    <div class="modalTop">
+      <b id="modalLabel">Schema generale</b>
+      <div class="modalBtns">
+        <button class="ghost" onclick="zoom(-0.15); event.stopPropagation();">−</button>
+        <button class="ghost" onclick="zoom(0.15); event.stopPropagation();">+</button>
+        <button class="ghost" onclick="resetZoom(); event.stopPropagation();">Reset</button>
+        <button onclick="forceClose(); event.stopPropagation();">Chiudi</button>
+      </div>
+    </div>
+    <div class="modalFrame">
+      <img id="modalImg" src="assets/immagine_mondo.png" alt="Schema generale">
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSrc = 'assets/immagine_mondo.png';
+let currentLabel = 'Schema generale';
+let scale = 1;
+
+function show(src,label){
+  currentSrc = src;
+  currentLabel = label || 'Schema';
+  document.getElementById('big').src = src;
+  document.getElementById('big').alt = label;
+  document.getElementById('label').textContent = label;
+}
+
+function openModal(){
+  const m = document.getElementById('modal');
+  const img = document.getElementById('modalImg');
+  const lab = document.getElementById('modalLabel');
+  img.src = currentSrc;
+  img.alt = currentLabel;
+  lab.textContent = currentLabel;
+  scale = 1;
+  img.style.transform = 'scale(1)';
+  m.classList.add('on');
+}
+
+function closeModal(e){
+  // chiudi solo se clicchi sullo sfondo (non dentro la box)
+  if(e.target.id === 'modal') document.getElementById('modal').classList.remove('on');
+}
+function forceClose(){
+  document.getElementById('modal').classList.remove('on');
+}
+
+function zoom(delta){
+  const img = document.getElementById('modalImg');
+  scale = Math.max(0.6, Math.min(3.2, scale + delta));
+  img.style.transform = 'scale(' + scale + ')';
+}
+function resetZoom(){
+  const img = document.getElementById('modalImg');
+  scale = 1;
+  img.style.transform = 'scale(1)';
+}
+
+// Notes
+function copyNotes(){
+  const t = document.getElementById('notes');
+  t.focus(); t.select();
+  try{ navigator.clipboard.writeText(t.value); } catch(e){ document.execCommand('copy'); }
+}
+function downloadNotes(){
+  const t = document.getElementById('notes').value;
+  const blob = new Blob([t], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'pascoli-immagine-del-mondo.txt';
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(a.href);
+  a.remove();
+}
+function clearNotes(){
+  document.getElementById('notes').value = '';
+}
+</script>
+
+</body>
+</html>
