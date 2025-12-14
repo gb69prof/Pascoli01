@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X agosto — Giovanni Pascoli | Libro.0</title>
+  <meta name="description" content="X agosto: commento, gioco analogico, schemi e immagini per la classe." />
+  <style>
+    :root{
+      --bg:#f3ede3;
+      --card:#ffffff;
+      --ink:#1b1d22;
+      --muted:#6b7280;
+      --accent:#3a235a;
+      --accent2:#7a1d2f;
+      --line:#e7ddd0;
+      --shadow: 0 14px 40px rgba(15, 23, 42, .12);
+      --radius: 24px;
+      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    .topbar{
+      height:8px;
+      background:linear-gradient(90deg, var(--accent), #5a2f86, #2b1a40);
+    }
+    .page{
+      max-width:1180px;
+      margin:0 auto;
+      padding:28px 18px 80px;
+    }
+    .home-row{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      margin:10px 0 18px;
+    }
+    .home-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(58,35,90,.18);
+      background:rgba(255,255,255,.65);
+      backdrop-filter: blur(8px);
+      text-decoration:none;
+      color:var(--accent);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .home-btn:active{transform:translateY(1px)}
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:44px;
+      border:1px solid rgba(231,221,208,.75);
+    }
+    .stack{display:grid; gap:28px;}
+    .kicker{
+      font-family:var(--serif);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(122,29,47,.85);
+      font-size:12px;
+      margin:0 0 10px;
+    }
+    h1{
+      font-family:var(--serif);
+      font-size: clamp(34px, 4vw, 54px);
+      line-height:1.05;
+      margin:0 0 14px;
+      letter-spacing:-.02em;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:18px;
+      margin:0;
+      max-width:60ch;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:34px;
+      align-items:stretch;
+    }
+    .hero-right{
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.06);
+      background:#0f172a;
+      display:flex;
+      flex-direction:column;
+      min-height:320px;
+    }
+    .hero-right img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      cursor:zoom-in;
+      flex:1;
+    }
+    .caption{
+      padding:16px 18px;
+      background:linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55));
+      color:rgba(255,255,255,.88);
+      font-family:var(--serif);
+      font-size:16px;
+    }
+
+    h2{
+      font-family:var(--serif);
+      font-size:34px;
+      margin:0 0 6px;
+      letter-spacing:-.01em;
+    }
+    .sub{
+      color:var(--muted);
+      margin:0 0 18px;
+      font-size:15px;
+    }
+    .two{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:28px;
+      align-items:start;
+    }
+    .note{
+      border-radius:22px;
+      border:1px solid rgba(122,29,47,.18);
+      background: rgba(122,29,47,.06);
+      padding:22px 22px;
+    }
+    .note h3{
+      font-family:var(--serif);
+      margin:0 0 10px;
+      font-size:22px;
+    }
+    .note ul{margin:10px 0 0 18px; padding:0}
+    .note li{margin:8px 0; color:#2b2f36}
+    .note .small-title{
+      margin-top:18px;
+      font-weight:800;
+      color:#2b2f36;
+      font-size:15px;
+    }
+    .def{
+      margin-top:10px;
+      display:grid;
+      gap:10px;
+    }
+    .def b{
+      display:block;
+      margin-bottom:3px;
+      font-family:var(--serif);
+      font-size:16px;
+    }
+    .def p{margin:0; color:var(--muted); font-size:14px}
+
+    .table-wrap{
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.12);
+    }
+    table{
+      border-collapse:collapse;
+      width:100%;
+      min-width:760px;
+      background:#fff;
+    }
+    thead th{
+      background:#0f172a;
+      color:#fff;
+      padding:16px 16px;
+      font-size:14px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      text-align:center;
+      font-weight:800;
+    }
+    tbody td{
+      border-top:1px solid rgba(231,221,208,.9);
+      border-right:1px solid rgba(231,221,208,.8);
+      padding:16px;
+      vertical-align:top;
+      font-size:16px;
+    }
+    tbody tr:nth-child(even) td{background:#fbf7f2}
+    tbody td:last-child{border-right:none}
+    .cell-title{font-weight:800; margin:0 0 4px}
+    .cell-sub{margin:0; color:var(--muted); font-size:14px}
+
+    .img-card{
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.08);
+      background:#fff;
+    }
+    .img-card img{
+      width:100%;
+      height:auto;
+      display:block;
+      cursor:zoom-in;
+    }
+    .img-pad{padding:18px}
+    .foot{
+      text-align:center;
+      margin-top:26px;
+      color:var(--muted);
+      font-family:var(--serif);
+    }
+    .foot small{display:block; margin-top:6px; font-family:var(--sans); color:rgba(107,114,128,.95)}
+    /* modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:9999;
+    }
+    .modal.open{display:flex}
+    .modal-inner{
+      max-width:min(1200px, 96vw);
+      max-height:88vh;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+      background:#000;
+    }
+    .modal-inner img{display:block; width:100%; height:auto; max-height:88vh; object-fit:contain}
+    .modal-hint{
+      position:fixed;
+      bottom:14px;
+      left:50%;
+      transform:translateX(-50%);
+      color:rgba(255,255,255,.85);
+      font-size:13px;
+      background:rgba(0,0,0,.35);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.15);
+      z-index:10000;
+      pointer-events:none;
+    }
+
+    @media (max-width: 980px){
+      .card{padding:28px}
+      .hero{grid-template-columns:1fr; }
+      .hero-right{min-height:260px}
+      .two{grid-template-columns:1fr}
+      h2{font-size:30px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar"></div>
+
+  <main class="page">
+    <div class="home-row">
+      <a class="home-btn" href="../index.html" aria-label="Torna alla home del progetto">
+        <span aria-hidden="true">⟵</span><span>Home</span>
+      </a>
+    </div>
+
+    <div class="stack">
+      <!-- HERO -->
+      <section class="card">
+        <div class="hero">
+          <div>
+            <p class="kicker">GIOVANNI PASCOLI · X AGOSTO</p>
+            <h1>Il pianto di stelle e il nido spezzato</h1>
+            <p class="lead">
+              Questa pagina raccoglie testo, immagini e schemi per entrare nel cuore di <i>X agosto</i>,
+              la poesia in cui Pascoli trasforma l’assassinio del padre in una costellazione di simboli:
+              la rondine, il nido, le bambole, il cielo che piange.
+              <br /><br />
+              Scorri la pagina: troverai un <b>commento ragionato</b>, il <b>gioco analogico</b> visualizzato e una
+              <b>tabella di confronto</b> tra piano naturale e piano umano.
+            </p>
+          </div>
+
+          <figure class="hero-right" aria-label="Illustrazione: X agosto">
+            <img src="../assets/x-agosto-illustrazione.png" alt="Illustrazione di X agosto: rondine, stelle e nido spezzato." data-zoom />
+            <figcaption class="caption">
+              Rondine, nido, cappello e bambole sotto un pianto di stelle: il dolore si fa immagine.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- COMMENTO -->
+      <section class="card" id="commento">
+        <h2>Commento alla poesia</h2>
+        <p class="sub">Dal fatto biografico alla visione del mondo.</p>
+
+        <div class="two">
+          <div>
+            <p>
+              La poesia <b>X agosto</b> è uno dei cardini emotivi e simbolici dell’opera pascoliana. Non ricostruisce un fatto:
+              <i>lo trasfigura</i>. L’omicidio del padre (10 agosto 1867) diventa l’origine di un dolore che Pascoli non smetterà
+              mai di interrogare. Su ventiquattro versi, solo quattro accennano direttamente all’assassinio: il resto è simbolo,
+              eco, cosmologia affettiva.
+            </p>
+            <p>
+              Il componimento si apre con una rondine che non torna al nido. Non è un semplice preambolo naturale: è una ferita.
+              In quell’immagine Pascoli colloca la condizione dell’uomo che ha perso il proprio centro. Subito dopo, l’analogia si compie:
+              come la rondine, anche l’uomo ucciso non ritorna a casa. <b>Nido e tetto</b> sono la stessa cosa, due versioni della stessa
+              archeologia emotiva. Il nido degli uccelli coincide con la casa degli uomini: entrambi sono luoghi di calore, custodia, identità.
+              Una volta distrutti, non rimane che lo smarrimento.
+            </p>
+            <p>
+              Pascoli non descrive il dolore: lo fa accadere nel lettore. La forza analogica non spiega, <i>fa sentire</i>.
+              La tragedia personale diventa figura universale: l’infanzia violata, il ritorno negato, la famiglia spezzata.
+              E dietro tutto questo c’è il poeta che dice di non essere mai cresciuto: un figlio per sempre orfano, che cerca nel simbolo
+              ciò che la vita gli ha tolto.
+            </p>
+            <p>
+              Eppure, ai margini del testo, qualcosa si solleva. I versi iniziali e finali convergono in un gesto cosmico: il dolore innocente
+              risale al Cielo, che lo accoglie in un «<b>pianto di stelle</b>». La natura non è indifferente: partecipa, amplifica, consola.
+              Il cosmo diventa un testimone muto e compassionevole dell’ingiustizia umana. È qui che la poesia oltrepassa la cronaca e diventa
+              meditazione sul male e sul destino.
+            </p>
+          </div>
+
+          <aside class="note">
+            <h3>Saperi irrinunciabili</h3>
+            <ul>
+              <li><b>Evento biografico:</b> assassinio del padre (10 agosto 1867).</li>
+              <li><b>Analogia centrale:</b> rondine/uomo, nido/tetto di casa → famiglia.</li>
+              <li><b>Nido:</b> simbolo chiave della poetica pascoliana, luogo degli affetti minacciati.</li>
+              <li><b>Cielo che piange:</b> partecipazione cosmica al dolore innocente.</li>
+            </ul>
+
+            <div class="small-title">Vocabolario essenziale</div>
+            <div class="def">
+              <div>
+                <b>Analogia</b>
+                <p>Accostamento immediato di immagini che rivela un legame profondo (rondine/uomo).</p>
+              </div>
+              <div>
+                <b>Nido</b>
+                <p>Luogo degli affetti, dell’origine e della fragilità; simbolo della famiglia perduta.</p>
+              </div>
+              <div>
+                <b>Pianto di stelle</b>
+                <p>Immagine cosmica che trasforma il dolore umano in evento universale.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- GIOCO ANALOGICO -->
+      <section class="card" id="gioco">
+        <h2>Il gioco analogico</h2>
+        <p class="sub">Come funziona il meccanismo del dolore speculare.</p>
+
+        <div class="two">
+          <div>
+            <h3 style="font-family:var(--serif); margin:0 0 10px; font-size:26px;">Il meccanismo del dolore speculare</h3>
+            <p>
+              Il gioco analogico in <i>X agosto</i> non è un semplice abbellimento retorico: è una struttura portante, quasi un’<b>equazione del dolore</b>.
+              Pascoli sovrappone il mondo naturale (la rondine) e quello umano (il padre) per mostrare che il male colpisce allo stesso modo ogni forma di innocenza.
+            </p>
+            <p>
+              La potenza di questo gioco risiede nella <b>simmetria</b>: ogni elemento della tragedia della rondine trova il suo corrispettivo nella tragedia dell’uomo.
+              Non c’è gerarchia: la morte dell’animale ha la stessa dignità ontologica di quella dell’uomo, perché entrambe lasciano un vuoto incolmabile in chi resta
+              (i rondinini, la famiglia).
+            </p>
+            <ul style="margin:14px 0 0 18px;">
+              <li style="margin:10px 0;"><b>L’identità delle vittime:</b> rondine e uomo sono entrambi <i>portatori di vita</i> (cibo, doni) colti nell’attimo del ritorno.</li>
+              <li style="margin:10px 0;"><b>La sacralità del luogo:</b> nido e tetto non sono solo spazi fisici, ma <i>rifugi metafisici</i>, zone di esclusione dal mondo ostile.</li>
+              <li style="margin:10px 0;"><b>L’inutilità del dono:</b> l’insetto e le bambole restano a terra: oggetti d’amore diventati reliquie.</li>
+              <li style="margin:10px 0;"><b>L’attesa senza fine:</b> il pigolio che si spegne e l’attesa vana sono la stessa agonia: la voce di chi resta che scivola nel silenzio.</li>
+            </ul>
+          </div>
+
+          <aside class="note">
+            <h3>Dal particolare all’universale</h3>
+            <p style="margin:0; color:#2b2f36">
+              Attraverso l’analogia, la storia privata di una famiglia diventa <b>modello di tutte le tragedie familiari</b>.
+              Il nido-famiglia infranto genera la visione pascoliana del mondo:
+            </p>
+            <ul>
+              <li>paura costante per la perdita degli affetti;</li>
+              <li>sfiducia nella scienza come unico rimedio al male;</li>
+              <li>lettura del cosmo come spazio di pianto e di mistero.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- TABELLA -->
+      <section class="card" id="tabella">
+        <h2>Schema del gioco analogico</h2>
+        <p class="sub">La corrispondenza tra piano naturale e piano umano.</p>
+
+        <div class="table-wrap" role="region" aria-label="Tabella del gioco analogico" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th>PIANO NATURALE<br /><span style="font-weight:600; opacity:.8; text-transform:none; letter-spacing:0;">(La rondine)</span></th>
+                <th>NODO DRAMMATICO<br /><span style="font-weight:600; opacity:.8; text-transform:none; letter-spacing:0;">(L’azione)</span></th>
+                <th>PIANO UMANO<br /><span style="font-weight:600; opacity:.8; text-transform:none; letter-spacing:0;">(L’uomo)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p class="cell-title">La rondine</p>
+                  <p class="cell-sub">L’innocenza istintiva</p>
+                </td>
+                <td style="text-align:center;">
+                  <div style="font-size:20px;">↔</div>
+                  <div style="color:var(--muted); letter-spacing:.12em; font-size:12px; font-weight:800;">SOGGETTO</div>
+                </td>
+                <td>
+                  <p class="cell-title">L’uomo</p>
+                  <p class="cell-sub">L’innocenza morale</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="cell-title">Il nido</p>
+                  <p class="cell-sub">Il calore animale</p>
+                </td>
+                <td style="text-align:center;">
+                  <div style="font-size:20px;">↔</div>
+                  <div style="color:var(--muted); letter-spacing:.12em; font-size:12px; font-weight:800;">LUOGO / META</div>
+                </td>
+                <td>
+                  <p class="cell-title">Il tetto</p>
+                  <p class="cell-sub">La custodia familiare</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="cell-title">L’hanno uccisa</p>
+                  <p class="cell-sub">Atto vile verso l’alto</p>
+                </td>
+                <td style="text-align:center;">
+                  <div style="font-size:20px;">↔</div>
+                  <div style="color:var(--muted); letter-spacing:.12em; font-size:12px; font-weight:800;">EVENTO</div>
+                </td>
+                <td>
+                  <p class="cell-title">L’hanno ucciso</p>
+                  <p class="cell-sub">Atto vile verso il basso</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="cell-title">Un insetto</p>
+                  <p class="cell-sub">Il nutrimento negato</p>
+                </td>
+                <td style="text-align:center;">
+                  <div style="font-size:20px;">↔</div>
+                  <div style="color:var(--muted); letter-spacing:.12em; font-size:12px; font-weight:800;">IL DONO / RELIQUIA</div>
+                </td>
+                <td>
+                  <p class="cell-title">Due bambole</p>
+                  <p class="cell-sub">L’affetto negato</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="cell-title">Pigola sempre più piano</p>
+                  <p class="cell-sub">Agonia fisica / suono</p>
+                </td>
+                <td style="text-align:center;">
+                  <div style="font-size:20px;">↔</div>
+                  <div style="color:var(--muted); letter-spacing:.12em; font-size:12px; font-weight:800;">CONSEGUENZA</div>
+                </td>
+                <td>
+                  <p class="cell-title">Aspettano invano</p>
+                  <p class="cell-sub">Agonia psicologica / silenzio</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="foot">
+          X agosto — Giovanni Pascoli · Pagina didattica per Libro.0
+          <small>Clicca sulle immagini per ingrandirle e tornare alla visione normale.</small>
+        </div>
+      </section>
+
+      <!-- SCHEMA -->
+      <section class="card" id="schema">
+        <h2>Schema del testo e del nido-famiglia</h2>
+        <p class="sub">La poesia organizzata in colonne: sintassi, gioco analogico, nido-famiglia.</p>
+
+        <div class="img-card">
+          <img src="../assets/x-agosto-schema.png" alt="Schema del testo: sintassi, gioco analogico e nido-famiglia." data-zoom />
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-inner">
+      <img id="modalImg" alt="" />
+    </div>
+  </div>
+  <div class="modal-hint" id="modalHint" style="display:none;">Tocca per chiudere</div>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modalImg');
+      const hint = document.getElementById('modalHint');
+
+      function open(src, alt){
+        modalImg.src = src;
+        modalImg.alt = alt || '';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        hint.style.display = 'block';
+        document.body.style.overflow='hidden';
+      }
+      function close(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        hint.style.display = 'none';
+        document.body.style.overflow='';
+        modalImg.src='';
+      }
+
+      document.querySelectorAll('img[data-zoom]').forEach(img=>{
+        img.addEventListener('click', ()=> open(img.src, img.alt));
+      });
+
+      modal.addEventListener('click', close);
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
+</body>
+</html>
