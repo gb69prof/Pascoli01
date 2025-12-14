@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pascoli — La forma</title>
+<style>
+  :root{
+    --bg:#fffaf0;
+    --card:#ffffff;
+    --ink:#1f2a33;
+    --mut:#51626f;
+    --brand:#ff7a00;
+    --brand2:#0ea5e9;
+    --g:#22c55e; --y:#eab308; --b:#3b82f6;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:linear-gradient(180deg,#fff7e6, var(--bg)); color:var(--ink)}
+  a{color:inherit}
+  header{padding:22px 18px 10px; position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px); background:rgba(255,250,240,.75); border-bottom:1px solid rgba(0,0,0,.06); z-index:5}
+  .wrap{max-width:1100px;margin:0 auto}
+  .top{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .title{display:flex;flex-direction:column;gap:2px}
+  h1{margin:0;font-size:26px; letter-spacing:.2px}
+  .sub{margin:0;color:var(--mut)}
+  .nav{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid rgba(0,0,0,.10); background:white; box-shadow:0 6px 18px rgba(0,0,0,.06); text-decoration:none}
+  main{padding:18px}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr; gap:16px}
+  @media (max-width: 920px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card); border:1px solid rgba(0,0,0,.08); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+  .card .hd{padding:16px 16px 10px}
+  .card .bd{padding:0 16px 16px}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-weight:700; font-size:13px}
+  .b-g{background:rgba(34,197,94,.12); color:#0f7a3a; border:1px solid rgba(34,197,94,.28)}
+  .b-y{background:rgba(234,179,8,.14); color:#8a6a00; border:1px solid rgba(234,179,8,.30)}
+  .b-b{background:rgba(59,130,246,.12); color:#1e4fbf; border:1px solid rgba(59,130,246,.28)}
+  .k{display:flex;flex-wrap:wrap; gap:8px; margin-top:10px}
+  .pill{padding:6px 10px;border-radius:999px;background:rgba(14,165,233,.10); border:1px solid rgba(14,165,233,.22); color:#075985; font-weight:650; font-size:13px}
+  p{line-height:1.55}
+  ul{margin:10px 0 0 18px}
+  li{margin:6px 0}
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr); gap:12px; padding:16px}
+  @media (max-width: 720px){.gallery{grid-template-columns:1fr}}
+  .shot{border-radius:14px; overflow:hidden; border:1px solid rgba(0,0,0,.10); background:#fff}
+  .shot img{width:100%; height:auto; display:block; cursor:zoom-in}
+  .cap{padding:10px 12px; color:var(--mut); font-size:13px}
+  .hr{height:1px;background:rgba(0,0,0,.08);margin:14px 0}
+  textarea{width:100%; min-height:140px; resize:vertical; padding:12px 12px; border-radius:14px; border:1px solid rgba(0,0,0,.14); font:inherit; line-height:1.45}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .action{cursor:pointer; border:0; border-radius:12px; padding:10px 12px; font-weight:700; background:linear-gradient(90deg,#ff7a00,#ffb703); color:#1f2a33}
+  .ghost{cursor:pointer; border:1px solid rgba(0,0,0,.16); border-radius:12px; padding:10px 12px; font-weight:700; background:white}
+  footer{padding:18px; color:var(--mut); text-align:center}
+  .lb{position:fixed; inset:0; background:rgba(0,0,0,.78); display:none; place-items:center; padding:18px; z-index:20}
+  .lb.open{display:grid}
+  .lb img{max-width:min(1100px,96vw); max-height:86vh; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .lb .hint{color:#fff; opacity:.85; margin-top:12px; font-size:13px; text-align:center}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="logo">Libro01 · Pascoli</div>
+      <div class="tiny">Sezione 5 · Simbolismo</div>
+    </div>
+    <nav class="nav">
+      <a class="btn" href="index.html">← Home</a>
+      <a class="btn" href="#ossatura">Ossatura</a>
+      <a class="btn" href="#lavoro">Allenarsi</a>
+      <a class="btn" href="#porte">Porte</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Il simbolismo</h1>
+      <p class="lead">Le cose umili diventano simboli: nido, siepe, digitale purpurea</p>
+      <div class="chips">
+        <span class="chip green">🟢 Nuotare</span>
+        <span class="chip yellow">🟡 Allenarsi</span>
+        <span class="chip blue">🔵 Porte</span>
+      </div>
+    </section>
+
+    <section id="ossatura" class="panel green">
+      <h2>🟢 Ossatura</h2>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Idea chiave</h3>
+          <p><strong>Il mondo poetico non è “dato”:</strong> nasce nello sguardo. Le cose diventano <em>segni</em> di una realtà interiore.</p>
+          <p class="quote">«Il mondo nasce per ognun che nasce al mondo»</p>
+        </div>
+        <div class="card">
+          <h3>Saperi irrinunciabili</h3>
+          <ul>
+<li>Ogni oggetto ha un valore simbolico.</li>
+<li>Il mondo poetico nasce nello sguardo del fanciullino.</li>
+<li>Simboli fondamentali: nido, siepe, digitale purpurea, fanciullino.</li>
+<li>Pascoli partecipa al clima simbolista europeo.</li>
+</ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Testo principale</h3>
+        <p>Per Pascoli la realtà non esiste di per sé, ma nasce nello sguardo del poeta. Le cose non sono solo materiali: diventano simboli che incarnano significati interiori. Così il nido non è solo intreccio di rami, ma immagine della famiglia perduta e rifugio degli affetti; la siepe è barriera che protegge l’intimità domestica; la digitale purpurea rappresenta il sesso, visto con gli occhi turbati del fanciullino. Ogni oggetto è caricato di valore morale e affettivo: la poesia diventa il luogo in cui il mistero delle cose si rivela.</p><p>Pascoli, poeta delle piccole cose, attribuisce agli oggetti quotidiani un’anima, trasformandoli in simboli universali. Questa prospettiva lo avvicina al Simbolismo europeo e apre la strada alla poesia del Novecento.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Schema sintetico</h3>
+          <ul>
+<li>Realtà = non data, ma creata dal poeta.</li>
+<li>Oggetti → simboli di significati interiori.</li>
+<li>Simboli principali:</li>
+<li>Nido-famiglia = rifugio, affetti.</li>
+<li>Siepe = protezione dell’intimità.</li>
+<li>Digitale purpurea = turbamento del sesso.</li>
+<li>Fanciullino = voce interiore del poeta.</li>
+<li>Poetica vicina al Simbolismo europeo.</li>
+</ul>
+        </div>
+        <div class="card">
+          <h3>Vocabolario</h3>
+          <ul>
+<li>Simbolismo: movimento poetico che interpreta la realtà come rete di segni misteriosi.</li>
+<li>Nido-famiglia: simbolo degli affetti perduti e rifugio intimo.</li>
+<li>Digitale purpurea: fiore velenoso, simbolo della sessualità turbata.</li>
+<li>Trasfigurazione: attribuire agli oggetti un significato interiore e universale.</li>
+</ul>
+        </div>
+      </div>
+
+      <h3 class="sectionTitle">Immagini guida</h3>
+      <div class="gallery">
+        
+        <figure class="card media">
+          <img src="assets/Siepe.png" alt="La siepe in Pascoli e Leopardi" data-full="assets/Siepe.png">
+          <figcaption>La siepe in Pascoli e Leopardi</figcaption>
+        </figure>
+        <figure class="card media">
+          <img src="assets/simbolismi-pascoliani.jpg" alt="Simbolismi pascoliani" data-full="assets/simbolismi-pascoliani.jpg">
+          <figcaption>Simbolismi pascoliani</figcaption>
+        </figure>
+        <figure class="card media">
+          <img src="assets/Pascoli-simbolista.png" alt="Pascoli simbolista: cose umili → simbolo" data-full="assets/Pascoli-simbolista.png">
+          <figcaption>Pascoli simbolista: cose umili → simbolo</figcaption>
+        </figure>
+      </div>
+      <p class="tiny muted">Suggerimento didattico: apri un’immagine, poi chiedi agli studenti di “tradurre” un oggetto in simbolo (cosa → sentimento → idea).</p>
+    </section>
+
+    <section id="lavoro" class="panel yellow">
+      <h2>🟡 Allenarsi</h2>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>1) Trasforma oggetti in simboli</h3>
+          <ol>
+            <li>Scegli un oggetto “umile” (nido, siepe, campana, fiore, strada…)</li>
+            <li>Scrivi 3 possibili significati interiori (paura, protezione, desiderio, lutto…)</li>
+            <li>Collega ogni significato a un episodio biografico o a un bisogno umano universale</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>2) Confronto rapido con Leopardi</h3>
+          <p>Usa la <strong>siepe</strong> come parola-ponte:</p>
+          <ul>
+            <li>In Pascoli: <em>protezione</em>, limite domestico, paura di perdere gli affetti</li>
+            <li>In Leopardi: limite che apre l’immaginazione verso <em>infinito</em> e “sovrumani silenzi”</li>
+          </ul>
+          <p class="tiny muted">Obiettivo: capire che un simbolo non è “una cosa”, ma un modo di guardare.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>3) Quaderno rapido</h3>
+        <p class="tiny muted">Scrivi qui. Si salva sul dispositivo (localStorage) e si può esportare in .txt.</p>
+        <div class="noteBar">
+          <button class="btn" id="saveBtn">Salva</button>
+          <button class="btn" id="clearBtn">Svuota</button>
+          <button class="btn" id="exportBtn">Esporta .txt</button>
+          <span class="status" id="status"></span>
+        </div>
+        <textarea id="note" class="note" placeholder="Esempio: NIDO → famiglia perduta → bisogno di protezione → paura del mondo esterno..."></textarea>
+      </div>
+    </section>
+
+    <section id="porte" class="panel blue">
+      <h2>🔵 Porte</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>P1 · Pascoli e il Simbolismo europeo</h3>
+          <p>Individua 3 caratteristiche “simboliste” nella sua poesia: mistero, analogie, oggetti-soglia, musica delle parole.</p>
+        </div>
+        <div class="card">
+          <h3>P2 · “Cose umili” e Novecento</h3>
+          <p>Spiega perché la dignità delle piccole cose apre la strada a una poesia moderna: meno retorica, più interiorità e frammento.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>P3 · Domanda che spacca</h3>
+        <p class="quote">Quando un simbolo è vero e quando è una scusa per non capire?</p>
+        <p class="tiny muted">Se la risposta resta comoda, di solito non è simbolo: è decorazione.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div>© Libro01 · Pascoli — simbolismo</div>
+      <div class="tiny">Aggiornato: <span id="y"></span></div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="x" id="closeLb" aria-label="Chiudi">×</button>
+    <img id="lbImg" alt="">
+    <div class="cap" id="lbCap"></div>
+  </div>
+
+  <script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  const KEY = "pascoli_simbolismo_note_v1";
+  const note = document.getElementById('note');
+  const status = document.getElementById('status');
+  note.value = localStorage.getItem(KEY) || "";
+
+  function ping(msg){
+    status.textContent = msg;
+    clearTimeout(ping._t);
+    ping._t = setTimeout(()=>status.textContent="", 1800);
+  }
+
+  document.getElementById('save').addEventListener('click', ()=>{
+    localStorage.setItem(KEY, note.value);
+    ping("Salvato.");
+  });
+
+  document.getElementById('clear').addEventListener('click', ()=>{
+    if(!note.value) return;
+    note.value="";
+    localStorage.removeItem(KEY);
+    ping("Svuotato.");
+  });
+
+  // lightbox
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lbImg');
+
+  document.querySelectorAll('.shot img').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      lbImg.src = img.getAttribute('src');
+      lbImg.alt = img.getAttribute('alt') || "Immagine";
+      lb.classList.add('open');
+    });
+  });
+
+  function closeLB(){ lb.classList.remove('open'); lbImg.src=""; }
+  lb.addEventListener('click', closeLB);
+  document.addEventListener('keydown', (e)=>{ if(e.key==="Escape") closeLB(); });
+</script>
+</body>
+</html>
