@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pascoli — La forma</title>
+<style>
+  :root{
+    --bg:#fffaf0;
+    --card:#ffffff;
+    --ink:#1f2a33;
+    --mut:#51626f;
+    --brand:#ff7a00;
+    --brand2:#0ea5e9;
+    --g:#22c55e; --y:#eab308; --b:#3b82f6;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:linear-gradient(180deg,#fff7e6, var(--bg)); color:var(--ink)}
+  a{color:inherit}
+  header{padding:22px 18px 10px; position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px); background:rgba(255,250,240,.75); border-bottom:1px solid rgba(0,0,0,.06); z-index:5}
+  .wrap{max-width:1100px;margin:0 auto}
+  .top{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .title{display:flex;flex-direction:column;gap:2px}
+  h1{margin:0;font-size:26px; letter-spacing:.2px}
+  .sub{margin:0;color:var(--mut)}
+  .nav{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid rgba(0,0,0,.10); background:white; box-shadow:0 6px 18px rgba(0,0,0,.06); text-decoration:none}
+  main{padding:18px}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr; gap:16px}
+  @media (max-width: 920px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card); border:1px solid rgba(0,0,0,.08); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+  .card .hd{padding:16px 16px 10px}
+  .card .bd{padding:0 16px 16px}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-weight:700; font-size:13px}
+  .b-g{background:rgba(34,197,94,.12); color:#0f7a3a; border:1px solid rgba(34,197,94,.28)}
+  .b-y{background:rgba(234,179,8,.14); color:#8a6a00; border:1px solid rgba(234,179,8,.30)}
+  .b-b{background:rgba(59,130,246,.12); color:#1e4fbf; border:1px solid rgba(59,130,246,.28)}
+  .k{display:flex;flex-wrap:wrap; gap:8px; margin-top:10px}
+  .pill{padding:6px 10px;border-radius:999px;background:rgba(14,165,233,.10); border:1px solid rgba(14,165,233,.22); color:#075985; font-weight:650; font-size:13px}
+  p{line-height:1.55}
+  ul{margin:10px 0 0 18px}
+  li{margin:6px 0}
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr); gap:12px; padding:16px}
+  @media (max-width: 720px){.gallery{grid-template-columns:1fr}}
+  .shot{border-radius:14px; overflow:hidden; border:1px solid rgba(0,0,0,.10); background:#fff}
+  .shot img{width:100%; height:auto; display:block; cursor:zoom-in}
+  .cap{padding:10px 12px; color:var(--mut); font-size:13px}
+  .hr{height:1px;background:rgba(0,0,0,.08);margin:14px 0}
+  textarea{width:100%; min-height:140px; resize:vertical; padding:12px 12px; border-radius:14px; border:1px solid rgba(0,0,0,.14); font:inherit; line-height:1.45}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .action{cursor:pointer; border:0; border-radius:12px; padding:10px 12px; font-weight:700; background:linear-gradient(90deg,#ff7a00,#ffb703); color:#1f2a33}
+  .ghost{cursor:pointer; border:1px solid rgba(0,0,0,.16); border-radius:12px; padding:10px 12px; font-weight:700; background:white}
+  footer{padding:18px; color:var(--mut); text-align:center}
+  .lb{position:fixed; inset:0; background:rgba(0,0,0,.78); display:none; place-items:center; padding:18px; z-index:20}
+  .lb.open{display:grid}
+  .lb img{max-width:min(1100px,96vw); max-height:86vh; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .lb .hint{color:#fff; opacity:.85; margin-top:12px; font-size:13px; text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div class="title">
+      <h1>La forma</h1>
+      <p class="sub">Come Pascoli fa parlare il mondo: suono, sintassi, analogie, sinestesie</p>
+      <div class="k">
+        <span class="pill">musicalità</span>
+        <span class="pill">paratassi</span>
+        <span class="pill">analogia</span>
+        <span class="pill">sinestesia</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="btn" href="index.html">← Home</a>
+      <a class="btn" href="poetica.html">Poetica</a>
+      <a class="btn" href="#lavoro">Allenarsi</a>
+      <a class="btn" href="#porte">Porte</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="grid">
+    <article class="card">
+      <div class="hd">
+        <span class="badge b-g">🟢 OSSATURA</span>
+      </div>
+      <div class="bd">
+        <p>La forma</p><p>Lo stile di Pascoli rompe con la tradizione poetica ottocentesca. La sua sintassi imita il linguaggio infantile: frasi brevi, coordinate, spesso senza soggetto o verbo, come nel parlato. Questo rifiuto della gerarchia logica sostituisce la spiegazione razionale con la suggestione immediata.</p><p>Il poeta usa l’analogia per accostare immagini senza spiegazioni, creando corrispondenze segrete tra le cose. Ricorre anche alla sinestesia, che fonde sensazioni diverse (suono, colore, odore), restituendo l’unità originaria del reale. Centrale è il valore musicale della parola: allitterazioni, onomatopee ed effetti sonori riproducono direttamente il mondo percepito dal fanciullino. A volte il suono diventa esso stesso poesia: din don dan, fr…</p><p>Con queste scelte linguistiche Pascoli prepara la poesia del Novecento: non descrivere il reale, ma evocarlo attraverso simboli, suoni e suggestioni.</p>
+        <div class="hr"></div>
+        <h3 style="margin:0 0 6px;">Schema sintetico</h3>
+        <ul>
+<li>Sintassi frammentata, paratattica, infantile.</li>
+<li>Frasi brevi, spesso ellittiche.</li>
+<li>Analogia: accostamento di immagini senza spiegazione.</li>
+<li>Sinestesia: fusione di sensazioni diverse.</li>
+<li>Musicalità della parola: allitterazioni, onomatopee, effetti acustici.</li>
+<li>La poesia diventa evocazione, non descrizione.</li>
+</ul>
+        <div class="hr"></div>
+        <h3 style="margin:0 0 6px;">Saperi irrinunciabili</h3>
+        <ul>
+<li>Sintassi paratattica = stile infantile del poeta-fanciullino.</li>
+<li>Analogia e sinestesia come figure fondamentali.</li>
+<li>Suono e musica delle parole sostituiscono la razionalità.</li>
+<li>Pascoli anticipa la poesia del Novecento.</li>
+</ul>
+        <div class="hr"></div>
+        <h3 style="margin:0 0 6px;">Vocabolario</h3>
+        <ul>
+<li>Paratassi: frasi coordinate poste sullo stesso piano.</li>
+<li>Asindeto: mancanza di congiunzioni tra frasi coordinate.</li>
+<li>Analogia: accostamento di immagini senza spiegazione logica.</li>
+<li>Sinestesia: unione di percezioni sensoriali diverse.</li>
+<li>Allitterazione: ripetizione di suoni simili.</li>
+<li>Onomatopea: parola che imita un suono naturale.</li>
+</ul>
+      </div>
+    </article>
+
+    <aside class="card">
+      <div class="hd">
+        <span class="badge b-g">🟢 IMMAGINI GUIDA</span>
+        <p class="sub" style="margin-top:10px;">Clicca per ingrandire. Sono le tue “mappe visive” per spiegare la forma.</p>
+      </div>
+      <div class="gallery">
+        <div class="shot">
+          <img src="assets/Forma.png" alt="La forma (schema)" />
+          <div class="cap">Quadro generale: parola e sintassi</div>
+        </div>
+        <div class="shot">
+          <img src="assets/Tecniche-suono.png" alt="Tecniche del suono" />
+          <div class="cap">Onomatopea vs allitterazione</div>
+        </div>
+        <div class="shot">
+          <img src="assets/Suono.png" alt="Il suono diventa parola" />
+          <div class="cap">Il suono diventa parola</div>
+        </div>
+        <div class="shot">
+          <img src="assets/Allitterazione.png" alt="Allitterazione" />
+          <div class="cap">Allitterazione (musicalità)</div>
+        </div>
+        <div class="shot">
+          <img src="assets/sinestesia.png" alt="Sinestesia" />
+          <div class="cap">Sinestesia</div>
+        </div>
+        <div class="shot">
+          <img src="assets/sintassi.png" alt="Sintassi" />
+          <div class="cap">Sintassi: scientifica vs pascoliana</div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section id="lavoro" class="card" style="margin-top:16px;">
+    <div class="hd">
+      <span class="badge b-y">🟡 ALLENARSI</span>
+      <p class="sub" style="margin-top:10px;">Qui non “ripeti”: applichi. Obiettivo: riconoscere la forma e spiegare l’effetto.</p>
+    </div>
+    <div class="bd">
+      <ol style="margin:0 0 12px 18px; line-height:1.55;">
+        <li><b>Trova e classifica</b>: in un testo di Pascoli scegli <i>3</i> esempi di <b>allitterazione</b>, <i>2</i> di <b>onomatopea</b>, <i>2</i> di <b>sinestesia</b>. Per ciascuno: scrivi <b>cosa fa sentire</b> (non “cosa significa”).</li>
+        <li><b>Sintassi</b>: riscrivi una strofa trasformando la paratassi in una sintassi “scientifica” (subordinate, spiegazioni). Poi confronta: <b>cosa perdi</b> e <b>cosa guadagni</b>.</li>
+        <li><b>Analogia</b>: scegli due immagini accostate da Pascoli e prova a dire <b>qual è il ponte invisibile</b> che le unisce (anche se non è dimostrabile).</li>
+      </ol>
+
+      <div class="hr"></div>
+
+      <h3 style="margin:0 0 8px;">Quaderno rapido</h3>
+      <p class="sub">Scrivi qui la tua mini-scheda “Forma di Pascoli in 10 righe”. Si salva sul dispositivo.</p>
+      <textarea id="note" placeholder="Esempio: Pascoli non descrive: evoca. La parola diventa suono, il suono diventa simbolo..."></textarea>
+      <div class="row" style="margin-top:10px;">
+        <button class="action" id="save">Salva</button>
+        <button class="ghost" id="clear">Svuota</button>
+        <span class="sub" id="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="porte" class="card" style="margin-top:16px;">
+    <div class="hd">
+      <span class="badge b-b">🔵 PORTE</span>
+      <p class="sub" style="margin-top:10px;">Per scendere: tre piste, una alla volta. Non è “di più”: è “più in profondità”.</p>
+    </div>
+    <div class="bd">
+      <ul>
+        <li><b>Pascoli e il simbolismo</b>: perché l’immagine non spiega, ma <i>allude</i>. Cerca un esempio in cui il significato resta volutamente sospeso.</li>
+        <li><b>La musica della parola</b>: prova a leggere ad alta voce una poesia e segnare dove il suono <i>comanda</i> il senso (ritmo, ripetizioni, consonanti).</li>
+        <li><b>Anticipo del Novecento</b>: in che modo questa forma prepara una poesia che non “narra” ma <i>evoca</i> (montaggio di immagini, frammenti, vuoti).</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
+  <div style="display:grid; place-items:center;">
+    <img id="lbImg" alt=""/>
+    <div class="hint">Click o ESC per chiudere</div>
+  </div>
+</div>
+
+<footer>© <span id="y"></span> — Pascoli / Libro.0</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  const KEY = "pascoli_forma_note_v1";
+  const note = document.getElementById('note');
+  const status = document.getElementById('status');
+  note.value = localStorage.getItem(KEY) || "";
+
+  function ping(msg){
+    status.textContent = msg;
+    clearTimeout(ping._t);
+    ping._t = setTimeout(()=>status.textContent="", 1800);
+  }
+
+  document.getElementById('save').addEventListener('click', ()=>{
+    localStorage.setItem(KEY, note.value);
+    ping("Salvato.");
+  });
+
+  document.getElementById('clear').addEventListener('click', ()=>{
+    if(!note.value) return;
+    note.value="";
+    localStorage.removeItem(KEY);
+    ping("Svuotato.");
+  });
+
+  // lightbox
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lbImg');
+
+  document.querySelectorAll('.shot img').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      lbImg.src = img.getAttribute('src');
+      lbImg.alt = img.getAttribute('alt') || "Immagine";
+      lb.classList.add('open');
+    });
+  });
+
+  function closeLB(){ lb.classList.remove('open'); lbImg.src=""; }
+  lb.addEventListener('click', closeLB);
+  document.addEventListener('keydown', (e)=>{ if(e.key==="Escape") closeLB(); });
+</script>
+</body>
+</html>
