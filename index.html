@@ -8,17 +8,16 @@
 
   <style>
     :root{
-      /* Palette viva (fanciullino): carta + cielo + giallo caldo */
-      --bg1:#fbf7ef;        /* carta */
-      --bg2:#e9f6ff;        /* cielo */
-      --ink:#1f2a33;        /* inchiostro */
+      --bg1:#fbf7ef;
+      --bg2:#e9f6ff;
+      --ink:#1f2a33;
       --muted:rgba(31,42,51,0.72);
       --quiet:rgba(31,42,51,0.56);
       --line:rgba(31,42,51,0.14);
       --card:rgba(255,255,255,0.72);
-      --card2:rgba(255,255,255,0.90);
-      --accent:#ffb703;     /* giallo caldo */
-      --accent2:#219ebc;    /* azzurro */
+      --card2:#fff;
+      --accent:#ffb703;
+      --accent2:#219ebc;
       --shadow:0 18px 60px rgba(0,0,0,0.14);
       --r-xl:22px;
       --r-lg:16px;
@@ -41,7 +40,6 @@
     a{ color:inherit; text-decoration:none; }
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px 18px 28px; }
 
-    /* HEADER: frase + significato */
     .titleline{ text-align:center; margin: 2px 0 10px; }
     .phraseBtn{
       appearance:none;
@@ -77,32 +75,12 @@
       box-shadow: 0 12px 40px rgba(0,0,0,0.08);
       text-align:left;
     }
-    .meaning p{
-      margin: 0;
-      line-height: 1.6;
-      font-size: 14px;
-      color: rgba(31,42,51,0.86);
-    }
-    .meaning .mini{
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--quiet);
-      line-height: 1.5;
-    }
-    .meaning details{
-      margin-top: 10px;
-      border-top: 1px dashed rgba(31,42,51,0.18);
-      padding-top: 10px;
-    }
-    .meaning summary{
-      cursor:pointer;
-      font-weight: 850;
-      color: rgba(31,42,51,0.86);
-      list-style:none;
-    }
+    .meaning p{ margin:0; line-height:1.6; font-size:14px; color:rgba(31,42,51,0.86); }
+    .meaning .mini{ margin-top:8px; font-size:12px; color:var(--quiet); line-height:1.5; }
+    .meaning details{ margin-top:10px; border-top:1px dashed rgba(31,42,51,0.18); padding-top:10px; }
+    .meaning summary{ cursor:pointer; font-weight:850; color:rgba(31,42,51,0.86); list-style:none; }
     .meaning summary::-webkit-details-marker{ display:none; }
 
-    /* Cards */
     .card{
       border: 1px solid rgba(31,42,51,0.14);
       background: var(--card);
@@ -112,165 +90,82 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
-    .card .hd{
-      padding: 12px 14px 10px;
-      border-bottom: 1px solid rgba(31,42,51,0.10);
-      background: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.25));
-    }
-    .card .hd strong{
-      font-size: 12px;
-      letter-spacing: .9px;
-      text-transform: uppercase;
-      color: rgba(31,42,51,0.76);
-    }
-    .card .bd{ padding: 14px; }
+    .card .hd{ padding:12px 14px 10px; border-bottom:1px solid rgba(31,42,51,0.10); background:linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.25)); }
+    .card .hd strong{ font-size:12px; letter-spacing:.9px; text-transform:uppercase; color:rgba(31,42,51,0.76); }
+    .card .bd{ padding:14px; }
 
-    /* TOP: immagine/video + filosofia */
-    .topgrid{
-      display:grid;
-      grid-template-columns: 1fr 390px;
-      gap: 16px;
-      align-items: stretch;
-    }
-    @media (max-width: 980px){
-      .topgrid{ grid-template-columns: 1fr; }
-    }
+    .topgrid{ display:grid; grid-template-columns:1fr 390px; gap:16px; align-items:stretch; }
+    @media (max-width:980px){ .topgrid{ grid-template-columns:1fr; } }
 
     .stage{
-      position: relative;
-      border-radius: var(--r-xl);
-      border: 1px solid rgba(31,42,51,0.14);
-      overflow: hidden;
+      position:relative;
+      border-radius:var(--r-xl);
+      border:1px solid rgba(31,42,51,0.14);
+      overflow:hidden;
       background:
         radial-gradient(700px 340px at 30% 40%, rgba(255,183,3,0.14), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.20));
-      min-height: clamp(360px, 52vh, 560px);
+      min-height:clamp(360px,52vh,560px);
     }
 
     .hint{
-      position:absolute;
-      top:12px;
-      left:12px;
-      font-size: 12px;
-      color: rgba(31,42,51,0.72);
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(31,42,51,0.12);
-      padding: 6px 10px;
-      border-radius: 999px;
-      z-index: 5;
+      position:absolute; top:12px; left:12px;
+      font-size:12px; color:rgba(31,42,51,0.72);
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(31,42,51,0.12);
+      padding:6px 10px; border-radius:999px; z-index:5;
     }
 
-    .stageInner{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:stretch;
-      justify-content:stretch;
-      padding: 14px;
-    }
+    .stageInner{ position:absolute; inset:0; display:flex; align-items:stretch; justify-content:stretch; padding:14px; }
 
-    /* FOTO: si vede intera */
     .portraitBtn{
-      width:100%;
-      height:100%;
-      border: 1px solid rgba(31,42,51,0.12);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.70);
-      cursor:pointer;
-      overflow:hidden;
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      width:100%; height:100%;
+      border:1px solid rgba(31,42,51,0.12);
+      border-radius:18px;
+      background:rgba(255,255,255,0.70);
+      cursor:pointer; overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
     }
-    .portraitBtn img{
-      width:100%;
-      height:100%;
-      object-fit: contain;   /* <-- QUI la foto non viene tagliata */
-      object-position: center;
-      display:block;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.65);
-    }
+    .portraitBtn img{ width:100%; height:100%; object-fit:contain; object-position:center; border-radius:18px; background:rgba(255,255,255,0.65); }
 
-    /* CTA */
     .cta{
-      position:absolute;
-      bottom: 14px;
-      left: 14px;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.88);
-      font-size: 12px;
-      font-weight: 900;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      z-index: 6;
+      position:absolute; bottom:14px; left:14px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(31,42,51,0.14);
+      background:rgba(255,255,255,0.88);
+      font-size:12px; font-weight:900; cursor:pointer; user-select:none;
+      transition:transform .14s ease, background .14s ease, border-color .14s ease;
+      z-index:6;
     }
-    .cta:hover{ transform: translateY(-1px); border-color: rgba(33,158,188,0.45); background: rgba(255,255,255,0.96); }
+    .cta:hover{ transform:translateY(-1px); border-color:rgba(33,158,188,0.45); background:rgba(255,255,255,0.96); }
 
     .backToPhoto{
-      position:absolute;
-      top:12px;
-      right:12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(31,42,51,0.14);
-      background: rgba(255,255,255,0.90);
-      font-size: 12px;
-      font-weight: 900;
-      cursor:pointer;
-      user-select:none;
-      display:none;
-      z-index: 6;
+      position:absolute; top:12px; right:12px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(31,42,51,0.14);
+      background:rgba(255,255,255,0.90);
+      font-size:12px; font-weight:900; cursor:pointer; user-select:none;
+      display:none; z-index:6;
     }
 
-    /* VIDEO */
-    .videoWrap{
-      width:100%;
-      height:100%;
-      border: 1px solid rgba(31,42,51,0.12);
-      border-radius: 18px;
-      overflow:hidden;
-      background:#fff;
-    }
-    .videoWrap iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-    }
+    .videoWrap{ width:100%; height:100%; border:1px solid rgba(31,42,51,0.12); border-radius:18px; overflow:hidden; background:#fff; }
+    .videoWrap iframe{ width:100%; height:100%; border:0; display:block; }
 
-    /* Indice */
-    .indexgrid{ margin-top: 16px; }
+    .indexgrid{ margin-top:16px; }
     .nav a{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 10px 10px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      background: rgba(255,255,255,0.78);
-      margin: 8px 0;
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; padding:10px 10px; border-radius:14px;
+      border:1px solid transparent; background:rgba(255,255,255,0.78);
+      margin:8px 0;
+      transition:transform .14s ease, background .14s ease, border-color .14s ease;
     }
-    .nav a:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,183,3,0.45);
-      background: rgba(255,255,255,0.94);
-    }
-    .label{ font-weight: 900; font-size: 13px; }
-    .sub{ color: var(--quiet); font-size: 12px; }
-    .chev{ color: rgba(33,158,188,0.95); font-weight: 900; }
+    .nav a:hover{ transform:translateY(-1px); border-color:rgba(255,183,3,0.45); background:rgba(255,255,255,0.94); }
+    .label{ font-weight:900; font-size:13px; }
+    .sub{ color:var(--quiet); font-size:12px; }
+    .chev{ color:rgba(33,158,188,0.95); font-weight:900; }
 
-    footer{ margin-top: 16px; font-size: 12px; color: var(--quiet); }
-
+    footer{ margin-top:16px; font-size:12px; color:var(--quiet); }
     @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
   </style>
 </head>
@@ -278,14 +173,12 @@
 <body>
   <div class="wrap">
 
-    <!-- Frase: SOLO cliccabile -->
     <div class="titleline">
       <button id="phraseBtn" class="phraseBtn" type="button" aria-controls="meaningBox" aria-expanded="false">
         Io non sono mai cresciuto
       </button>
     </div>
 
-    <!-- Significato: SUBITO sotto (sempre visibile) -->
     <section id="meaningBox" class="meaning" aria-label="Significato della frase">
       <p>
         Qui “non crescere” non significa restare bambini. Significa restare <b>esposti</b>:
@@ -306,15 +199,12 @@
       </details>
     </section>
 
-    <!-- TOP: FOTO/VIDEO + FILOSOFIA -->
     <section class="topgrid" aria-label="Home Pascoli">
 
-      <!-- Stage: foto -> video (clic) -->
       <div class="stage" aria-label="Pascoli (foto o video)">
         <div class="hint" id="hint">clic sulla foto: eco di Pascoli</div>
 
         <div class="stageInner" id="stageInner">
-          <!-- FOTO (cliccabile) -->
           <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
             <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
           </button>
@@ -324,7 +214,6 @@
         <button class="backToPhoto" id="backToPhoto" type="button">↩︎ Torna alla foto</button>
       </div>
 
-      <!-- Filosofia -->
       <aside class="card" aria-label="Filosofia del libro">
         <div class="hd"><strong>Filosofia di questo libro</strong></div>
         <div class="bd">
@@ -345,7 +234,6 @@
 
     </section>
 
-    <!-- Indice -->
     <section class="indexgrid" aria-label="Indice della web app">
       <div class="card nav">
         <div class="hd"><strong>Indice</strong></div>
@@ -374,7 +262,8 @@
             <div class="chev">›</div>
           </a>
 
-          <a href="testi/gelsomino-notturno.html">
+          <!-- QUI LA VARIAZIONE -->
+          <a href="gelsomino/gelsomino.html">
             <div>
               <div class="label">4. I testi — Il gelsomino notturno</div>
               <div class="sub">pagina + lavoro sul testo</div>
@@ -406,22 +295,16 @@
 
   <script>
     const $ = (q, r=document) => r.querySelector(q);
-
-    // Year
     $('#year').textContent = new Date().getFullYear();
 
-    // Frase: clic = apri/chiudi "Approfondisci" (il significato base è già visibile)
     const phraseBtn = $('#phraseBtn');
     const details = $('#moreMeaning');
-
     phraseBtn.addEventListener('click', () => {
       details.open = !details.open;
       phraseBtn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-      // piccolo effetto: porta lo sguardo sul significato
       $('#meaningBox').scrollIntoView({behavior:'smooth', block:'start'});
     });
 
-    // Foto -> Video (HeyGen)
     const stageInner = $('#stageInner');
     const cta = $('#cta');
     const hint = $('#hint');
@@ -464,7 +347,6 @@
       $('#portraitBtn').addEventListener('click', showVideo);
     }
 
-    // binding iniziale
     $('#portraitBtn').addEventListener('click', showVideo);
     cta.addEventListener('click', showVideo);
     backToPhoto.addEventListener('click', showPhoto);
