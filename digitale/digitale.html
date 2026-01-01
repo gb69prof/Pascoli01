@@ -16,6 +16,8 @@
       --radius: 24px;
       --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --frameW: 120px;        /* larghezza cornice */
+      --gutter: 34px;         /* respiro tra cornice e contenuto */
     }
     *{box-sizing:border-box}
     body{
@@ -26,19 +28,31 @@
       line-height:1.6;
     }
     .topbar{height:8px;background:linear-gradient(90deg,#3a235a,#5a2f86,#2b1a40);}
-    /* Side frames */
+
+    /* Side frames (non devono coprire il testo) */
     .frame-left,.frame-right{
-      position:fixed; top:0; width:120px; height:100vh;
+      position:fixed;
+      top:0;
+      width:var(--frameW);
+      height:100vh;
       background:url('assets/digitale-cornice.png') repeat-y center;
       background-size:contain;
       opacity:.95;
       pointer-events:none;
       filter: drop-shadow(0 10px 30px rgba(0,0,0,.10));
+      z-index:0; /* dietro al contenuto */
     }
     .frame-left{left:0;}
     .frame-right{right:0; transform:scaleX(-1);}
 
-    .page{max-width:1180px;margin:0 auto;padding:28px 18px 80px;}
+    .page{
+      max-width:1180px;
+      margin:0 auto;
+      padding:28px calc(18px + var(--frameW) + var(--gutter)) 80px; /* spazio per le cornici */
+      position:relative;
+      z-index:1; /* sopra le cornici */
+    }
+
     .home-row{display:flex;align-items:center;justify-content:flex-start;margin:10px 0 18px;}
     .home-btn{
       display:inline-flex;align-items:center;gap:10px;
@@ -74,6 +88,7 @@
       .card{padding:28px;}
       .layout{grid-template-columns:1fr;}
       .frame-left,.frame-right{display:none;}
+      .page{padding:28px 18px 80px;}
     }
   </style>
 </head>
@@ -93,7 +108,7 @@
       <p class="kicker">GIOVANNI PASCOLI · LA DIGITALE PURPUREA</p>
       <h1>Il fiore del proibito: attrazione e paura</h1>
       <p class="lead">
-        A sinistra trovi la <b>lezione completa</b>. A destra: il <b>video</b> (inserisci il link) e lo <b>schema</b> riassuntivo.
+        A sinistra trovi la <b>lezione completa</b>. A destra: il <b>video</b> e lo <b>schema</b> riassuntivo.
         Le cornici laterali riprendono la digitale come segno visivo costante.
       </p>
 
@@ -164,8 +179,12 @@ che porta con sé il fascino del mistero e il timore della morte.
 
         <aside class="pane media" aria-label="Video e schema">
           <div class="video" aria-label="Video">
-            <!-- Incolla qui il tuo iframe: sostituisci tutto il blocco con quello che mi darai -->
-            <iframe src="VIDEO_DA_INSERIRE" title="Video: La digitale purpurea"></iframe>
+            <iframe
+              src="https://www.youtube.com/embed/KYZBnaaFytI?rel=0"
+              title="YouTube Shorts: La digitale purpurea"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
           </div>
           <div class="img-card">
             <img src="assets/schema-digitale.png" alt="Schema concettuale: La digitale purpurea" data-zoom />
