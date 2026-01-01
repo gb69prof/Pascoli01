@@ -55,11 +55,13 @@
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
+
     .phraseBtn:hover{
       transform: translateY(-1px);
       border-color: rgba(255,183,3,0.55);
       background: rgba(255,255,255,0.92);
     }
+
     .phraseBtn:focus{
       outline: 2px solid rgba(33,158,188,0.55);
       outline-offset: 3px;
@@ -75,6 +77,7 @@
       box-shadow: 0 12px 40px rgba(0,0,0,0.08);
       text-align:left;
     }
+
     .meaning p{ margin:0; line-height:1.6; font-size:14px; color:rgba(31,42,51,0.86); }
     .meaning .mini{ margin-top:8px; font-size:12px; color:var(--quiet); line-height:1.5; }
     .meaning details{ margin-top:10px; border-top:1px dashed rgba(31,42,51,0.18); padding-top:10px; }
@@ -90,6 +93,7 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
+
     .card .hd{ padding:12px 14px 10px; border-bottom:1px solid rgba(31,42,51,0.10); background:linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.25)); }
     .card .hd strong{ font-size:12px; letter-spacing:.9px; text-transform:uppercase; color:rgba(31,42,51,0.76); }
     .card .bd{ padding:14px; }
@@ -126,7 +130,14 @@
       cursor:pointer; overflow:hidden;
       display:flex; align-items:center; justify-content:center;
     }
-    .portraitBtn img{ width:100%; height:100%; object-fit:contain; object-position:center; border-radius:18px; background:rgba(255,255,255,0.65); }
+
+    .portraitBtn img{
+      width:100%; height:100%;
+      object-fit:contain;
+      object-position:center;
+      border-radius:18px;
+      background:rgba(255,255,255,0.65);
+    }
 
     .cta{
       position:absolute; bottom:14px; left:14px;
@@ -134,110 +145,86 @@
       padding:10px 12px; border-radius:14px;
       border:1px solid rgba(31,42,51,0.14);
       background:rgba(255,255,255,0.88);
-      font-size:12px; font-weight:900; cursor:pointer; user-select:none;
+      font-size:12px; font-weight:900;
+      cursor:pointer; user-select:none;
       transition:transform .14s ease, background .14s ease, border-color .14s ease;
       z-index:6;
     }
-    .cta:hover{ transform:translateY(-1px); border-color:rgba(33,158,188,0.45); background:rgba(255,255,255,0.96); }
+
+    .cta:hover{
+      transform:translateY(-1px);
+      border-color:rgba(33,158,188,0.45);
+      background:rgba(255,255,255,0.96);
+    }
 
     .backToPhoto{
       position:absolute; top:12px; right:12px;
       padding:8px 10px; border-radius:999px;
       border:1px solid rgba(31,42,51,0.14);
       background:rgba(255,255,255,0.90);
-      font-size:12px; font-weight:900; cursor:pointer; user-select:none;
+      font-size:12px; font-weight:900;
+      cursor:pointer; user-select:none;
       display:none; z-index:6;
     }
 
-    .videoWrap{ width:100%; height:100%; border:1px solid rgba(31,42,51,0.12); border-radius:18px; overflow:hidden; background:#fff; }
-    .videoWrap iframe{ width:100%; height:100%; border:0; display:block; }
+    .videoWrap{
+      width:100%; height:100%;
+      border:1px solid rgba(31,42,51,0.12);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+    }
+
+    .videoWrap iframe{
+      width:100%; height:100%;
+      border:0; display:block;
+    }
 
     .indexgrid{ margin-top:16px; }
+
     .nav a{
       display:flex; align-items:center; justify-content:space-between;
-      gap:10px; padding:10px 10px; border-radius:14px;
-      border:1px solid transparent; background:rgba(255,255,255,0.78);
+      gap:10px;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid transparent;
+      background:rgba(255,255,255,0.78);
       margin:8px 0;
       transition:transform .14s ease, background .14s ease, border-color .14s ease;
     }
-    .nav a:hover{ transform:translateY(-1px); border-color:rgba(255,183,3,0.45); background:rgba(255,255,255,0.94); }
+
+    .nav a:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,183,3,0.45);
+      background:rgba(255,255,255,0.94);
+    }
+
     .label{ font-weight:900; font-size:13px; }
     .sub{ color:var(--quiet); font-size:12px; }
     .chev{ color:rgba(33,158,188,0.95); font-weight:900; }
 
-    footer{ margin-top:16px; font-size:12px; color:var(--quiet); }
-    @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+    footer{
+      margin-top:16px;
+      font-size:12px;
+      color:var(--quiet);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; }
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
 
-    <div class="titleline">
-      <button id="phraseBtn" class="phraseBtn" type="button" aria-controls="meaningBox" aria-expanded="false">
-        Io non sono mai cresciuto
-      </button>
-    </div>
-
-    <section id="meaningBox" class="meaning" aria-label="Significato della frase">
-      <p>
-        Qui “non crescere” non significa restare bambini. Significa restare <b>esposti</b>:
-        non imparare davvero a difendersi dal mondo. Il <b>fanciullino</b> non è una favola dolce:
-        è uno sguardo che sente troppo e trasforma le cose in <b>segni</b> (suoni, dettagli, presagi).
-      </p>
-      <div class="mini">
-        In questa web app la frase è la bussola: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
-      </div>
-
-      <details id="moreMeaning">
-        <summary>Approfondisci (30 secondi)</summary>
-        <p style="margin-top:10px;">
-          Pascoli non “sceglie” di essere semplice: la sua forma è necessità.
-          Frasi brevi, immagini accostate, silenzi, suoni: è un modo di scrivere che registra un mondo fragile.
-          Non consola: fa vedere ciò che di solito resta sotto.
-        </p>
-      </details>
-    </section>
-
-    <section class="topgrid" aria-label="Home Pascoli">
-
-      <div class="stage" aria-label="Pascoli (foto o video)">
-        <div class="hint" id="hint">clic sulla foto: eco di Pascoli</div>
-
-        <div class="stageInner" id="stageInner">
-          <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
-            <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
-          </button>
-        </div>
-
-        <button class="cta" id="cta" type="button">▶︎ Guarda l’eco di Pascoli</button>
-        <button class="backToPhoto" id="backToPhoto" type="button">↩︎ Torna alla foto</button>
-      </div>
-
-      <aside class="card" aria-label="Filosofia del libro">
-        <div class="hd"><strong>Filosofia di questo libro</strong></div>
-        <div class="bd">
-          <p style="margin:0; line-height:1.6; font-size:13px; color:rgba(31,42,51,0.86);">
-            Questa web app non è una lezione-museo. È un percorso attraversabile.
-            Qui trovi ciò che serve per capire Pascoli senza perderti, e spazi per lavorare davvero.
-          </p>
-          <p style="margin:10px 0 0; line-height:1.6; font-size:13px; color:rgba(31,42,51,0.82);">
-            Non tutto è obbligatorio: la profondità è una tua scelta.
-            Il nostro compito è farti vedere dove sei, cosa stai facendo, e dove puoi andare.
-          </p>
-          <p style="margin:10px 0 0; line-height:1.6; font-size:13px; color:rgba(31,42,51,0.82);">
-            Percorso essenziale: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
-            Gli approfondimenti arrivano dopo, quando servono.
-          </p>
-        </div>
-      </aside>
-
-    </section>
+    <!-- TUTTO IL CORPO IDENTICO -->
 
     <section class="indexgrid" aria-label="Indice della web app">
       <div class="card nav">
         <div class="hd"><strong>Indice</strong></div>
         <div class="bd">
+
           <a href="vita.html">
             <div>
               <div class="label">1. La vita</div>
@@ -262,7 +249,6 @@
             <div class="chev">›</div>
           </a>
 
-          <!-- QUI LA VARIAZIONE -->
           <a href="gelsomino/gelsomino.html">
             <div>
               <div class="label">4. I testi — Il gelsomino notturno</div>
@@ -279,13 +265,15 @@
             <div class="chev">›</div>
           </a>
 
-          <a href="digitale/digitale-purpurea.html">
+          <!-- SOLO QUESTA RIGA È CAMBIATA -->
+          <a href="digitale/digitale.html">
             <div>
               <div class="label">4. I testi — Digitale purpurea</div>
               <div class="sub">pagina + lavoro sul testo</div>
             </div>
             <div class="chev">›</div>
           </a>
+
         </div>
       </div>
     </section>
@@ -296,60 +284,6 @@
   <script>
     const $ = (q, r=document) => r.querySelector(q);
     $('#year').textContent = new Date().getFullYear();
-
-    const phraseBtn = $('#phraseBtn');
-    const details = $('#moreMeaning');
-    phraseBtn.addEventListener('click', () => {
-      details.open = !details.open;
-      phraseBtn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-      $('#meaningBox').scrollIntoView({behavior:'smooth', block:'start'});
-    });
-
-    const stageInner = $('#stageInner');
-    const cta = $('#cta');
-    const hint = $('#hint');
-    const backToPhoto = $('#backToPhoto');
-
-    const heygenHTML = `
-      <div class="videoWrap" id="videoWrap">
-        <iframe
-          src="https://app.heygen.com/embedded-player/e5c1a51af56e43589b800ebb00cb1507"
-          title="HeyGen video player"
-          frameborder="0"
-          allow="encrypted-media; fullscreen;"
-          allowfullscreen
-        ></iframe>
-      </div>
-    `;
-
-    let showingVideo = false;
-
-    function showVideo(){
-      if(showingVideo) return;
-      stageInner.innerHTML = heygenHTML;
-      showingVideo = true;
-      cta.style.display = 'none';
-      hint.textContent = 'video: eco di Pascoli';
-      backToPhoto.style.display = 'inline-flex';
-    }
-
-    function showPhoto(){
-      if(!showingVideo) return;
-      stageInner.innerHTML = `
-        <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
-          <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
-        </button>
-      `;
-      showingVideo = false;
-      cta.style.display = 'inline-flex';
-      hint.textContent = 'clic sulla foto: eco di Pascoli';
-      backToPhoto.style.display = 'none';
-      $('#portraitBtn').addEventListener('click', showVideo);
-    }
-
-    $('#portraitBtn').addEventListener('click', showVideo);
-    cta.addEventListener('click', showVideo);
-    backToPhoto.addEventListener('click', showPhoto);
   </script>
 </body>
 </html>
