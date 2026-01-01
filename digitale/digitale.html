@@ -78,6 +78,42 @@
     .img-card{border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.10);background:#fff;}
     .img-card img{width:100%;height:auto;display:block;cursor:zoom-in;}
 
+    /* Approfondimento link card */
+    .deep-dive{
+      margin-top:18px;
+      border-radius:18px;
+      border:1px solid rgba(0,0,0,.10);
+      background: linear-gradient(135deg, rgba(122,29,47,.10), rgba(58,35,90,.08));
+      padding:16px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .deep-dive .icon{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(0,0,0,.08);
+      flex:0 0 auto;
+      font-size:20px;
+    }
+    .deep-dive h3{margin:0 0 6px; font-size:18px;}
+    .deep-dive p{margin:0; color:var(--muted); font-size:14.5px; line-height:1.55;}
+    .deep-dive a{
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(122,29,47,.22);
+      background:rgba(255,255,255,.72);
+      color:#3a235a;
+      font-weight:800;
+      text-decoration:none;
+      width:fit-content;
+    }
+    .deep-dive a:hover{transform:translateY(-1px);}
+    .deep-dive a:active{transform:translateY(0);}
+
     /* modal zoom */
     .modal{position:fixed;inset:0;background:rgba(2,6,23,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:9999;}
     .modal.open{display:flex;}
@@ -189,6 +225,21 @@ che porta con sé il fascino del mistero e il timore della morte.
           <div class="img-card">
             <img src="assets/schema-digitale.png" alt="Schema concettuale: La digitale purpurea" data-zoom />
           </div>
+
+          <!-- NOVITÀ: Approfondimento in fondo alla pagina -->
+          <div class="deep-dive" aria-label="Approfondimento: il fiore come simbolo nella letteratura">
+            <div class="icon" aria-hidden="true">🌺</div>
+            <div>
+              <h3>Il fiore come simbolo nella letteratura</h3>
+              <p>
+                Un percorso storico: rosa, gelsomino, orchidea e altri fiori come linguaggio “coperto”
+                di corpo, desiderio, verginità e procreazione.
+              </p>
+              <a href="approfondimenti/Fiore.html">
+                <span>Apri approfondimento</span> <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
         </aside>
       </div>
     </section>
@@ -226,3 +277,4 @@ che porta con sé il fascino del mistero e il timore della morte.
   </script>
 </body>
 </html>
+``` :contentReference[oaicite:0]{index=0}
