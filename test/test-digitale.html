@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test – Pascoli: La digitale purpurea</title>
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0f1b2d;
+      --text:#e8eefc;
+      --muted:#a7b4d6;
+      --accent:#7c5cff;
+      --accent2:#00d4ff;
+      --ok:#2ee59d;
+      --bad:#ff4d6d;
+      --warn:#ffd166;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(0,212,255,.25), transparent 52%),
+        radial-gradient(700px 520px at 70% 85%, rgba(46,229,157,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+
+    .wrap{max-width: 980px; margin: 0 auto; padding: 28px 16px 60px;}
+
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between;
+      padding: 18px 18px 14px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .title{display:flex; flex-direction:column; gap:6px;}
+    h1{margin:0; font-size: 22px; letter-spacing:.2px;}
+    .subtitle{color:var(--muted); font-size: 14px; line-height:1.35;}
+
+    .badgeRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end;}
+    .badge{
+      padding:8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{width:8px; height:8px; border-radius:50%; background: var(--accent2); box-shadow: 0 0 0 3px rgba(0,212,255,.15)}
+
+    main{margin-top: 18px;}
+
+    .card{
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .q{
+      margin-top: 14px;
+      border-radius: 16px;
+      padding: 14px 14px 10px;
+      background: linear-gradient(180deg, rgba(16,31,54,.85), rgba(15,27,47,.75));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .qHead{display:flex; gap:10px; align-items:flex-start; justify-content:space-between;}
+    .qNum{
+      min-width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(124,92,255,.35), rgba(0,212,255,.18));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .qText{font-size: 15px; line-height: 1.45; margin: 0;}
+
+    .options{margin-top: 10px; display:grid; gap:10px;}
+
+    .opt{
+      display:flex; align-items:flex-start; gap:10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .08s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .opt:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06)}
+
+    input[type="radio"]{margin-top: 3px; accent-color: var(--accent2);}
+
+    .opt.correct{border-color: rgba(46,229,157,.55); background: rgba(46,229,157,.12)}
+    .opt.wrong{border-color: rgba(255,77,109,.55); background: rgba(255,77,109,.12)}
+    .opt.revealCorrect{outline: 2px solid rgba(46,229,157,.35)}
+
+    .feedback{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+    .feedback strong{color: var(--text)}
+
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 18px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .btn{
+      border:none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      color: var(--text);
+      cursor:pointer;
+      background: linear-gradient(135deg, rgba(124,92,255,.92), rgba(0,212,255,.60));
+      box-shadow: 0 12px 24px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.14);
+      transition: transform .08s ease, filter .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.04)}
+    .btn:active{transform: translateY(0px); filter: brightness(.98)}
+
+    .btn.secondary{background: rgba(255,255,255,.08);}
+
+    .note{color: var(--muted); font-size: 13px; line-height:1.35;}
+
+    .result{
+      display:none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+    }
+
+    .scoreRow{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;}
+    .bigScore{font-size: 20px; font-weight: 800; letter-spacing:.2px;}
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .report{margin-top: 12px; display:grid; gap:12px;}
+    .mini{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mini h3{margin:0 0 6px; font-size: 14px}
+    .mini p{margin:0; color: var(--muted); font-size: 13px; line-height:1.45}
+
+    .warnBox{
+      display:none;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,209,102,.35);
+      background: rgba(255,209,102,.12);
+      color: rgba(255,239,204,.95);
+      font-size: 13px;
+      line-height:1.4;
+    }
+
+    footer{margin-top: 18px; color: rgba(167,180,214,.75); font-size: 12px; text-align:center}
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Pascoli – La digitale purpurea (Test)</h1>
+        <div class="subtitle">10 domande. 1 punto per risposta corretta. Correzione e colori <strong>solo dopo</strong> la consegna.</div>
+      </div>
+      <div class="badgeRow">
+        <div class="badge"><span class="dot"></span> Risposte mescolate a ogni apertura</div>
+        <div class="badge">🌿 Focus: simbolo, turbamento, sguardo del “fanciullino”</div>
+      </div>
+    </header>
+
+    <main class="card" id="quiz"></main>
+
+    <div class="actions">
+      <button class="btn" id="submitBtn">Consegna e correggi</button>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
+        <button class="btn secondary" id="resetBtn" title="Azzera e rimescola">Ricomincia</button>
+        <span class="note" id="progress">Compila tutte le domande prima di consegnare.</span>
+      </div>
+    </div>
+
+    <div class="warnBox" id="warnBox">⚠️ Ti mancano alcune risposte. Completa tutte le domande prima di consegnare.</div>
+
+    <section class="result" id="result">
+      <div class="scoreRow">
+        <div class="bigScore" id="scoreText">Punteggio: —</div>
+        <div class="pill" id="gradeText">Voto: —</div>
+      </div>
+      <div class="report" id="report"></div>
+    </section>
+
+    <footer>Test HTML standalone – pronto per GitHub Pages.</footer>
+  </div>
+
+  <script>
+    // Nota trasparente: non sono riuscita a leggere automaticamente la pagina GitHub fornita (errore tecnico di fetch).
+    // Questo test è costruito su una lettura scolastica standard della poesia "La digitale purpurea".
+    // Se vuoi, incollami i punti chiave della tua pagina e lo riallineo in 2 minuti.
+
+    const QUESTIONS = [
+      {
+        q: "Nella lettura più comune, che cosa simboleggia la 'digitale purpurea'?",
+        options: [
+          "Il desiderio sessuale percepito come mistero e pericolo",
+          "La speranza patriottica in un'Italia unita",
+          "Il progresso scientifico e la fiducia nella tecnica",
+          "La serenità completa della vita domestica"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il simbolo centrale",
+        explain: "La digitale purpurea (fiore bello ma velenoso) diventa simbolo di desiderio: attrazione e paura insieme, soprattutto se guardato con lo sguardo infantile pascoliano."
+      },
+      {
+        q: "Perché la digitale è un simbolo particolarmente efficace in Pascoli?",
+        options: [
+          "Perché unisce bellezza (fiore) e minaccia (veleno), come il desiderio",
+          "Perché è un fiore raro che rappresenta solo l'esotico",
+          "Perché serve solo a decorare il paesaggio",
+          "Perché è il simbolo ufficiale della religione cristiana"
+        ],
+        correctIndex: 0,
+        explainTitle: "Bellezza e veleno",
+        explain: "Pascoli spesso carica un oggetto naturale di un doppio valore: fascino e inquietudine. Qui il fiore è seducente ma velenoso: perfetto per raccontare un desiderio ambivalente."
+      },
+      {
+        q: "Quale atteggiamento tipico dello sguardo pascoliano emerge nella poesia?",
+        options: [
+          "Lo sguardo del 'fanciullino': stupore e turbamento davanti al corpo e al mistero",
+          "Lo sguardo dell'oratore: tesi chiara e dimostrazione logica",
+          "Lo sguardo del cronista: descrizione oggettiva senza emozioni",
+          "Lo sguardo del satirico: derisione della realtà"
+        ],
+        correctIndex: 0,
+        explainTitle: "Fanciullino",
+        explain: "Nella lettura pascoliana, il mondo è pieno di segni: il 'fanciullino' non domina, teme e si incanta. La sessualità appare come un enigma che inquieta."
+      },
+      {
+        q: "Che cosa crea, spesso, l'effetto di inquietudine in Pascoli?",
+        options: [
+          "Cose minime che diventano segni di un senso più profondo e oscuro",
+          "L'uso continuo di esempi scientifici e formule",
+          "L'assenza totale di immagini sensoriali",
+          "Solo riferimenti diretti alla politica contemporanea"
+        ],
+        correctIndex: 0,
+        explainTitle: "Piccole cose, grandi ombre",
+        explain: "Pascoli fa questo: prende una cosa piccola (fiore, suono, luce) e la trasforma in un simbolo che apre un mistero—non sempre consolatorio."
+      },
+      {
+        q: "Quale coppia di termini descrive bene la tensione simbolica della poesia?",
+        options: [
+          "Attrazione / paura",
+          "Eroismo / gloria",
+          "Razionalità / calcolo",
+          "Satira / comicità"
+        ],
+        correctIndex: 0,
+        explainTitle: "Tensione",
+        explain: "La digitale purpurea è 'bella' e 'pericolosa': la stessa tensione attraversa il desiderio, che chiama e spaventa."
+      },
+      {
+        q: "In questa lettura, il desiderio è presentato come…",
+        options: [
+          "un'esperienza insieme naturale e disturbante, non pienamente pacificata",
+          "un fatto solo biologico e privo di significato",
+          "un traguardo eroico da esibire",
+          "una questione esclusivamente religiosa e dottrinale"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il desiderio pascoliano",
+        explain: "Non è moralismo 'a sermone': è un turbamento. Il corpo è natura, ma la coscienza lo vive come un confine inquieto."
+      },
+      {
+        q: "Che ruolo ha la natura nei testi simbolisti/pascoliani come questo?",
+        options: [
+          "È un linguaggio di segni: le cose rimandano a significati interiori",
+          "È un semplice fondale realistico",
+          "È un nemico da domare con la tecnica",
+          "È un argomento usato solo per propaganda"
+        ],
+        correctIndex: 0,
+        explainTitle: "Natura come linguaggio",
+        explain: "Nel simbolismo e in Pascoli, la natura è un sistema di corrispondenze: ciò che vedi è anche ciò che senti (e ciò che temi)."
+      },
+      {
+        q: "Perché si parla di 'trasfigurazione' in Pascoli?",
+        options: [
+          "Perché un oggetto reale viene trasformato in simbolo universale",
+          "Perché la poesia traduce i testi latini parola per parola",
+          "Perché la poesia elimina tutte le immagini per essere più chiara",
+          "Perché i versi ripetono sempre la stessa idea senza variazioni"
+        ],
+        correctIndex: 0,
+        explainTitle: "Trasfigurazione",
+        explain: "Trasfigurare significa cambiare statuto alle cose: restano oggetti, ma diventano segni di un senso interiore e più ampio."
+      },
+      {
+        q: "Qual è una conseguenza stilistica tipica di questa poetica simbolica?",
+        options: [
+          "Allusione e ambiguità controllata: non tutto è detto in modo esplicito",
+          "Spiegazione didascalica e tesi dichiarata",
+          "Argomentazione filosofica con definizioni precise",
+          "Uso esclusivo di linguaggio tecnico"
+        ],
+        correctIndex: 0,
+        explainTitle: "Stile allusivo",
+        explain: "Il simbolo non 'spiega': suggerisce. La poesia lavora per allusioni, risonanze, immagini che aprono interpretazioni."
+      },
+      {
+        q: "In sintesi, la digitale purpurea funziona come simbolo perché…",
+        options: [
+          "incarna un piacere che attrae e ferisce, aprendo il tema del mistero del corpo",
+          "riassume le battaglie risorgimentali del secolo",
+          "rappresenta un esempio di scrittura comica e ironica",
+          "dimostra l'ottimismo assoluto verso la vita"
+        ],
+        correctIndex: 0,
+        explainTitle: "Sintesi",
+        explain: "Il simbolo non è 'decorazione': è una chiave. Qui apre il nodo desiderio/paura, vita/veleno, attrazione/ferita: il mondo pascoliano in miniatura."
+      }
+    ];
+
+    function shuffle(arr){
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function scoreToGrade10(score, total){
+      const ratio = score / total;
+      const grade = Math.round((ratio * 9 + 1) * 10) / 10; // 1.0 - 10.0
+      return grade.toFixed(1);
+    }
+
+    function gradeLabel(grade){
+      const g = parseFloat(grade);
+      if(g >= 9) return "Eccellente";
+      if(g >= 8) return "Molto buono";
+      if(g >= 7) return "Buono";
+      if(g >= 6) return "Sufficiente";
+      return "Da ripassare";
+    }
+
+    const quizEl = document.getElementById('quiz');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const warnBox = document.getElementById('warnBox');
+    const progress = document.getElementById('progress');
+    const resultEl = document.getElementById('result');
+    const scoreText = document.getElementById('scoreText');
+    const gradeText = document.getElementById('gradeText');
+    const reportEl = document.getElementById('report');
+
+    let state = { finished:false, questions:[] };
+
+    function buildState(){
+      state.finished = false;
+      state.questions = QUESTIONS.map((q, idx) => {
+        const mapped = q.options.map((text, i) => ({ text, isCorrect: i === q.correctIndex }));
+        shuffle(mapped);
+        return {
+          id: idx,
+          q: q.q,
+          options: mapped,
+          explainTitle: q.explainTitle,
+          explain: q.explain,
+          chosenIndex: null
+        };
+      });
+    }
+
+    function render(){
+      quizEl.innerHTML = '';
+
+      const intro = document.createElement('div');
+      intro.className = 'note';
+      intro.style.marginTop = '2px';
+      intro.innerHTML = "<strong>Istruzioni:</strong> una sola risposta per domanda. Consegna per vedere correzione e mini-lezioni.";
+      quizEl.appendChild(intro);
+
+      state.questions.forEach((q, i) => {
+        const box = document.createElement('section');
+        box.className = 'q';
+
+        const head = document.createElement('div');
+        head.className = 'qHead';
+
+        const num = document.createElement('div');
+        num.className = 'qNum';
+        num.textContent = String(i + 1);
+
+        const text = document.createElement('p');
+        text.className = 'qText';
+        text.textContent = q.q;
+
+        head.appendChild(num);
+        head.appendChild(text);
+        box.appendChild(head);
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, oi) => {
+          const label = document.createElement('label');
+          label.className = 'opt';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = 'q_' + q.id;
+          input.value = String(oi);
+          input.disabled = state.finished;
+          input.checked = (q.chosenIndex === oi);
+
+          input.addEventListener('change', () => {
+            if(state.finished) return;
+            q.chosenIndex = oi;
+            updateProgress();
+          });
+
+          const span = document.createElement('span');
+          span.textContent = opt.text;
+
+          label.appendChild(input);
+          label.appendChild(span);
+
+          if(state.finished){
+            const isCorrect = opt.isCorrect;
+            const isChosen = (q.chosenIndex === oi);
+            if(isChosen && isCorrect) label.classList.add('correct');
+            if(isChosen && !isCorrect) label.classList.add('wrong');
+            if(isCorrect) label.classList.add('revealCorrect');
+          }
+
+          options.appendChild(label);
+        });
+
+        box.appendChild(options);
+
+        const fb = document.createElement('div');
+        fb.className = 'feedback';
+        fb.style.display = state.finished ? 'block' : 'none';
+
+        const correctOpt = q.options.find(o => o.isCorrect);
+        const chosenOpt = q.chosenIndex == null ? null : q.options[q.chosenIndex];
+
+        if(state.finished){
+          const ok = chosenOpt && chosenOpt.isCorrect;
+          fb.innerHTML = ok
+            ? `<strong>✔ Corretto.</strong> ${q.explain}`
+            : `<strong>✘ Non corretto.</strong> Risposta giusta: <strong>${correctOpt.text}</strong>. ${q.explain}`;
+        }
+
+        box.appendChild(fb);
+        quizEl.appendChild(box);
+      });
+
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const answered = state.questions.filter(q => q.chosenIndex !== null).length;
+      const total = state.questions.length;
+
+      if(state.finished){
+        progress.textContent = `Test concluso: ${answered}/${total} risposte.`;
+        return;
+      }
+
+      progress.textContent = `Risposte: ${answered}/${total}`;
+      warnBox.style.display = 'none';
+    }
+
+    function finish(){
+      const missing = state.questions.filter(q => q.chosenIndex === null).length;
+      if(missing > 0){
+        warnBox.style.display = 'block';
+        warnBox.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+
+      state.finished = true;
+
+      let score = 0;
+      const wrongs = [];
+
+      state.questions.forEach((q) => {
+        const chosen = q.options[q.chosenIndex];
+        if(chosen && chosen.isCorrect) score += 1;
+        else wrongs.push(q);
+      });
+
+      const grade = scoreToGrade10(score, state.questions.length);
+
+      scoreText.textContent = `Punteggio: ${score} / ${state.questions.length}`;
+      gradeText.textContent = `Voto: ${grade} (${gradeLabel(grade)})`;
+
+      reportEl.innerHTML = '';
+
+      const summary = document.createElement('div');
+      summary.className = 'mini';
+      summary.innerHTML = `
+        <h3>Report</h3>
+        <p>${wrongs.length === 0
+          ? "Perfetto: nessun errore. Ora prova a spiegare perché il simbolo 'bellezza/veleno' è così pascoliano."
+          : `Errori: <strong>${wrongs.length}</strong>. Qui sotto trovi mini-lezioni mirate sugli errori.`}
+        </p>
+      `;
+      reportEl.appendChild(summary);
+
+      if(wrongs.length){
+        wrongs.forEach((q, idx) => {
+          const mini = document.createElement('div');
+          mini.className = 'mini';
+
+          const correctOpt = q.options.find(o => o.isCorrect);
+          const chosenOpt = q.options[q.chosenIndex];
+
+          mini.innerHTML = `
+            <h3>${idx + 1}) ${q.explainTitle}</h3>
+            <p><strong>Domanda:</strong> ${q.q}</p>
+            <p><strong>Hai scelto:</strong> ${chosenOpt ? chosenOpt.text : '—'}</p>
+            <p><strong>Corretto:</strong> ${correctOpt ? correctOpt.text : '—'}</p>
+            <p>${q.explain}</p>
+          `;
+          reportEl.appendChild(mini);
+        });
+      }
+
+      resultEl.style.display = 'block';
+
+      render();
+
+      submitBtn.disabled = true;
+      submitBtn.style.filter = 'grayscale(.2)';
+      submitBtn.style.opacity = '.85';
+
+      resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function reset(){
+      buildState();
+      submitBtn.disabled = false;
+      submitBtn.style.filter = '';
+      submitBtn.style.opacity = '';
+      resultEl.style.display = 'none';
+      reportEl.innerHTML = '';
+      warnBox.style.display = 'none';
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    submitBtn.addEventListener('click', finish);
+    resetBtn.addEventListener('click', reset);
+
+    buildState();
+    render();
+  </script>
+</body>
+</html>
