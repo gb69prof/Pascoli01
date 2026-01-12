@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test – Pascoli: visione del mondo</title>
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0f1b2d;
+      --card:#0f1b2f;
+      --card2:#101f36;
+      --text:#e8eefc;
+      --muted:#a7b4d6;
+      --accent:#7c5cff;
+      --accent2:#00d4ff;
+      --ok:#2ee59d;
+      --bad:#ff4d6d;
+      --warn:#ffd166;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(0,212,255,.25), transparent 52%),
+        radial-gradient(700px 520px at 70% 85%, rgba(46,229,157,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+
+    .wrap{max-width: 980px; margin: 0 auto; padding: 28px 16px 60px;}
+
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between;
+      padding: 18px 18px 14px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .title{
+      display:flex; flex-direction:column; gap:6px;
+    }
+
+    h1{margin:0; font-size: 22px; letter-spacing:.2px;}
+    .subtitle{color:var(--muted); font-size: 14px; line-height:1.35;}
+
+    .badgeRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end;}
+    .badge{
+      padding:8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{width:8px; height:8px; border-radius:50%; background: var(--accent2); box-shadow: 0 0 0 3px rgba(0,212,255,.15)}
+
+    main{margin-top: 18px;}
+
+    .card{
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .q{
+      margin-top: 14px;
+      border-radius: 16px;
+      padding: 14px 14px 10px;
+      background: linear-gradient(180deg, rgba(16,31,54,.85), rgba(15,27,47,.75));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .qHead{display:flex; gap:10px; align-items:flex-start; justify-content:space-between;}
+    .qNum{
+      min-width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(124,92,255,.35), rgba(0,212,255,.18));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .qText{font-size: 15px; line-height: 1.45; margin: 0;}
+
+    .options{margin-top: 10px; display:grid; gap:10px;}
+
+    .opt{
+      display:flex; align-items:flex-start; gap:10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .08s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .opt:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06)}
+
+    input[type="radio"]{margin-top: 3px; accent-color: var(--accent2);}
+
+    .opt.correct{border-color: rgba(46,229,157,.55); background: rgba(46,229,157,.12)}
+    .opt.wrong{border-color: rgba(255,77,109,.55); background: rgba(255,77,109,.12)}
+    .opt.revealCorrect{outline: 2px solid rgba(46,229,157,.35)}
+
+    .feedback{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    .feedback strong{color: var(--text)}
+
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 18px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .btn{
+      border:none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      color: var(--text);
+      cursor:pointer;
+      background: linear-gradient(135deg, rgba(124,92,255,.92), rgba(0,212,255,.60));
+      box-shadow: 0 12px 24px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.14);
+      transition: transform .08s ease, filter .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.04)}
+    .btn:active{transform: translateY(0px); filter: brightness(.98)}
+
+    .btn.secondary{
+      background: rgba(255,255,255,.08);
+    }
+
+    .note{color: var(--muted); font-size: 13px; line-height:1.35;}
+
+    .result{
+      display:none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+    }
+
+    .scoreRow{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;}
+    .bigScore{
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .report{margin-top: 12px; display:grid; gap:12px;}
+    .mini{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mini h3{margin:0 0 6px; font-size: 14px}
+    .mini p{margin:0; color: var(--muted); font-size: 13px; line-height:1.45}
+
+    .warnBox{
+      display:none;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,209,102,.35);
+      background: rgba(255,209,102,.12);
+      color: rgba(255,239,204,.95);
+      font-size: 13px;
+      line-height:1.4;
+    }
+
+    footer{margin-top: 18px; color: rgba(167,180,214,.75); font-size: 12px; text-align:center}
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Pascoli – La visione del mondo (Test)</h1>
+        <div class="subtitle">10 domande. 1 punto per risposta corretta. La correzione si vede <strong>solo</strong> dopo la consegna.</div>
+      </div>
+      <div class="badgeRow">
+        <div class="badge"><span class="dot"></span> Risposte mescolate a ogni apertura</div>
+        <div class="badge">⏱️ Consiglio: 6–8 minuti</div>
+      </div>
+    </header>
+
+    <main class="card" id="quiz"></main>
+
+    <div class="actions">
+      <button class="btn" id="submitBtn">Consegna e correggi</button>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
+        <button class="btn secondary" id="resetBtn" title="Azzera e rimescola">Ricomincia</button>
+        <span class="note" id="progress">Compila tutte le domande prima di consegnare.</span>
+      </div>
+    </div>
+
+    <div class="warnBox" id="warnBox">⚠️ Ti mancano alcune risposte. Completa tutte le domande prima di consegnare.</div>
+
+    <section class="result" id="result">
+      <div class="scoreRow">
+        <div class="bigScore" id="scoreText">Punteggio: —</div>
+        <div class="pill" id="gradeText">Voto: —</div>
+      </div>
+      <div class="report" id="report"></div>
+    </section>
+
+    <footer>Test HTML standalone – pronto per GitHub Pages.</footer>
+  </div>
+
+  <script>
+    // =========================
+    //  BANCA DOMANDE (Pascoli)
+    // =========================
+    // Nota: ogni domanda ha 4 opzioni; la corretta è indicata da correctIndex PRIMA dello shuffle.
+
+    const QUESTIONS = [
+      {
+        q: "Secondo Pascoli, da che cosa nasce la poesia?",
+        options: [
+          "Dalla meraviglia e dallo stupore che fanno vedere il mondo come nuovo",
+          "Dalla fiducia nel progresso scientifico e nell'ordine razionale delle cose",
+          "Dal desiderio di celebrare eroi e imprese storiche in modo solenne",
+          "Dalla pura tecnica retorica, indipendente da emozioni e visioni"
+        ],
+        correctIndex: 0,
+        explainTitle: "Poesia come stupore",
+        explain: "Per Pascoli la poesia nasce dalla meraviglia: il poeta, come un 'fanciullino', riscopre le cose come se fossero nuove e lascia emergere il mistero dietro il reale."
+      },
+      {
+        q: "Chi è il 'fanciullino' nella poetica pascoliana?",
+        options: [
+          "La parte infantile che resta viva nell'uomo e permette lo stupore",
+          "Un bambino reale a cui il poeta si rivolge come interlocutore fisso",
+          "Un simbolo dell'educazione scolastica, basata su regole e disciplina",
+          "L'eroe romantico che sfida la società con orgoglio individuale"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il fanciullino",
+        explain: "Il 'fanciullino' è la componente infantile e intuitiva che sopravvive nell'adulto: è ciò che consente al poeta di vedere oltre l'abitudine e di stupirsi di tutto."
+      },
+      {
+        q: "Quale esperienza personale segna in modo decisivo la visione del mondo di Pascoli?",
+        options: [
+          "I lutti familiari che distrussero la sua infanzia",
+          "Un lungo viaggio esotico che gli rivelò culture lontane",
+          "Una carriera politica diretta, culminata in un incarico pubblico",
+          "L'adesione piena e ottimista al Positivismo scientifico"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il dolore dei lutti",
+        explain: "La perdita dei familiari (padre e madre, tra gli altri) genera paura e solitudine: da lì nasce una visione fragile e inquieta del mondo e il bisogno di rifugio."
+      },
+      {
+        q: "Che cosa rappresenta il 'nido-famiglia' per Pascoli?",
+        options: [
+          "Un rifugio protettivo contro i mali della storia e dell'esistenza",
+          "Un luogo da abbandonare per cercare libertà totale e avventura",
+          "Un simbolo di ricchezza materiale e ascesa sociale",
+          "Una metafora della città moderna e del progresso urbano"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il nido come protezione",
+        explain: "Il nido-famiglia è il centro simbolico: spazio chiuso e protetto, dove gli affetti diventano riparo contro l'insicurezza e le minacce del mondo esterno."
+      },
+      {
+        q: "In che modo Pascoli guarda alla scienza positivista?",
+        options: [
+          "La rifiuta: non dà felicità e può aumentare l'insicurezza dell'uomo",
+          "La esalta come via definitiva alla verità e alla serenità",
+          "La usa solo come modello per rendere la poesia più 'oggettiva'",
+          "La considera irrilevante perché la poesia deve essere solo politica"
+        ],
+        correctIndex: 0,
+        explainTitle: "Critica al Positivismo",
+        explain: "Pascoli mette in crisi l'ottimismo positivista: la scienza non basta a dare senso e può amplificare la sensazione di precarietà. La poesia resta la via al 'mistero'."
+      },
+      {
+        q: "Quale valore assumono le 'cose umili' nella poesia pascoliana?",
+        options: [
+          "Diventano segni simbolici che racchiudono intimità, stupore e interiorità",
+          "Sono dettagli banali da evitare, perché non degni di poesia",
+          "Servono solo a descrivere il realismo sociale in modo documentario",
+          "Sono oggetti comici usati per ridicolizzare la tradizione letteraria"
+        ],
+        correctIndex: 0,
+        explainTitle: "Cose umili e simbolo",
+        explain: "Oggetti e dettagli quotidiani, apparentemente minimi, si caricano di significato: diventano simboli del mondo interiore e del bisogno di riparo e senso."
+      },
+      {
+        q: "Quale caratteristica sintattica è tipica dello stile di Pascoli secondo la lezione?",
+        options: [
+          "Paratassi: frasi coordinate, spesso semplici e frammentate",
+          "Iper-ipotassi: catene lunghissime di subordinate complesse",
+          "Assenza totale di punteggiatura per creare flusso continuo",
+          "Uso esclusivo di periodi classici equilibrati e simmetrici"
+        ],
+        correctIndex: 0,
+        explainTitle: "Paratassi e frammentazione",
+        explain: "La sintassi tende alla paratassi (coordinate) e può risultare frammentata: lo stile rispecchia una percezione spezzata e inquieta del reale."
+      },
+      {
+        q: "Quali figure sonore e sensoriali ricorrono spesso nella scrittura pascoliana?",
+        options: [
+          "Allitterazioni, onomatopee e sinestesie",
+          "Solo metafore epiche e iperboli eroiche",
+          "Esclusivamente termini tecnici e linguaggio scientifico",
+          "Aforismi moralistici privi di immagini"
+        ],
+        correctIndex: 0,
+        explainTitle: "Suono e sensi",
+        explain: "Pascoli lavora sul suono (allitterazioni, onomatopee) e sull'incrocio dei sensi (sinestesia): la lingua cerca di far 'sentire' il mistero delle cose."
+      },
+      {
+        q: "Come si intrecciano politica e sentimento nella visione di Pascoli?",
+        options: [
+          "Socialismo come fratellanza e nazionalismo come 'nido' per gli emigranti",
+          "Rifiuto totale della politica, vista come estranea alla poesia",
+          "Nazionalismo come culto della guerra e socialismo come puro calcolo economico",
+          "Impegno politico solo a favore della scienza e del progresso tecnico"
+        ],
+        correctIndex: 0,
+        explainTitle: "Politica 'sentimentale'",
+        explain: "Pascoli oscilla tra socialismo (fratellanza) e nazionalismo (nido-nazione): la politica viene letta con categorie affettive di protezione e comunità."
+      },
+      {
+        q: "Che rapporto ha Pascoli con la 'realtà' secondo la lezione?",
+        options: [
+          "La realtà non è già data: nasce nello sguardo del poeta come simbolo",
+          "La realtà è oggettiva e identica per tutti, e la poesia deve copiarla",
+          "La realtà coincide con la cronaca e va registrata senza interpretazioni",
+          "La realtà non esiste: conta solo l'invenzione senza legami con il mondo"
+        ],
+        correctIndex: 0,
+        explainTitle: "Realtà come simbolo",
+        explain: "Per Pascoli il reale si 'accende' nello sguardo poetico: gli oggetti diventano simboli, e il senso del mondo si ricrea ogni volta attraverso la poesia."
+      }
+    ];
+
+    // =========================
+    //  UTILS
+    // =========================
+    function shuffle(arr){
+      // Fisher–Yates
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function scoreToGrade10(score, total){
+      // Voto in decimi, con una conversione semplice e leggibile
+      // 0..total -> 1..10 circa, ma 0 resta 1 (se vuoi 0, cambia qui)
+      const ratio = score / total;
+      const grade = Math.round((ratio * 9 + 1) * 10) / 10; // 1.0 - 10.0
+      return grade.toFixed(1);
+    }
+
+    function gradeLabel(grade){
+      const g = parseFloat(grade);
+      if(g >= 9) return "Eccellente";
+      if(g >= 8) return "Molto buono";
+      if(g >= 7) return "Buono";
+      if(g >= 6) return "Sufficiente";
+      return "Da ripassare";
+    }
+
+    // =========================
+    //  RENDER
+    // =========================
+    const quizEl = document.getElementById('quiz');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const warnBox = document.getElementById('warnBox');
+    const progress = document.getElementById('progress');
+    const resultEl = document.getElementById('result');
+    const scoreText = document.getElementById('scoreText');
+    const gradeText = document.getElementById('gradeText');
+    const reportEl = document.getElementById('report');
+
+    // Build a working copy where options are shuffled per question on each load
+    let state = {
+      finished: false,
+      questions: []
+    };
+
+    function buildState(){
+      state.finished = false;
+      // deep-ish clone
+      state.questions = QUESTIONS.map((q, idx) => {
+        const mapped = q.options.map((text, i) => ({ text, isCorrect: i === q.correctIndex }));
+        shuffle(mapped);
+        return {
+          id: idx,
+          q: q.q,
+          options: mapped,
+          explainTitle: q.explainTitle,
+          explain: q.explain,
+          chosenIndex: null
+        };
+      });
+    }
+
+    function render(){
+      quizEl.innerHTML = '';
+
+      const intro = document.createElement('div');
+      intro.className = 'note';
+      intro.style.marginTop = '2px';
+      intro.innerHTML = "<strong>Istruzioni:</strong> scegli una sola risposta per domanda. Poi premi <strong>Consegna e correggi</strong>.";
+      quizEl.appendChild(intro);
+
+      state.questions.forEach((q, i) => {
+        const box = document.createElement('section');
+        box.className = 'q';
+        box.dataset.qid = q.id;
+
+        const head = document.createElement('div');
+        head.className = 'qHead';
+
+        const num = document.createElement('div');
+        num.className = 'qNum';
+        num.textContent = String(i + 1);
+
+        const text = document.createElement('p');
+        text.className = 'qText';
+        text.textContent = q.q;
+
+        head.appendChild(num);
+        head.appendChild(text);
+        box.appendChild(head);
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, oi) => {
+          const label = document.createElement('label');
+          label.className = 'opt';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = 'q_' + q.id;
+          input.value = String(oi);
+          input.disabled = state.finished;
+          input.checked = (q.chosenIndex === oi);
+
+          input.addEventListener('change', () => {
+            if(state.finished) return;
+            q.chosenIndex = oi;
+            updateProgress();
+          });
+
+          const span = document.createElement('span');
+          span.textContent = opt.text;
+
+          label.appendChild(input);
+          label.appendChild(span);
+
+          // reveal styling only when finished
+          if(state.finished){
+            const isCorrect = opt.isCorrect;
+            const isChosen = (q.chosenIndex === oi);
+            if(isChosen && isCorrect) label.classList.add('correct');
+            if(isChosen && !isCorrect) label.classList.add('wrong');
+            if(isCorrect) label.classList.add('revealCorrect');
+          }
+
+          options.appendChild(label);
+        });
+
+        box.appendChild(options);
+
+        const fb = document.createElement('div');
+        fb.className = 'feedback';
+        fb.style.display = state.finished ? 'block' : 'none';
+
+        // compute correct option text
+        const correctOpt = q.options.find(o => o.isCorrect);
+        const chosenOpt = q.chosenIndex == null ? null : q.options[q.chosenIndex];
+
+        if(state.finished){
+          const ok = chosenOpt && chosenOpt.isCorrect;
+          fb.innerHTML = ok
+            ? `<strong>✔ Corretto.</strong> ${q.explain}`
+            : `<strong>✘ Non corretto.</strong> Risposta giusta: <strong>${correctOpt.text}</strong>. ${q.explain}`;
+        }
+
+        box.appendChild(fb);
+        quizEl.appendChild(box);
+      });
+
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const answered = state.questions.filter(q => q.chosenIndex !== null).length;
+      const total = state.questions.length;
+
+      if(state.finished){
+        progress.textContent = `Test concluso: ${answered}/${total} risposte.`;
+        return;
+      }
+
+      progress.textContent = `Risposte: ${answered}/${total}`;
+      warnBox.style.display = 'none';
+    }
+
+    function finish(){
+      // validate all answered
+      const missing = state.questions.filter(q => q.chosenIndex === null).length;
+      if(missing > 0){
+        warnBox.style.display = 'block';
+        warnBox.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+
+      state.finished = true;
+
+      // score
+      let score = 0;
+      const wrongs = [];
+
+      state.questions.forEach((q) => {
+        const chosen = q.options[q.chosenIndex];
+        if(chosen && chosen.isCorrect) score += 1;
+        else wrongs.push(q);
+      });
+
+      const grade = scoreToGrade10(score, state.questions.length);
+
+      // show results
+      scoreText.textContent = `Punteggio: ${score} / ${state.questions.length}`;
+      gradeText.textContent = `Voto: ${grade} (${gradeLabel(grade)})`;
+
+      // report
+      reportEl.innerHTML = '';
+
+      const summary = document.createElement('div');
+      summary.className = 'mini';
+      summary.innerHTML = `
+        <h3>Report</h3>
+        <p>${wrongs.length === 0
+          ? 'Perfetto: nessun errore. Ora prova a rispiegare a voce i concetti chiave (fanciullino, nido, simbolo, rifiuto del Positivismo).'
+          : `Errori: <strong>${wrongs.length}</strong>. Qui sotto trovi mini-lezioni mirate sugli argomenti che ti hanno fregato.`}
+        </p>
+      `;
+      reportEl.appendChild(summary);
+
+      if(wrongs.length){
+        wrongs.forEach((q, idx) => {
+          const mini = document.createElement('div');
+          mini.className = 'mini';
+
+          const correctOpt = q.options.find(o => o.isCorrect);
+          const chosenOpt = q.options[q.chosenIndex];
+
+          mini.innerHTML = `
+            <h3>${idx + 1}) ${q.explainTitle}</h3>
+            <p><strong>Domanda:</strong> ${q.q}</p>
+            <p><strong>Hai scelto:</strong> ${chosenOpt ? chosenOpt.text : '—'}</p>
+            <p><strong>Corretto:</strong> ${correctOpt ? correctOpt.text : '—'}</p>
+            <p>${q.explain}</p>
+          `;
+          reportEl.appendChild(mini);
+        });
+      }
+
+      resultEl.style.display = 'block';
+
+      // re-render to reveal answers and explanations
+      render();
+
+      // lock buttons
+      submitBtn.disabled = true;
+      submitBtn.style.filter = 'grayscale(.2)';
+      submitBtn.style.opacity = '.85';
+
+      // scroll to results
+      resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function reset(){
+      buildState();
+      submitBtn.disabled = false;
+      submitBtn.style.filter = '';
+      submitBtn.style.opacity = '';
+      resultEl.style.display = 'none';
+      reportEl.innerHTML = '';
+      warnBox.style.display = 'none';
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    submitBtn.addEventListener('click', finish);
+    resetBtn.addEventListener('click', reset);
+
+    // init
+    buildState();
+    render();
+  </script>
+</body>
+</html>
