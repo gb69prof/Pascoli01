@@ -1,1 +1,613 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test – Pascoli: Il gelsomino notturno</title>
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0f1b2d;
+      --text:#e8eefc;
+      --muted:#a7b4d6;
+      --accent:#7c5cff;
+      --accent2:#00d4ff;
+      --ok:#2ee59d;
+      --bad:#ff4d6d;
+      --warn:#ffd166;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(0,212,255,.25), transparent 52%),
+        radial-gradient(700px 520px at 70% 85%, rgba(46,229,157,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+
+    .wrap{max-width: 980px; margin: 0 auto; padding: 28px 16px 60px;}
+
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between;
+      padding: 18px 18px 14px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .title{display:flex; flex-direction:column; gap:6px;}
+    h1{margin:0; font-size: 22px; letter-spacing:.2px;}
+    .subtitle{color:var(--muted); font-size: 14px; line-height:1.35;}
+
+    .badgeRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end;}
+    .badge{
+      padding:8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{width:8px; height:8px; border-radius:50%; background: var(--accent2); box-shadow: 0 0 0 3px rgba(0,212,255,.15)}
+
+    main{margin-top: 18px;}
+
+    .card{
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .q{
+      margin-top: 14px;
+      border-radius: 16px;
+      padding: 14px 14px 10px;
+      background: linear-gradient(180deg, rgba(16,31,54,.85), rgba(15,27,47,.75));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .qHead{display:flex; gap:10px; align-items:flex-start; justify-content:space-between;}
+    .qNum{
+      min-width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(124,92,255,.35), rgba(0,212,255,.18));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .qText{font-size: 15px; line-height: 1.45; margin: 0;}
+
+    .options{margin-top: 10px; display:grid; gap:10px;}
+
+    .opt{
+      display:flex; align-items:flex-start; gap:10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .08s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .opt:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06)}
+
+    input[type="radio"]{margin-top: 3px; accent-color: var(--accent2);}
+
+    .opt.correct{border-color: rgba(46,229,157,.55); background: rgba(46,229,157,.12)}
+    .opt.wrong{border-color: rgba(255,77,109,.55); background: rgba(255,77,109,.12)}
+    .opt.revealCorrect{outline: 2px solid rgba(46,229,157,.35)}
+
+    .feedback{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+    .feedback strong{color: var(--text)}
+
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 18px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .btn{
+      border:none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      color: var(--text);
+      cursor:pointer;
+      background: linear-gradient(135deg, rgba(124,92,255,.92), rgba(0,212,255,.60));
+      box-shadow: 0 12px 24px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.14);
+      transition: transform .08s ease, filter .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.04)}
+    .btn:active{transform: translateY(0px); filter: brightness(.98)}
+
+    .btn.secondary{background: rgba(255,255,255,.08);}
+
+    .note{color: var(--muted); font-size: 13px; line-height:1.35;}
+
+    .result{
+      display:none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+    }
+
+    .scoreRow{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;}
+    .bigScore{font-size: 20px; font-weight: 800; letter-spacing:.2px;}
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .report{margin-top: 12px; display:grid; gap:12px;}
+    .mini{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mini h3{margin:0 0 6px; font-size: 14px}
+    .mini p{margin:0; color: var(--muted); font-size: 13px; line-height:1.45}
+
+    .warnBox{
+      display:none;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,209,102,.35);
+      background: rgba(255,209,102,.12);
+      color: rgba(255,239,204,.95);
+      font-size: 13px;
+      line-height:1.4;
+    }
+
+    footer{margin-top: 18px; color: rgba(167,180,214,.75); font-size: 12px; text-align:center}
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Pascoli – Il gelsomino notturno (Test)</h1>
+        <div class="subtitle">10 domande. 1 punto per risposta corretta. Correzione e colori <strong>solo dopo</strong> la consegna.</div>
+      </div>
+      <div class="badgeRow">
+        <div class="badge"><span class="dot"></span> Risposte mescolate a ogni apertura</div>
+        <div class="badge">🌙 Focus: temi + simboli + struttura</div>
+      </div>
+    </header>
+
+    <main class="card" id="quiz"></main>
+
+    <div class="actions">
+      <button class="btn" id="submitBtn">Consegna e correggi</button>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
+        <button class="btn secondary" id="resetBtn" title="Azzera e rimescola">Ricomincia</button>
+        <span class="note" id="progress">Compila tutte le domande prima di consegnare.</span>
+      </div>
+    </div>
+
+    <div class="warnBox" id="warnBox">⚠️ Ti mancano alcune risposte. Completa tutte le domande prima di consegnare.</div>
+
+    <section class="result" id="result">
+      <div class="scoreRow">
+        <div class="bigScore" id="scoreText">Punteggio: —</div>
+        <div class="pill" id="gradeText">Voto: —</div>
+      </div>
+      <div class="report" id="report"></div>
+    </section>
+
+    <footer>Test HTML standalone – pronto per GitHub Pages.</footer>
+  </div>
+
+  <script>
+    // =========================
+    //  BANCA DOMANDE (Gelsomino notturno)
+    // =========================
+
+    const QUESTIONS = [
+      {
+        q: "Secondo la lezione, perché questa poesia è importante oltre il testo poetico?",
+        options: [
+          "Perché è una scena notturna che racconta la nascita di una nuova famiglia osservata da fuori",
+          "Perché è un manifesto politico scritto contro la modernità",
+          "Perché è un racconto realistico di vita contadina senza simboli",
+          "Perché è un esercizio metrico privo di temi"
+        ],
+        correctIndex: 0,
+        explainTitle: "Perché questa poesia",
+        explain: "La poesia è una scena: notte estiva, casa, profumi, presenze minime. Dentro la calma si muove un evento grande: una nuova famiglia, vista dal poeta da fuori."
+      },
+      {
+        q: "Qual è la metrica e la struttura indicate nella lezione?",
+        options: [
+          "Quartine di novenari con rime alternate (ABAB)",
+          "Terzine di endecasillabi con rima incatenata (ABA BCB)",
+          "Quartine di settenari con rime baciate (AABB)",
+          "Distici di ottonari senza schema di rime"
+        ],
+        correctIndex: 0,
+        explainTitle: "Metrica e struttura",
+        explain: "La lezione indica quartine di novenari con rime alternate ABAB: una forma regolare che costruisce atmosfera calma e silenziosa."
+      },
+      {
+        q: "Qual è uno dei contrasti centrali della poesia, secondo la lezione?",
+        options: [
+          "Vita nuova degli sposi vs memoria della famiglia perduta del poeta",
+          "Città moderna vs campagna industriale",
+          "Eroismo bellico vs gloria patriottica",
+          "Progresso scientifico vs superstizione religiosa"
+        ],
+        correctIndex: 0,
+        explainTitle: "Vita nuova vs vita passata",
+        explain: "Dentro la casa nasce una famiglia; il poeta pensa ai suoi morti e alla famiglia perduta: la gioia altrui richiama la sua mancanza."
+      },
+      {
+        q: "Come viene rappresentato il rapporto amoroso nella poesia?",
+        options: [
+          "In modo indiretto, attraverso simboli naturali (fiori, profumi, luci)",
+          "Con una descrizione esplicita e realistica della scena",
+          "Solo con un dialogo tra i due sposi",
+          "Con riferimenti storici e citazioni mitologiche"
+        ],
+        correctIndex: 0,
+        explainTitle: "Sesso come mistero",
+        explain: "Il sesso non è descritto direttamente: Pascoli lo traduce in simboli naturali (fiori che si aprono, profumi, luci che si spengono), vissuti come mistero e turbamento."
+      },
+      {
+        q: "Che cosa significa il contrasto 'dentro e fuori' nella lettura proposta?",
+        options: [
+          "Gli sposi sono dentro la casa; il poeta è fuori, nella notte, come osservatore",
+          "Il poeta entra in casa e partecipa attivamente alla festa",
+          "Il poeta è dentro e gli sposi sono fuori, nel giardino",
+          "Tutti sono dentro: la notte è solo un pretesto"
+        ],
+        correctIndex: 0,
+        explainTitle: "Dentro e fuori",
+        explain: "Gli sposi vivono l'evento dentro la casa; Pascoli è fuori, partecipa solo con l'immaginazione: osservatore esterno della vita degli altri."
+      },
+      {
+        q: "Nella lettura strofa per strofa, che cosa simboleggia l'ape tardiva?",
+        options: [
+          "Il poeta, arrivato troppo tardi per costruirsi una famiglia",
+          "Lo sposo che torna tardi dalla festa",
+          "Un segno della primavera che ricomincia",
+          "La laboriosità serena della vita domestica già compiuta"
+        ],
+        correctIndex: 0,
+        explainTitle: "Ape tardiva",
+        explain: "L'ape che arriva tardi e trova le celle occupate rappresenta Pascoli: la sensazione di essere fuori tempo rispetto alla vita adulta e familiare."
+      },
+      {
+        q: "Che cosa suggerisce l'immagine del 'nido tranquillo' che dorme sotto le ali?",
+        options: [
+          "Stabilità e protezione familiare",
+          "La minaccia imminente della tempesta",
+          "La fuga verso l'avventura e il viaggio",
+          "Il caos urbano e la folla"
+        ],
+        correctIndex: 0,
+        explainTitle: "Nido",
+        explain: "Il nido tranquillo è immagine di stabilità e protezione: una famiglia già raccolta e sicura, in contrasto con l'inquietudine degli sposi all'inizio."
+      },
+      {
+        q: "Secondo la lezione, perché la casa degli sposi 'bisbiglia'?",
+        options: [
+          "Perché è inquieta: il nido non è ancora del tutto unito e stabile",
+          "Perché dentro c'è una festa rumorosa con musica e canti",
+          "Perché la casa è vuota e abbandonata",
+          "Perché indica un pettegolezzo del paese"
+        ],
+        correctIndex: 0,
+        explainTitle: "Bisbigliare",
+        explain: "La casa 'bisbiglia' come segno di inquietudine: l'unione è in atto, ma non è ancora una stabilità familiare compiuta."
+      },
+      {
+        q: "Nel finale, che cosa indica l'immagine dei petali 'un poco gualciti'?",
+        options: [
+          "Allusione al corpo della sposa dopo l'atto amoroso e al turbamento del poeta",
+          "Un semplice dettaglio botanico senza significato",
+          "Il segno di una lite tra gli sposi",
+          "Un simbolo di guerra e distruzione"
+        ],
+        correctIndex: 0,
+        explainTitle: "Gualcito",
+        explain: "I petali un poco gualciti alludono al corpo dopo l'atto amoroso: la sessualità è vista con occhi turbati, come qualcosa che ferisce e inquieta."
+      },
+      {
+        q: "Quale idea riassume meglio il rapporto tra vita e morte nella poesia, secondo la lezione?",
+        options: [
+          "Ogni immagine di vita porta con sé un'ombra di morte e una memoria di perdita",
+          "La poesia celebra solo la gioia, senza alcun richiamo al passato",
+          "La morte è presentata come vittoria eroica e patriottica",
+          "Vita e morte sono separate: non si toccano mai"
+        ],
+        correctIndex: 0,
+        explainTitle: "Vita e morte intrecciate",
+        explain: "La gioia della vita nuova richiama immediatamente una perdita: la poesia intreccia fecondazione e nostalgia, luce e ombra."
+      }
+    ];
+
+    // =========================
+    //  UTILS
+    // =========================
+    function shuffle(arr){
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function scoreToGrade10(score, total){
+      const ratio = score / total;
+      const grade = Math.round((ratio * 9 + 1) * 10) / 10; // 1.0 - 10.0
+      return grade.toFixed(1);
+    }
+
+    function gradeLabel(grade){
+      const g = parseFloat(grade);
+      if(g >= 9) return "Eccellente";
+      if(g >= 8) return "Molto buono";
+      if(g >= 7) return "Buono";
+      if(g >= 6) return "Sufficiente";
+      return "Da ripassare";
+    }
+
+    // =========================
+    //  RENDER
+    // =========================
+    const quizEl = document.getElementById('quiz');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const warnBox = document.getElementById('warnBox');
+    const progress = document.getElementById('progress');
+    const resultEl = document.getElementById('result');
+    const scoreText = document.getElementById('scoreText');
+    const gradeText = document.getElementById('gradeText');
+    const reportEl = document.getElementById('report');
+
+    let state = { finished:false, questions:[] };
+
+    function buildState(){
+      state.finished = false;
+      state.questions = QUESTIONS.map((q, idx) => {
+        const mapped = q.options.map((text, i) => ({ text, isCorrect: i === q.correctIndex }));
+        shuffle(mapped);
+        return {
+          id: idx,
+          q: q.q,
+          options: mapped,
+          explainTitle: q.explainTitle,
+          explain: q.explain,
+          chosenIndex: null
+        };
+      });
+    }
+
+    function render(){
+      quizEl.innerHTML = '';
+
+      const intro = document.createElement('div');
+      intro.className = 'note';
+      intro.style.marginTop = '2px';
+      intro.innerHTML = "<strong>Istruzioni:</strong> una sola risposta per domanda. Consegna per vedere correzione e mini-lezioni.";
+      quizEl.appendChild(intro);
+
+      state.questions.forEach((q, i) => {
+        const box = document.createElement('section');
+        box.className = 'q';
+
+        const head = document.createElement('div');
+        head.className = 'qHead';
+
+        const num = document.createElement('div');
+        num.className = 'qNum';
+        num.textContent = String(i + 1);
+
+        const text = document.createElement('p');
+        text.className = 'qText';
+        text.textContent = q.q;
+
+        head.appendChild(num);
+        head.appendChild(text);
+        box.appendChild(head);
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, oi) => {
+          const label = document.createElement('label');
+          label.className = 'opt';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = 'q_' + q.id;
+          input.value = String(oi);
+          input.disabled = state.finished;
+          input.checked = (q.chosenIndex === oi);
+
+          input.addEventListener('change', () => {
+            if(state.finished) return;
+            q.chosenIndex = oi;
+            updateProgress();
+          });
+
+          const span = document.createElement('span');
+          span.textContent = opt.text;
+
+          label.appendChild(input);
+          label.appendChild(span);
+
+          // evidenziazione SOLO a test concluso
+          if(state.finished){
+            const isCorrect = opt.isCorrect;
+            const isChosen = (q.chosenIndex === oi);
+            if(isChosen && isCorrect) label.classList.add('correct');
+            if(isChosen && !isCorrect) label.classList.add('wrong');
+            if(isCorrect) label.classList.add('revealCorrect');
+          }
+
+          options.appendChild(label);
+        });
+
+        box.appendChild(options);
+
+        const fb = document.createElement('div');
+        fb.className = 'feedback';
+        fb.style.display = state.finished ? 'block' : 'none';
+
+        const correctOpt = q.options.find(o => o.isCorrect);
+        const chosenOpt = q.chosenIndex == null ? null : q.options[q.chosenIndex];
+
+        if(state.finished){
+          const ok = chosenOpt && chosenOpt.isCorrect;
+          fb.innerHTML = ok
+            ? `<strong>✔ Corretto.</strong> ${q.explain}`
+            : `<strong>✘ Non corretto.</strong> Risposta giusta: <strong>${correctOpt.text}</strong>. ${q.explain}`;
+        }
+
+        box.appendChild(fb);
+        quizEl.appendChild(box);
+      });
+
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const answered = state.questions.filter(q => q.chosenIndex !== null).length;
+      const total = state.questions.length;
+
+      if(state.finished){
+        progress.textContent = `Test concluso: ${answered}/${total} risposte.`;
+        return;
+      }
+
+      progress.textContent = `Risposte: ${answered}/${total}`;
+      warnBox.style.display = 'none';
+    }
+
+    function finish(){
+      const missing = state.questions.filter(q => q.chosenIndex === null).length;
+      if(missing > 0){
+        warnBox.style.display = 'block';
+        warnBox.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+
+      state.finished = true;
+
+      let score = 0;
+      const wrongs = [];
+
+      state.questions.forEach((q) => {
+        const chosen = q.options[q.chosenIndex];
+        if(chosen && chosen.isCorrect) score += 1;
+        else wrongs.push(q);
+      });
+
+      const grade = scoreToGrade10(score, state.questions.length);
+
+      scoreText.textContent = `Punteggio: ${score} / ${state.questions.length}`;
+      gradeText.textContent = `Voto: ${grade} (${gradeLabel(grade)})`;
+
+      reportEl.innerHTML = '';
+
+      const summary = document.createElement('div');
+      summary.className = 'mini';
+      summary.innerHTML = `
+        <h3>Report</h3>
+        <p>${wrongs.length === 0
+          ? "Perfetto: nessun errore. Ora prova a spiegare in 5 righe il contrasto 'dentro/fuori' e perché l'ape è 'tardiva'."
+          : `Errori: <strong>${wrongs.length}</strong>. Qui sotto trovi mini-lezioni mirate sugli errori.`}
+        </p>
+      `;
+      reportEl.appendChild(summary);
+
+      if(wrongs.length){
+        wrongs.forEach((q, idx) => {
+          const mini = document.createElement('div');
+          mini.className = 'mini';
+
+          const correctOpt = q.options.find(o => o.isCorrect);
+          const chosenOpt = q.options[q.chosenIndex];
+
+          mini.innerHTML = `
+            <h3>${idx + 1}) ${q.explainTitle}</h3>
+            <p><strong>Domanda:</strong> ${q.q}</p>
+            <p><strong>Hai scelto:</strong> ${chosenOpt ? chosenOpt.text : '—'}</p>
+            <p><strong>Corretto:</strong> ${correctOpt ? correctOpt.text : '—'}</p>
+            <p>${q.explain}</p>
+          `;
+          reportEl.appendChild(mini);
+        });
+      }
+
+      resultEl.style.display = 'block';
+
+      render();
+
+      submitBtn.disabled = true;
+      submitBtn.style.filter = 'grayscale(.2)';
+      submitBtn.style.opacity = '.85';
+
+      resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function reset(){
+      buildState();
+      submitBtn.disabled = false;
+      submitBtn.style.filter = '';
+      submitBtn.style.opacity = '';
+      resultEl.style.display = 'none';
+      reportEl.innerHTML = '';
+      warnBox.style.display = 'none';
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    submitBtn.addEventListener('click', finish);
+    resetBtn.addEventListener('click', reset);
+
+    buildState();
+    render();
+  </script>
+</body>
+</html>
 
