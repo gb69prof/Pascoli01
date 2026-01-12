@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test – Pascoli: X Agosto</title>
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0f1b2d;
+      --text:#e8eefc;
+      --muted:#a7b4d6;
+      --accent:#7c5cff;
+      --accent2:#00d4ff;
+      --ok:#2ee59d;
+      --bad:#ff4d6d;
+      --warn:#ffd166;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(0,212,255,.25), transparent 52%),
+        radial-gradient(700px 520px at 70% 85%, rgba(46,229,157,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+
+    .wrap{max-width: 980px; margin: 0 auto; padding: 28px 16px 60px;}
+
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between;
+      padding: 18px 18px 14px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .title{display:flex; flex-direction:column; gap:6px;}
+    h1{margin:0; font-size: 22px; letter-spacing:.2px;}
+    .subtitle{color:var(--muted); font-size: 14px; line-height:1.35;}
+
+    .badgeRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end;}
+    .badge{
+      padding:8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{width:8px; height:8px; border-radius:50%; background: var(--accent2); box-shadow: 0 0 0 3px rgba(0,212,255,.15)}
+
+    main{margin-top: 18px;}
+
+    .card{
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .q{
+      margin-top: 14px;
+      border-radius: 16px;
+      padding: 14px 14px 10px;
+      background: linear-gradient(180deg, rgba(16,31,54,.85), rgba(15,27,47,.75));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .qHead{display:flex; gap:10px; align-items:flex-start; justify-content:space-between;}
+    .qNum{
+      min-width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(124,92,255,.35), rgba(0,212,255,.18));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .qText{font-size: 15px; line-height: 1.45; margin: 0;}
+
+    .options{margin-top: 10px; display:grid; gap:10px;}
+
+    .opt{
+      display:flex; align-items:flex-start; gap:10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .08s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .opt:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06)}
+
+    input[type="radio"]{margin-top: 3px; accent-color: var(--accent2);}
+
+    .opt.correct{border-color: rgba(46,229,157,.55); background: rgba(46,229,157,.12)}
+    .opt.wrong{border-color: rgba(255,77,109,.55); background: rgba(255,77,109,.12)}
+    .opt.revealCorrect{outline: 2px solid rgba(46,229,157,.35)}
+
+    .feedback{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+    .feedback strong{color: var(--text)}
+
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 18px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .btn{
+      border:none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      color: var(--text);
+      cursor:pointer;
+      background: linear-gradient(135deg, rgba(124,92,255,.92), rgba(0,212,255,.60));
+      box-shadow: 0 12px 24px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.14);
+      transition: transform .08s ease, filter .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.04)}
+    .btn:active{transform: translateY(0px); filter: brightness(.98)}
+
+    .btn.secondary{background: rgba(255,255,255,.08);}
+
+    .note{color: var(--muted); font-size: 13px; line-height:1.35;}
+
+    .result{
+      display:none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+    }
+
+    .scoreRow{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;}
+    .bigScore{font-size: 20px; font-weight: 800; letter-spacing:.2px;}
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .report{margin-top: 12px; display:grid; gap:12px;}
+    .mini{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mini h3{margin:0 0 6px; font-size: 14px}
+    .mini p{margin:0; color: var(--muted); font-size: 13px; line-height:1.45}
+
+    .warnBox{
+      display:none;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,209,102,.35);
+      background: rgba(255,209,102,.12);
+      color: rgba(255,239,204,.95);
+      font-size: 13px;
+      line-height:1.4;
+    }
+
+    footer{margin-top: 18px; color: rgba(167,180,214,.75); font-size: 12px; text-align:center}
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Pascoli – X Agosto (Test)</h1>
+        <div class="subtitle">10 domande. 1 punto per risposta corretta. Correzione e colori <strong>solo dopo</strong> la consegna.</div>
+      </div>
+      <div class="badgeRow">
+        <div class="badge"><span class="dot"></span> Risposte mescolate a ogni apertura</div>
+        <div class="badge">⭐ Focus: simboli (rondine / nido / stelle), male, dolore cosmico</div>
+      </div>
+    </header>
+
+    <main class="card" id="quiz"></main>
+
+    <div class="actions">
+      <button class="btn" id="submitBtn">Consegna e correggi</button>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
+        <button class="btn secondary" id="resetBtn" title="Azzera e rimescola">Ricomincia</button>
+        <span class="note" id="progress">Compila tutte le domande prima di consegnare.</span>
+      </div>
+    </div>
+
+    <div class="warnBox" id="warnBox">⚠️ Ti mancano alcune risposte. Completa tutte le domande prima di consegnare.</div>
+
+    <section class="result" id="result">
+      <div class="scoreRow">
+        <div class="bigScore" id="scoreText">Punteggio: —</div>
+        <div class="pill" id="gradeText">Voto: —</div>
+      </div>
+      <div class="report" id="report"></div>
+    </section>
+
+    <footer>Test HTML standalone – pronto per GitHub Pages.</footer>
+  </div>
+
+  <script>
+    // Nota: non riesco a leggere automaticamente la tua pagina GitHub (errore tecnico di fetch).
+    // Questo test è costruito su contenuti scolastici standard e sul testo noto di "X Agosto".
+
+    const QUESTIONS = [
+      {
+        q: "A che cosa rimanda il titolo 'X Agosto'?",
+        options: [
+          "Al 10 agosto (notte di San Lorenzo) e al lutto familiare legato al padre di Pascoli",
+          "Alla decima edizione di Myricae pubblicata in agosto",
+          "A un codice segreto usato dai poeti simbolisti",
+          "Alla decima poesia della raccolta I Canti di Castelvecchio"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il senso del titolo",
+        explain: "Il titolo richiama la notte di San Lorenzo (stelle cadenti) e, nella biografia pascoliana, la data del trauma familiare legato all'uccisione del padre."
+      },
+      {
+        q: "Nell'incipit, le stelle cadenti sono interpretate come…",
+        options: [
+          "un 'pianto' del cielo: lacrime cosmiche davanti al dolore",
+          "un segno di buon auspicio per gli innamorati",
+          "un fenomeno astronomico neutro, descritto senza emozione",
+          "un simbolo di vittoria politica e nazionale"
+        ],
+        correctIndex: 0,
+        explainTitle: "Stelle = lacrime",
+        explain: "La tradizione delle stelle cadenti viene rovesciata: non desideri, ma pianto. Il cosmo sembra partecipare al dolore."
+      },
+      {
+        q: "Quale funzione ha l'episodio della rondine?",
+        options: [
+          "È un simbolo parallelo che prepara e rispecchia la morte dell'uomo",
+          "È un semplice quadro naturalistico per descrivere l'estate",
+          "Serve a introdurre un tono comico e leggero",
+          "È un riferimento mitologico al mondo greco"
+        ],
+        correctIndex: 0,
+        explainTitle: "Parallelo rondine/uomo",
+        explain: "La rondine uccisa mentre porta cibo ai piccoli anticipa e rispecchia l'uomo ucciso mentre torna al nido con doni: innocenza colpita."
+      },
+      {
+        q: "Che cosa rappresenta il 'nido' in questa poesia?",
+        options: [
+          "La famiglia come luogo di protezione e affetti vulnerabili",
+          "La patria intesa come comunità politica",
+          "La natura come spazio privo di legami",
+          "Il successo sociale e la ricchezza"
+        ],
+        correctIndex: 0,
+        explainTitle: "Il simbolo del nido",
+        explain: "Il nido è la famiglia: rifugio affettivo e, proprio per questo, esposto al male esterno e alla perdita."
+      },
+      {
+        q: "In che modo la poesia collega il dolore personale a un significato universale?",
+        options: [
+          "Trasforma la vicenda individuale in scena cosmica: cielo, stelle, 'atomo opaco del Male'",
+          "Racconta solo la cronaca dell'evento senza simboli",
+          "Rinuncia a ogni immagine naturale per parlare in astratto",
+          "Sposta il tema sul successo dell'uomo che vince il destino"
+        ],
+        correctIndex: 0,
+        explainTitle: "Dal privato al cosmico",
+        explain: "La sofferenza familiare diventa simbolo del male nel mondo: la chiusa amplia tutto su scala cosmica."
+      },
+      {
+        q: "Che cosa accomuna rondine e uomo nei versi centrali?",
+        options: [
+          "Sono vittime innocenti colpite mentre portano 'cibo/doni' ai piccoli",
+          "Sono due figure colpevoli punite dalla giustizia",
+          "Sono due eroi celebrati per un'impresa militare",
+          "Sono due personaggi che scelgono la solitudine volontaria"
+        ],
+        correctIndex: 0,
+        explainTitle: "Innocenza colpita",
+        explain: "La somiglianza è strutturale: entrambe le figure tornano al nido con qualcosa per i figli e vengono uccise."
+      },
+      {
+        q: "Quale figura retorica domina la costruzione delle strofe centrali?",
+        options: [
+          "Il parallelismo (strutture simili tra rondine e uomo)",
+          "L'allegoria politica estesa",
+          "L'iperbole comica",
+          "La parodia di un testo classico"
+        ],
+        correctIndex: 0,
+        explainTitle: "Parallelismo",
+        explain: "Le strofe costruiscono un doppio percorso: natura (rondine) e umano (uomo) sono messi in corrispondenza con strutture e immagini simili."
+      },
+      {
+        q: "Perché la poesia insiste sull'attesa nel nido/casa?",
+        options: [
+          "Per rendere concreto il vuoto: i piccoli/figlie aspettano invano",
+          "Per descrivere un rito religioso di festa",
+          "Per mostrare che la morte non cambia nulla",
+          "Per introdurre un tema di viaggio e avventura"
+        ],
+        correctIndex: 0,
+        explainTitle: "Attesa e vuoto",
+        explain: "L'attesa è il dolore che resta: non la scena dell'uccisione, ma il dopo, il vuoto quotidiano di chi aspetta."
+      },
+      {
+        q: "Che valore ha la chiusa con 'quest'atomo opaco del Male'?",
+        options: [
+          "È un giudizio radicale: la terra come luogo del male e dell'ingiustizia",
+          "È un invito ottimistico a credere nel progresso",
+          "È una definizione scientifica neutra del pianeta",
+          "È un elogio della società moderna"
+        ],
+        correctIndex: 0,
+        explainTitle: "Chiusura pessimistico-morale",
+        explain: "La terra è chiamata 'atomo opaco del Male': non solo lutto personale, ma visione amara e morale dell'esistenza."
+      },
+      {
+        q: "Qual è l'effetto complessivo della poesia secondo la lettura scolastica più diffusa?",
+        options: [
+          "Un lamento che unisce dolore privato e compassione cosmica, senza vera consolazione",
+          "Una celebrazione festosa della notte di San Lorenzo",
+          "Un testo satirico contro i costumi borghesi",
+          "Un poema epico sulla gloria nazionale"
+        ],
+        correctIndex: 0,
+        explainTitle: "Effetto complessivo",
+        explain: "Il testo è un'elegia: la natura partecipa, ma non consola. Il cielo piange: la compassione non cancella il male."
+      }
+    ];
+
+    function shuffle(arr){
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function scoreToGrade10(score, total){
+      const ratio = score / total;
+      const grade = Math.round((ratio * 9 + 1) * 10) / 10; // 1.0 - 10.0
+      return grade.toFixed(1);
+    }
+
+    function gradeLabel(grade){
+      const g = parseFloat(grade);
+      if(g >= 9) return "Eccellente";
+      if(g >= 8) return "Molto buono";
+      if(g >= 7) return "Buono";
+      if(g >= 6) return "Sufficiente";
+      return "Da ripassare";
+    }
+
+    const quizEl = document.getElementById('quiz');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const warnBox = document.getElementById('warnBox');
+    const progress = document.getElementById('progress');
+    const resultEl = document.getElementById('result');
+    const scoreText = document.getElementById('scoreText');
+    const gradeText = document.getElementById('gradeText');
+    const reportEl = document.getElementById('report');
+
+    let state = { finished:false, questions:[] };
+
+    function buildState(){
+      state.finished = false;
+      state.questions = QUESTIONS.map((q, idx) => {
+        const mapped = q.options.map((text, i) => ({ text, isCorrect: i === q.correctIndex }));
+        shuffle(mapped);
+        return {
+          id: idx,
+          q: q.q,
+          options: mapped,
+          explainTitle: q.explainTitle,
+          explain: q.explain,
+          chosenIndex: null
+        };
+      });
+    }
+
+    function render(){
+      quizEl.innerHTML = '';
+
+      const intro = document.createElement('div');
+      intro.className = 'note';
+      intro.style.marginTop = '2px';
+      intro.innerHTML = "<strong>Istruzioni:</strong> una sola risposta per domanda. Consegna per vedere correzione e mini-lezioni.";
+      quizEl.appendChild(intro);
+
+      state.questions.forEach((q, i) => {
+        const box = document.createElement('section');
+        box.className = 'q';
+
+        const head = document.createElement('div');
+        head.className = 'qHead';
+
+        const num = document.createElement('div');
+        num.className = 'qNum';
+        num.textContent = String(i + 1);
+
+        const text = document.createElement('p');
+        text.className = 'qText';
+        text.textContent = q.q;
+
+        head.appendChild(num);
+        head.appendChild(text);
+        box.appendChild(head);
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, oi) => {
+          const label = document.createElement('label');
+          label.className = 'opt';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = 'q_' + q.id;
+          input.value = String(oi);
+          input.disabled = state.finished;
+          input.checked = (q.chosenIndex === oi);
+
+          input.addEventListener('change', () => {
+            if(state.finished) return;
+            q.chosenIndex = oi;
+            updateProgress();
+          });
+
+          const span = document.createElement('span');
+          span.textContent = opt.text;
+
+          label.appendChild(input);
+          label.appendChild(span);
+
+          if(state.finished){
+            const isCorrect = opt.isCorrect;
+            const isChosen = (q.chosenIndex === oi);
+            if(isChosen && isCorrect) label.classList.add('correct');
+            if(isChosen && !isCorrect) label.classList.add('wrong');
+            if(isCorrect) label.classList.add('revealCorrect');
+          }
+
+          options.appendChild(label);
+        });
+
+        box.appendChild(options);
+
+        const fb = document.createElement('div');
+        fb.className = 'feedback';
+        fb.style.display = state.finished ? 'block' : 'none';
+
+        const correctOpt = q.options.find(o => o.isCorrect);
+        const chosenOpt = q.chosenIndex == null ? null : q.options[q.chosenIndex];
+
+        if(state.finished){
+          const ok = chosenOpt && chosenOpt.isCorrect;
+          fb.innerHTML = ok
+            ? `<strong>✔ Corretto.</strong> ${q.explain}`
+            : `<strong>✘ Non corretto.</strong> Risposta giusta: <strong>${correctOpt.text}</strong>. ${q.explain}`;
+        }
+
+        box.appendChild(fb);
+        quizEl.appendChild(box);
+      });
+
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const answered = state.questions.filter(q => q.chosenIndex !== null).length;
+      const total = state.questions.length;
+
+      if(state.finished){
+        progress.textContent = `Test concluso: ${answered}/${total} risposte.`;
+        return;
+      }
+
+      progress.textContent = `Risposte: ${answered}/${total}`;
+      warnBox.style.display = 'none';
+    }
+
+    function finish(){
+      const missing = state.questions.filter(q => q.chosenIndex === null).length;
+      if(missing > 0){
+        warnBox.style.display = 'block';
+        warnBox.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+
+      state.finished = true;
+
+      let score = 0;
+      const wrongs = [];
+
+      state.questions.forEach((q) => {
+        const chosen = q.options[q.chosenIndex];
+        if(chosen && chosen.isCorrect) score += 1;
+        else wrongs.push(q);
+      });
+
+      const grade = scoreToGrade10(score, state.questions.length);
+
+      scoreText.textContent = `Punteggio: ${score} / ${state.questions.length}`;
+      gradeText.textContent = `Voto: ${grade} (${gradeLabel(grade)})`;
+
+      reportEl.innerHTML = '';
+
+      const summary = document.createElement('div');
+      summary.className = 'mini';
+      summary.innerHTML = `
+        <h3>Report</h3>
+        <p>${wrongs.length === 0
+          ? "Perfetto: nessun errore. Ora prova a spiegare perché rondine e uomo sono costruiti come due storie speculari."
+          : `Errori: <strong>${wrongs.length}</strong>. Qui sotto trovi mini-lezioni mirate sugli errori.`}
+        </p>
+      `;
+      reportEl.appendChild(summary);
+
+      if(wrongs.length){
+        wrongs.forEach((q, idx) => {
+          const mini = document.createElement('div');
+          mini.className = 'mini';
+
+          const correctOpt = q.options.find(o => o.isCorrect);
+          const chosenOpt = q.options[q.chosenIndex];
+
+          mini.innerHTML = `
+            <h3>${idx + 1}) ${q.explainTitle}</h3>
+            <p><strong>Domanda:</strong> ${q.q}</p>
+            <p><strong>Hai scelto:</strong> ${chosenOpt ? chosenOpt.text : '—'}</p>
+            <p><strong>Corretto:</strong> ${correctOpt ? correctOpt.text : '—'}</p>
+            <p>${q.explain}</p>
+          `;
+          reportEl.appendChild(mini);
+        });
+      }
+
+      resultEl.style.display = 'block';
+
+      render();
+
+      submitBtn.disabled = true;
+      submitBtn.style.filter = 'grayscale(.2)';
+      submitBtn.style.opacity = '.85';
+
+      resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function reset(){
+      buildState();
+      submitBtn.disabled = false;
+      submitBtn.style.filter = '';
+      submitBtn.style.opacity = '';
+      resultEl.style.display = 'none';
+      reportEl.innerHTML = '';
+      warnBox.style.display = 'none';
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    submitBtn.addEventListener('click', finish);
+    resetBtn.addEventListener('click', reset);
+
+    buildState();
+    render();
+  </script>
+</body>
+</html>
