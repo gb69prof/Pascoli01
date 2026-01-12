@@ -58,332 +58,191 @@
       padding: 22px 18px 34px;
     }
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:16px;
-      color: var(--inkOnDark);
-    }
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;color: var(--inkOnDark);}    
     .brand{display:flex; align-items:center; gap:10px;min-width: 220px;}
-    .mark{
-      width:38px;height:38px;border-radius:14px;
-      background:
-        radial-gradient(18px 18px at 30% 35%, rgba(255,255,255,.32), transparent 55%),
-        linear-gradient(135deg, rgba(33,158,188,.95), rgba(255,183,3,.95));
-      box-shadow:0 10px 28px rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.22);
-    }
+    .mark{width:38px;height:38px;border-radius:14px;background:radial-gradient(18px 18px at 30% 35%, rgba(255,255,255,.32), transparent 55%),linear-gradient(135deg, rgba(33,158,188,.95), rgba(255,183,3,.95));box-shadow:0 10px 28px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.22);}    
     .brandTitle{display:flex; flex-direction:column; line-height:1.05;}
     .brandTitle b{ font-size:14px; letter-spacing:.7px; }
     .brandTitle span{ font-size:12px; color: var(--mutedOnDark); }
 
     .chiprow{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      border-radius:999px;
-      padding:8px 10px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.08);
-      color: var(--mutedOnDark);
-      font-size:12px;
-      font-weight:700;
-      backdrop-filter: blur(10px);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background: var(--good);
-      box-shadow: 0 0 0 3px rgba(34,197,94,.18);
-    }
+    .chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 10px;border:1px solid rgba(255,255,255,.18);background: rgba(255,255,255,.08);color: var(--mutedOnDark);font-size:12px;font-weight:700;backdrop-filter: blur(10px);}    
+    .dot{ width:8px; height:8px; border-radius:50%; background: var(--good); box-shadow: 0 0 0 3px rgba(34,197,94,.18)}
 
-    .hero{
-      border-radius: var(--r-xl);
-      border: 1px solid rgba(255,255,255,.16);
-      background:
-        radial-gradient(900px 420px at 18% 30%, rgba(255,183,3,.18), transparent 60%),
-        radial-gradient(900px 420px at 72% 10%, rgba(33,158,188,.20), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(10px);
-    }
-    .heroInner{
-      display:grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 18px;
-      padding: 18px;
-      align-items: stretch;
-    }
-    @media (max-width: 980px){
-      .heroInner{ grid-template-columns:1fr; }
-      .chiprow{ justify-content:flex-start; }
-    }
+    .hero{border-radius: var(--r-xl);border: 1px solid rgba(255,255,255,.16);background:radial-gradient(900px 420px at 18% 30%, rgba(255,183,3,.18), transparent 60%),radial-gradient(900px 420px at 72% 10%, rgba(33,158,188,.20), transparent 60%),linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));box-shadow: var(--shadow);overflow:hidden;backdrop-filter: blur(10px);}    
+    .heroInner{display:grid;grid-template-columns: 1.2fr 1fr;gap: 18px;padding: 18px;align-items: stretch;}
+    @media (max-width: 980px){.heroInner{ grid-template-columns:1fr; }.chiprow{ justify-content:flex-start; }}
 
     .heroText{padding: 10px 8px 12px;color: var(--inkOnDark);}    
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-size:12px;
-      color: var(--mutedOnDark);
-      letter-spacing:.9px;
-      text-transform:uppercase;
-    }
+    .kicker{display:inline-flex; align-items:center; gap:10px;font-size:12px;color: var(--mutedOnDark);letter-spacing:.9px;text-transform:uppercase;}    
     .kicker .bar{width:38px; height:1px; background: rgba(255,255,255,.22);}    
 
-    .headlineBtn{
-      margin-top:10px;
-      width:100%;
-      text-align:left;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
-      color: var(--inkOnDark);
-      padding: 14px 14px;
-      border-radius: 18px;
-      cursor:pointer;
-      box-shadow: var(--shadowSoft);
-    }
-    .headline{
-      font-weight: 950;
-      font-size: clamp(28px, 4.4vw, 54px);
-      line-height: 1.02;
-      margin:0;
-    }
+    .headlineBtn{margin-top:10px;width:100%;text-align:left;border: 1px solid rgba(255,255,255,.18);background: rgba(255,255,255,.10);color: var(--inkOnDark);padding: 14px 14px;border-radius: 18px;cursor:pointer;box-shadow: var(--shadowSoft);}    
+    .headline{font-weight: 950;font-size: clamp(28px, 4.4vw, 54px);line-height: 1.02;margin:0;}    
     .subline{margin: 8px 0 0;color: var(--mutedOnDark);font-size: 14px;line-height:1.55;}    
 
-    .meaning{
-      margin-top: 14px;
-      border-radius: var(--r-lg);
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-      padding: 14px 14px;
-    }
+    .meaning{margin-top: 14px;border-radius: var(--r-lg);border: 1px solid rgba(255,255,255,.16);background: rgba(255,255,255,.08);padding: 14px 14px;}    
+    .meaning p{margin:0;color: rgba(255,255,255,.80);line-height:1.55;font-size:14px;}
+    .meaning .mini{margin-top:10px;border-radius: 14px;border:1px dashed rgba(255,255,255,.16);padding:10px 12px;background: rgba(0,0,0,.10);color: rgba(255,255,255,.78);font-size:13px;}
+    .meaning summary{cursor:pointer;color: rgba(255,255,255,.85);font-weight:900;}
 
-    .stage{
-      border-radius: var(--r-xl);
-      border: 1px solid rgba(255,255,255,.16);
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-      overflow:hidden;
-      position:relative;
-      min-height: 360px;
-      box-shadow: var(--shadowSoft);
-    }
+    .stage{border-radius: var(--r-xl);border: 1px solid rgba(255,255,255,.16);background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));overflow:hidden;position:relative;min-height: 360px;box-shadow: var(--shadowSoft);}    
 
-    /* Bottoni stage */
-    .stageInner{ position:absolute; inset:0; display:flex; flex-direction:column; }
-    .stageMedia{ flex:1; display:flex; align-items:stretch; justify-content:stretch; }
-    .stageMedia img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .stageMedia iframe{ width:100%; height:100%; border:0; display:block; }
+    .stageTop{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-bottom: 1px solid rgba(255,255,255,.14);color: rgba(255,255,255,.82);}
+    .hint{font-size:12px;color: rgba(255,255,255,.70);}
 
-    .stageControls{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding: 10px;
-      border-top: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.86);
-      backdrop-filter: blur(10px);
-    }
-    .stageControls .hint{font-size:12px;color:rgba(255,255,255,.72);}
+    .stageInner{display:flex;align-items:center;justify-content:center;min-height: 260px;padding: 10px;}
 
-    .btnPrimary{
-      display:inline-flex; align-items:center; gap:10px;
-      border-radius: 14px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.92);
-      cursor:pointer;
-      box-shadow: var(--shadowSoft);
-      font-weight: 900;
-      letter-spacing:.2px;
-    }
-    .btnPrimary:focus{ outline:2px solid rgba(255,255,255,.22); outline-offset:2px; }
+    .portraitBtn{border:none;background:transparent;padding:0;cursor:pointer;border-radius: 22px;overflow:hidden;box-shadow: 0 18px 50px rgba(0,0,0,.35);border: 1px solid rgba(255,255,255,.18);}
+    .portraitBtn img{display:block; width:100%; max-width: 420px; height:auto;}
 
-    .btnPrimary.isGold{
-      background: linear-gradient(135deg, rgba(33,158,188,.95), rgba(255,183,3,.95));
-      border-color: rgba(255,255,255,.18);
-      color: rgba(12,18,32,.92);
-    }
-    .btnPrimary:hover{ border-color: rgba(255,255,255,.22); }
+    .stageActions{display:flex;gap:10px;justify-content:flex-end;align-items:center;padding: 10px 12px;border-top: 1px solid rgba(255,255,255,.14);}
 
-    .btnGhost{ display:none; }
+    .btn{border:none;cursor:pointer;border-radius: 14px;padding: 10px 12px;font-weight: 950;letter-spacing:.2px;}
+    .btnPrimary{background: linear-gradient(135deg, rgba(33,158,188,.95), rgba(255,183,3,.95));color: rgba(12,18,32,.95);border: 1px solid rgba(255,255,255,.18);box-shadow: var(--shadowSoft);}
+    .btnGhost{background: rgba(255,255,255,.08);color: rgba(255,255,255,.88);border: 1px solid rgba(255,255,255,.18);display:none;}
 
-    /* Indice */
-    .section{
-      margin-top: 16px;
-      border-radius: var(--r-xl);
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      box-shadow: var(--shadowSoft);
-      overflow:hidden;
-      backdrop-filter: blur(10px);
-    }
-    .sectionHd{
-      padding: 14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      border-bottom: 1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.86);
-    }
-    .sectionHd strong{font-size:12px;letter-spacing:.9px;text-transform: uppercase;}
-    .sectionBd{padding: 10px 10px 12px;}
+    .section{margin-top: 16px;border-radius: var(--r-xl);border: 1px solid rgba(255,255,255,.16);background: rgba(255,255,255,.06);box-shadow: var(--shadowSoft);overflow:hidden;backdrop-filter: blur(10px);}    
+    .sectionHd{padding: 14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom: 1px solid rgba(255,255,255,.14);color: rgba(255,255,255,.86);}    
+    .sectionHd strong{font-size:12px;letter-spacing:.9px;text-transform: uppercase;}    
+    .sectionBd{padding: 10px 10px 12px;}    
 
-    .nav{display:grid;grid-template-columns: 1fr 1fr;gap: 10px;}
+    .nav{display:grid;grid-template-columns: 1fr 1fr;gap: 10px;}    
     @media (max-width: 820px){ .nav{ grid-template-columns:1fr; } }
 
-    .nav a{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.08);
-      padding: 12px 12px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-      color: rgba(255,255,255,.90);
-    }
+    .nav a{border-radius: 18px;border: 1px solid rgba(255,255,255,.14);background: rgba(255,255,255,.08);padding: 12px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap: 12px;color: rgba(255,255,255,.90);}    
     .nav .meta{ display:flex; flex-direction:column; gap:6px; }
     .nav .label{ font-weight:950; font-size:13px; }
     .nav .sub{ font-size:12px; color: rgba(255,255,255,.72); }
     .nav .chev{font-weight:950;color: rgba(255,255,255,.78);}    
 
-    footer{margin-top: 14px;color: rgba(255,255,255,.62);font-size:12px;text-align:center;padding: 0 2px;}
+    footer{margin-top: 14px;color: rgba(255,255,255,.62);font-size:12px;text-align:center;padding: 0 2px;}    
 
-    /* Accessibilità: riduzione animazioni */
     @media (prefers-reduced-motion: reduce){
-      *{ transition:none !important; }
+      *{transition:none !important}
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header class="topbar" aria-label="Intestazione Libro.0">
-      <div class="brand">
-        <div class="mark" aria-hidden="true"></div>
-        <div class="brandTitle">
-          <b>Pascoli — Libro.0</b>
-          <span>web app didattica • percorso attraversabile</span>
+<div class="wrap">
+<header class="topbar" aria-label="Intestazione Libro.0">
+  <div class="brand"><div class="mark"></div><div class="brandTitle"><b>Pascoli — Libro.0</b><span>web app didattica • percorso attraversabile</span></div></div>
+  <div class="chiprow" aria-label="Indicatori">
+    <div class="chip"><span class="dot"></span> pronto per lezione</div>
+    <div class="chip">Vita → Mondo → Poetica → Testi</div>
+  </div>
+</header>
+
+<main class="hero" aria-label="Apertura">
+  <div class="heroInner">
+    <section class="heroText" aria-label="Frase guida">
+      <div class="kicker"><span class="bar"></span> Bussola</div>
+
+      <button id="phraseBtn" class="headlineBtn" aria-expanded="false">
+        <p class="headline">Io non sono mai cresciuto</p>
+        <p class="subline">Pascoli come mappa, non come vetrina.</p>
+      </button>
+
+      <section id="meaningBox" class="meaning" aria-label="Significato della frase">
+        <p>
+          Qui “non crescere” non significa restare bambini. Significa restare <b>esposti</b>:
+          non imparare davvero a difendersi dal mondo. Il <b>fanciullino</b> non è una favola dolce:
+          è uno sguardo che sente troppo e trasforma le cose in <b>segni</b> (suoni, dettagli, presagi).
+        </p>
+        <div class="mini">
+          In questa web app la frase è la bussola: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
         </div>
+
+        <details id="moreMeaning">
+          <summary>Approfondisci (30 secondi)</summary>
+          <p style="margin-top:10px;">
+            Pascoli non “sceglie” di essere fragile: viene ferito presto e resta in uno stato di allerta.
+            Per questo ogni cosa può diventare presagio. Il mondo non è un oggetto che si domina:
+            è un campo di segnali. In questa sensibilità sta sia la poesia sia l’angoscia.
+          </p>
+        </details>
+      </section>
+    </section>
+
+    <section class="stage" aria-label="Stage: immagine e video">
+      <div class="stageTop">
+        <div class="hint" id="hint">clic sulla foto: eco di Pascoli</div>
+        <div class="hint" aria-hidden="true">HeyGen embed</div>
       </div>
 
-      <div class="chiprow" aria-label="Indicatori">
-        <div class="chip"><span class="dot" aria-hidden="true"></span> pronto per lezione</div>
-        <div class="chip">Vita → Mondo → Poetica → Testi</div>
-      </div>
-    </header>
-
-    <main class="hero" aria-label="Apertura">
-      <div class="heroInner">
-        <section class="heroText" aria-label="Frase guida">
-          <div class="kicker"><span class="bar" aria-hidden="true"></span> Bussola</div>
-
-          <button id="phraseBtn" class="headlineBtn" aria-expanded="false">
-            <p class="headline">Io non sono mai cresciuto</p>
-            <p class="subline">Pascoli come mappa, non come vetrina.</p>
-          </button>
-
-          <section id="meaningBox" class="meaning" aria-label="Significato della frase">
-            <p>
-              Qui “non crescere” non significa restare bambini. Significa restare <b>esposti</b>:
-              non imparare davvero a difendersi dal mondo. Il <b>fanciullino</b> non è una favola dolce:
-              è uno sguardo che sente troppo e trasforma le cose in <b>segni</b> (suoni, dettagli, presagi).
-            </p>
-            <div class="mini">
-              In questa web app la frase è la bussola: <b>Vita</b> → <b>Immagine del mondo</b> → <b>Poetica</b> → <b>Testi</b>.
-            </div>
-
-            <details id="moreMeaning">
-              <summary>Approfondisci (30 secondi)</summary>
-              <p style="margin-top:10px;">
-                Pascoli non “sceglie” di essere fragile: viene ferito presto e resta in uno stato di allerta.
-                Per questo ogni cosa può diventare presagio. Il mondo non è un oggetto che si domina:
-                è un campo di segnali. In questa sensibilità sta sia la poesia sia l’angoscia.
-              </p>
-            </details>
-          </section>
-        </section>
-
-        <section class="stage" aria-label="Stage: immagine e video">
-          <div id="stageInner" class="stageInner">
-            <div class="stageMedia" id="stageMedia">
-              <img id="stagePhoto" src="assets/pascoli.jpg" alt="Giovanni Pascoli" />
-            </div>
-
-            <div class="stageControls" aria-label="Controlli">
-              <div class="hint" id="hint">Clicca “Guarda la spiegazione” per aprire il video.</div>
-              <div style="display:flex; gap:10px;">
-                <button id="cta" class="btnPrimary isGold">Guarda la spiegazione</button>
-                <button id="backToPhoto" class="btnPrimary" style="display:none;">Torna alla foto</button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <!-- INDICE -->
-    <section class="section" aria-label="Indice della web app">
-      <div class="sectionHd">
-        <strong>Indice</strong>
-        <span style="color:rgba(255,255,255,.70); font-size:12px;">4 porte, poi gli approfondimenti</span>
+      <div class="stageInner" id="stageInner">
+        <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
+          <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
+        </button>
       </div>
 
-      <div class="sectionBd">
-        <nav class="nav" aria-label="Navigazione principale">
-          <a href="vita.html">
-            <div class="meta">
-              <div class="label">1. La vita</div>
-              <div class="sub">sintesi + pagine collegate</div>
-            </div>
-            <div class="chev">›</div>
-          </a>
-
-          <a href="mondo.html">
-            <div class="meta">
-              <div class="label">2. Immagine del mondo</div>
-              <div class="sub">segni, presagi, realtà instabile</div>
-            </div>
-            <div class="chev">›</div>
-          </a>
-
-          <a href="poetica.html">
-            <div class="meta">
-              <div class="label">3. La poetica</div>
-              <div class="sub">fanciullino, forma, lingua</div>
-            </div>
-            <div class="chev">›</div>
-          </a>
-
-          <a href="gelsomino/gelsomino.html">
-            <div class="meta">
-              <div class="label">4. Testi — Il gelsomino notturno</div>
-              <div class="sub">analisi + ascolto + immagini</div>
-            </div>
-            <div class="chev">›</div>
-          </a>
-
-          <a href="testi/x-agosto.html">
-            <div class="meta">
-              <div class="label">4. Testi — X agosto</div>
-              <div class="sub">analisi + lettura</div>
-            </div>
-            <div class="chev">›</div>
-          </a>
-
-          <a href="digitale/digitale.html">
-            <div class="meta">
-              <div class="label">4. Testi — La digitale purpurea</div>
-              <div class="sub">analisi + simbolo</div>
-            </div>
-            <div class="chev">›</div>
-          </a>
-        </nav>
+      <div class="stageActions" aria-label="Azioni video">
+        <button class="btn btnPrimary" id="cta" type="button">▶︎ Guarda l’eco di Pascoli</button>
+        <button class="btn btnGhost" id="backToPhoto" type="button">↩︎ Torna alla foto</button>
       </div>
     </section>
+  </div>
+</main>
+
+<!-- INDICE -->
+<section class="section" aria-label="Indice della web app">
+  <div class="sectionHd">
+    <strong>Indice</strong>
+    <span style="color:rgba(255,255,255,.70); font-size:12px;">4 porte, poi gli approfondimenti</span>
+  </div>
+
+  <div class="sectionBd">
+    <nav class="nav" aria-label="Navigazione principale">
+      <a href="vita.html">
+        <div class="meta">
+          <div class="label">1. La vita</div>
+          <div class="sub">sintesi + pagine collegate</div>
+        </div>
+        <div class="chev">›</div>
+      </a>
+
+      <a href="mondo.html">
+        <div class="meta">
+          <div class="label">2. Immagine del mondo</div>
+          <div class="sub">segni, presagi, realtà instabile</div>
+        </div>
+        <div class="chev">›</div>
+      </a>
+
+      <a href="poetica.html">
+        <div class="meta">
+          <div class="label">3. La poetica</div>
+          <div class="sub">fanciullino, forma, lingua</div>
+        </div>
+        <div class="chev">›</div>
+      </a>
+
+      <a href="gelsomino/gelsomino.html">
+        <div class="meta">
+          <div class="label">4. Testi — Il gelsomino notturno</div>
+          <div class="sub">analisi + ascolto + immagini</div>
+        </div>
+        <div class="chev">›</div>
+      </a>
+
+      <a href="testi/x-agosto.html">
+        <div class="meta">
+          <div class="label">4. Testi — X agosto</div>
+          <div class="sub">analisi + lettura</div>
+        </div>
+        <div class="chev">›</div>
+      </a>
+
+      <a href="digitale/digitale.html">
+        <div class="meta">
+          <div class="label">4. Testi — La digitale purpurea</div>
+          <div class="sub">analisi + simbolo</div>
+        </div>
+        <div class="chev">›</div>
+      </a>
+    </nav>
+  </div>
+</section>
 
 
     <!-- TEST (aggiunto) -->
@@ -454,61 +313,139 @@
       </div>
     </section>
 
+    <!-- TEST -->
+    <section class="section" aria-label="Sezione Test">
+      <div class="sectionHd">
+        <strong>TEST</strong>
+        <span style="color:rgba(255,255,255,.70); font-size:12px;">verifica interattiva</span>
+      </div>
+
+      <div class="sectionBd">
+        <nav class="nav" aria-label="Elenco test">
+          <a href="test/test-immagine.html">
+            <div class="meta">
+              <div class="label">Immagine del mondo</div>
+              <div class="sub">test a scelta multipla</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+
+          <a href="test/test-poetica.html">
+            <div class="meta">
+              <div class="label">Poetica</div>
+              <div class="sub">test a scelta multipla</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+
+          <a href="test/test-forma.html">
+            <div class="meta">
+              <div class="label">Forma</div>
+              <div class="sub">test a scelta multipla</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+
+          <a href="test/test-simbolismo.html">
+            <div class="meta">
+              <div class="label">Simbolismo</div>
+              <div class="sub">test a scelta multipla</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+
+          <a href="test/test-X-agosto">
+            <div class="meta">
+              <div class="label">X agosto</div>
+              <div class="sub">test sul testo</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+
+          <a href="test/test-gelsomino.html">
+            <div class="meta">
+              <div class="label">Gelsomino notturno</div>
+              <div class="sub">test sul testo</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+
+          <a href="test/test-digitale.html">
+            <div class="meta">
+              <div class="label">Digitale purpurea</div>
+              <div class="sub">test sul testo</div>
+            </div>
+            <div class="chev">›</div>
+          </a>
+        </nav>
+      </div>
+    </section>
 
     <footer>© <span id="year"></span> — Pascoli / Libro.0 — a cura di gbprof</footer>
-  </div>
+</div>
 
-  <script>
-    const $ = (q, r=document) => r.querySelector(q);
-    $('#year').textContent = new Date().getFullYear();
+<script>
+  const $ = (q, r=document) => r.querySelector(q);
+  $('#year').textContent = new Date().getFullYear();
 
-    // Frase: apre/chiude l’approfondimento (senza cambiare il tuo contenuto).
-    const phraseBtn = $('#phraseBtn');
-    const details = $('#moreMeaning');
-    phraseBtn.addEventListener('click', () => {
-      details.open = !details.open;
-      phraseBtn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-      $('#meaningBox').scrollIntoView({behavior:'smooth', block:'start'});
-    });
+  // frase: apre/chiude l’approfondimento.
+  const phraseBtn = $('#phraseBtn');
+  const details = $('#moreMeaning');
+  phraseBtn.addEventListener('click', () => {
+    details.open = !details.open;
+    phraseBtn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+    $('#meaningBox').scrollIntoView({behavior:'smooth', block:'start'});
+  });
 
-    // Stage: foto -> video HeyGen -> foto
-    const stageInner = $('#stageInner');
-    const cta = $('#cta');
-    const hint = $('#hint');
-    const backToPhoto = $('#backToPhoto');
+  // VIDEO: foto -> HeyGen embed -> foto
+  const stageInner = $('#stageInner');
+  const portraitBtn = $('#portraitBtn');
+  const cta = $('#cta');
+  const backToPhoto = $('#backToPhoto');
+  const hint = $('#hint');
 
-    // Inserisci qui il tuo video HeyGen (embed) e la foto.
-    const PHOTO_SRC = 'assets/pascoli.jpg';
-    const HEYGEN_IFRAME = `
-      <iframe
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="Video"
-        frameborder="0"
-        allow="encrypted-media; fullscreen"
-        allowfullscreen
-      ></iframe>
-    `;
+  // Incolla qui il tuo embed HeyGen (iframe). Lasciato come placeholder sicuro.
+  // Sostituisci SOLO la stringa HEYGEN_EMBED con il tuo iframe.
+  const HEYGEN_EMBED = `
+    <iframe
+      src=""
+      title="HeyGen"
+      frameborder="0"
+      allow="clipboard-write; encrypted-media; fullscreen"
+      allowfullscreen
+      style="width:100%;max-width:520px;aspect-ratio:16/9;border-radius:18px;border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 50px rgba(0,0,0,.35);"
+    ></iframe>
+  `;
 
-    let showingVideo = false;
+  const PHOTO_HTML = `
+    <button class="portraitBtn" id="portraitBtn" type="button" aria-label="Apri il video dell’eco di Pascoli">
+      <img src="assets/pascoli-foto.png" alt="Pascoli (foto)" />
+    </button>
+  `;
 
-    function showVideo(){
-      if(showingVideo) return;
-      showingVideo = true;
-      $('#stageMedia').innerHTML = HEYGEN_IFRAME;
-      backToPhoto.style.display = 'inline-flex';
-      hint.textContent = 'Puoi tornare alla foto quando vuoi.';
-    }
+  let showingVideo = false;
 
-    function showPhoto(){
-      if(!showingVideo) return;
-      showingVideo = false;
-      $('#stageMedia').innerHTML = `<img id="stagePhoto" src="${PHOTO_SRC}" alt="Giovanni Pascoli" />`;
-      backToPhoto.style.display = 'none';
-      hint.textContent = 'Clicca “Guarda la spiegazione” per aprire il video.';
-    }
+  function showVideo(){
+    if(showingVideo) return;
+    showingVideo = true;
+    stageInner.innerHTML = HEYGEN_EMBED;
+    backToPhoto.style.display = 'inline-block';
+    hint.textContent = 'Video aperto (HeyGen).';
+  }
 
-    cta.addEventListener('click', showVideo);
-    backToPhoto.addEventListener('click', showPhoto);
-  </script>
+  function showPhoto(){
+    if(!showingVideo) return;
+    showingVideo = false;
+    stageInner.innerHTML = PHOTO_HTML;
+    // ricollega l’evento al nuovo bottone ricreato
+    $('#portraitBtn').addEventListener('click', showVideo);
+    backToPhoto.style.display = 'none';
+    hint.textContent = 'clic sulla foto: eco di Pascoli';
+  }
+
+  cta.addEventListener('click', showVideo);
+  portraitBtn.addEventListener('click', showVideo);
+  backToPhoto.addEventListener('click', showPhoto);
+</script>
 </body>
 </html>
